@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rameur <rameur@stduent.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/07/20 20:30:49 by reda             ###   ########.fr       */
+/*   Updated: 2021/07/22 02:59:53 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 int	main()
 {
 	char *str;
-	str = readline();
-	printf("%s\n", str);
+
+	str = NULL;
+	while (1)
+	{
+		str = readline("minishell>");
+		if (str)
+			free (str);
+		str = NULL;
+	}
 	return (0);
 }
