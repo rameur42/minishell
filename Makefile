@@ -1,4 +1,7 @@
 SRCS            = main.c\
+					utils/ft_strcmp.c\
+					utils/ft_strdup.c\
+					utils/lst.c\
 
 CC              = clang
 CFLAGS          = -g -Wall -Wextra -Werror -I ./includes
@@ -15,8 +18,7 @@ $(NAME):	$(OBJS)
 					${CC} -lreadline ${CFLAGS} ${OBJS} -o ${NAME}
 
 clean:
-		rm -f src/*.o
-		rm -f op/*.o
+		rm -f utils/*.o
 		rm -f *.o
 
 fclean:		clean
