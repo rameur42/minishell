@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:47:03 by rameur            #+#    #+#             */
-/*   Updated: 2021/07/26 22:51:29 by rameur           ###   ########.fr       */
+/*   Updated: 2021/08/26 01:53:42 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,30 @@ char *ft_strdup(char *str)
 		res[i] = str[i];
 		i++;
 	}
+	return (res);
+}
+
+char	*ft_strjoin(char *s1, char *s2, int mode)
+{
+	int		i;
+	int		j;
+	char	*res;
+
+	i = 0;
+	j = 0;
+	if (!(s1) || !(s2))
+		return (NULL);
+	res = malloc((ft_strlen((char *)s1)
+				+ ft_strlen((char*)s2) + 1) * sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	while (s1[i])
+		res[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		res[j++] = s2[i++];
+	res[j] = '\0';
+	if (mode == 1)
+		free(s1);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/07/26 23:01:47 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/02 15:08:18 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,19 @@ void	ft_get_env(char **env, t_struct *cfg)
 	int i;
 
 	i = 0;
+	//printf("hello there\n");
 	while(env[i] != NULL)
 	{
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i])));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0));
+		i++;
+	}
+	cfg->path = split_path(env);
+	cfg->path[0] = ft_rm_p(cfg->path[0]);
+	i = 0;
+	while (cfg->path[i])
+	{
+		cfg->path[i] = ft_strjoin(cfg->path[i], "/", 1);
+		//printf("path->%s\n", cfg->path[i]);
 		i++;
 	}
 }
@@ -42,6 +52,9 @@ int	main(int ac, char **av, char **env)
 	char *str;
 
 	str = NULL;
+	cfg.env = NULL;
+	cfg.arg = NULL;
+	cfg.pipe = -1;
 	(void)av;
 	if (ac == 1)
 	{
@@ -51,8 +64,16 @@ int	main(int ac, char **av, char **env)
 		{
 			str = readline("minishell>");
 			printf("str -> %s\n", str);
+			ft_parse_line(&cfg, str);
+			if (ft_init_count_pipe(&cfg) == 1)
+				return (0);
+			ft_is_file(&cfg);
+			//ft_print_lst(&cfg);
+			ft_exec(&cfg);
+			//printf("pipe -> %d\n", cfg.pipe);
 			if (ft_strcmp(str, "exit") == 0)
 				return (0);
+			ft_lstclear(&cfg.arg);
 			if (str)
 				free (str);
 			str = NULL;
