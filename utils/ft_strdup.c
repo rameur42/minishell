@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:47:03 by rameur            #+#    #+#             */
-/*   Updated: 2021/08/26 01:53:42 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/02 15:48:24 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,28 @@ char	*ft_strjoin(char *s1, char *s2, int mode)
 	if (mode == 1)
 		free(s1);
 	return (res);
+}
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (to_find == NULL || to_find[0] == '\0' || str == NULL)
+		return (str);
+	while (str[i + j])
+	{
+		if (str[i + j] == to_find[i])
+			i++;
+		else if (!(str[i + j] == to_find[i]))
+		{
+			j++;
+			i = 0;
+		}
+		if (to_find[i] == '\0')
+			return (&str[j]);
+	}
+	return (NULL);
 }

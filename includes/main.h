@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/09/02 14:23:14 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/02 15:48:22 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int		ft_init_count_pipe(t_struct *cfg);
 void	ft_print_lst(t_struct *cfg);
 void	ft_is_file(t_struct *cfg);
 void	ft_exec(t_struct *cfg);
+char	*ft_strstr(char *str, char *to_find);
 
 #endif
