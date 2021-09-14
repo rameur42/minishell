@@ -21,7 +21,7 @@ int		ft_tab_count(t_list *arg)
 		return (0);
 	tmp = arg;
 	res = 0;
-	while (tmp && tmp->type == 2)
+	while (tmp && (tmp->type == 2 || tmp->type == 0))
 	{
 		tmp = tmp->next;
 		res++;
@@ -96,77 +96,68 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-void	ft_exec_ft(t_struct *cfg, char **cmd)
+void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 {
 	pid_t	pid;
 	int		ret;
 	int		statue;
-	t_list 	*tmpN;
-	t_list	*tmpP;
+	int		pp;
+	int		pn;
+	t_list	*temp;
 
 	statue = 0;
-	tmpN = cfg->arg;
-	tmpP = cfg->arg;
- 	while (tmpN) 
+	temp = tmp;
+	pp = 0;
+	pn = 0;
+	if (tmp->prev && tmp->prev->type == 1)
+		pp = 1;
+	while (temp)
 	{
-	//printf("++ cmd[0] = %s ct = %s\n", cmd[0], tmpN->content);
-		if (ft_strstr(cmd[0], tmpN->content) != NULL)
+		if (temp->type == 1)
+		{
+			pn = 1;
 			break ;
-		tmpN = tmpN->next;
-		tmpP = tmpP->next;
+		}
+		temp = temp->next;
 	}
-	while (tmpN)
-	{
-		if (tmpN->type == 1)
-			break ;
-		tmpN = tmpN->next;
-	}
-	//if (tmpN != NULL)
-	//	printf("^^tmpN = %s %d\n", tmpN->content, tmpN->type);
-	if (tmpP->prev && tmpP->prev->type == 1)
-		tmpP = tmpP->prev;
 	pid = fork();
 	if (pid == -1)
 		printf("fork failed\n");
 	else if (pid == 0)
 	{
-		/*if (tmpN != NULL)
-			printf("tmpN = %s\n", tmpN->content);
-		if (tmpP != NULL)
-			printf("tmpP = %s\n", tmpP->content);*/
-		if (tmpN && tmpN->type == 1)
+		if (pp == 1)
 		{
-			printf("YOOO\n");
-			close (tmpN->pipefd[1]);
-			tmpN->pipefd[0] = dup2(tmpN->pipefd[0], 1);
+			dup2(tmp->prev->pipefd[0], 0);
+			close(tmp->prev->pipefd[0]);
+			close(tmp->prev->pipefd[1]);
 		}
-		if (tmpP && tmpP->type == 1)
+		if (pn == 1)
 		{
-			//printf("BOO\n");
-			close (tmpP->pipefd[0]);
-			tmpP->pipefd[1] = dup2(tmpP->pipefd[1], 0);
+			dup2(temp->pipefd[1], 1);
+			close(temp->pipefd[0]);
+			close(temp->pipefd[1]);
 		}
-		//while (1);
 		ft_cp_env(cfg);
 		ret = execve(cmd[0], cmd, cfg->tabEnv);
 		if (ret == -1)
+		{
 			printf("execve failed\n");
-		printf("wtf\n");
+			exit (1);
+		}
 		ft_free_tab(cfg->tabEnv);
-		/*dup2(1, 1);
+		dup2(1, 1);
 		dup2(0, 0);
-		while (1);*/
 		exit(0);
 	}
 	else
 	{
-		/*if (tmpN->type == 1)
+		printf("PID->%d\n", pid);
+		if (waitpid(pid, &statue, WUNTRACED) == -1)
 		{
-			close(tmpN->pipefd[0]);
+			printf("Error waitpid\n");
+			return ;
 		}
-		if (tmpP->type == 1)
-			close(tmpP->pipefd[1]);*/
-		wait(&statue);
+		printf("PID->%d\n", pid);
 	}
 }
 
@@ -207,7 +198,7 @@ void	ft_exec(t_struct *cfg)
 			cmd = ft_init_cmd(tmp);
 			ft_get_path(cfg, cmd);
 			//ft_display_tab(cmd);
-			ft_exec_ft(cfg, cmd);
+			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
 		}
 		tmp = tmp->next;
