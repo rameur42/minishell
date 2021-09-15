@@ -105,6 +105,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	int		pn;
 	t_list	*temp;
 
+	printf("tmp->content %s\n", tmp->content);
 	statue = 0;
 	temp = tmp;
 	pp = 0;
@@ -125,6 +126,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		printf("fork failed\n");
 	else if (pid == 0)
 	{
+		printf("PP->%d PN->%d\n", pp, pn);
 		if (pp == 1)
 		{
 			dup2(tmp->prev->pipefd[0], 0);
@@ -151,13 +153,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	else
 	{
-		printf("PID->%d\n", pid);
-		if (waitpid(pid, &statue, WUNTRACED) == -1)
-		{
-			printf("Error waitpid\n");
-			return ;
-		}
-		printf("PID->%d\n", pid);
+		waitpid(pid, &statue, WNOHANG);
 	}
 }
 

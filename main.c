@@ -77,7 +77,6 @@ int	main(int ac, char **av, char **env)
 			if (str)
 				free (str);
 			str = NULL;
-			//printf("hello there\n");
 		}
 	}
 	return (0);
