@@ -20,7 +20,7 @@ void	ft_get_env(char **env, t_struct *cfg)
 	//printf("hello there\n");
 	while(env[i] != NULL)
 	{
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0, 0));
 		i++;
 	}
 	cfg->path = split_path(env);
@@ -63,14 +63,14 @@ int	main(int ac, char **av, char **env)
 		while (1)
 		{
 			str = readline("minishell>");
-			printf("str -> %s\n", str);
-			ft_parse_line(&cfg, str);
+			add_history(str);
+			if (ft_parse_line(&cfg, str) == 1)
+				ft_lstclear(&cfg.arg);
 			if (ft_init_count_pipe(&cfg) == 1)
 				return (0);
 			ft_is_file(&cfg);
 			//ft_print_lst(&cfg);
 			ft_exec(&cfg);
-			//printf("pipe -> %d\n", cfg.pipe);
 			if (ft_strcmp(str, "exit") == 0)
 				return (0);
 			ft_lstclear(&cfg.arg);

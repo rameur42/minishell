@@ -51,7 +51,6 @@ char	**ft_init_cmd(t_list *tmp)
 	nb = ft_tab_count(tmp->next) + 1;
 	cmd = malloc((nb + 1) * sizeof(char *));
 	cmd[nb] = NULL;
-	//printf("||HELLO THERE  nb = %d||\n", nb);
 	if (!cmd)
 		return (NULL);
 	while (nb > 0)
@@ -61,7 +60,6 @@ char	**ft_init_cmd(t_list *tmp)
 		tmp = tmp->next;
 		nb--;
 	}
-	ft_display_tab(cmd);
 	return (cmd);
 }
 
@@ -105,11 +103,11 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	int		pn;
 	t_list	*temp;
 
-	printf("tmp->content %s\n", tmp->content);
 	statue = 0;
 	temp = tmp;
 	pp = 0;
 	pn = 0;
+	pid = 0;
 	if (tmp->prev && tmp->prev->type == 1)
 		pp = 1;
 	while (temp)
@@ -123,10 +121,12 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	pid = fork();
 	if (pid == -1)
+	{
 		printf("fork failed\n");
+		return ;
+	}
 	else if (pid == 0)
 	{
-		printf("PP->%d PN->%d\n", pp, pn);
 		if (pp == 1)
 		{
 			dup2(tmp->prev->pipefd[0], 0);
@@ -153,7 +153,11 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	else
 	{
-		waitpid(pid, &statue, WNOHANG);
+		if (pp == 1)
+			close(tmp->prev->pipefd[0]);
+		if (pn == 1)
+			close(temp->pipefd[1]);
+		waitpid(pid, &statue, 0);
 	}
 }
 

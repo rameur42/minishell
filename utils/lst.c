@@ -12,7 +12,7 @@
 
 #include "main.h"
 
-t_list	*ft_lstnew(void *content, int type)
+t_list	*ft_lstnew(void *content, int type, int dq, int sq)
 {
 	t_list *new_list;
 
@@ -21,6 +21,8 @@ t_list	*ft_lstnew(void *content, int type)
 		return (NULL);
 	new_list->content = content;
 	new_list->type = type;
+	new_list->dq = dq;
+	new_list->sq = sq;
 	new_list->next = NULL;
 	new_list->prev = NULL;
 	return (new_list);

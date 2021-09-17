@@ -24,34 +24,53 @@ void	ft_print_lst(t_struct *cfg)
 	}
 }
 
-void	ft_parse_line(t_struct *cfg, char *str)
+int	ft_parse_line(t_struct *cfg, char *str)
 {
 	char **tab;
 	int i;
+	int	dq;
+	int	sq;
 
 	i = 0;
+	dq = 0;
+	sq = 0;
 	tab = ft_split(str, ' ');
 	while (tab[i])
 	{
 		//printf("tab[i] -> %s\n", tab[i]);
 		if (ft_strcmp(tab[i], "|") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 1));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 1, dq, sq));
 		else if (ft_strcmp(tab[i], ">") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 3));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 3, dq, sq));
 		else if (ft_strcmp(tab[i], ">>") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 4));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 4, dq, sq));
 		else if (ft_strcmp(tab[i], "<") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 5));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 5, dq, sq));
 		else if (ft_strcmp(tab[i], "<<") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 6));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 6, dq, sq));
 		else if (ft_strcmp(tab[i], ";") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 8));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 8, dq, sq));
 		else if (tab[i][0] == '$')
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 7));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 7, dq, sq));
 		else if (tab[i][0] == '-')
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 2));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 2, dq, sq));
+		if (tab[i][0] == '\'')
+		{
+			 if (sq == 1)
+			 	sq = 0;
+			 else
+			 	sq = 1;
+		}
+		if (tab[i][ft_strlen(tab[i])])
+		{
+			if (sq == 1)
+				sq = 0;
+			else
+				sq = 1;
+		}
+		
 		else
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 0));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 0, dq, sq));
 		i++;
 	}
 	i = 0;
@@ -61,5 +80,16 @@ void	ft_parse_line(t_struct *cfg, char *str)
 		i++;
 	}
 	free (tab);
+	if (sq == 1)
+	{
+		printf("Error unclosed quote\n");
+		return (1);
+	}
+	if (dq == 1)
+	{
+		printf("Error unclosed double quote\n");
+		return (1);
+	}
+	return (0);
 	//ft_print_lst(cfg);
 }

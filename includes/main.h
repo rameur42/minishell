@@ -47,6 +47,8 @@ typedef struct s_list {
 	char	*content;
 	int		type;
 	int		pipefd[2];
+	int		dq;
+	int		sq;
 	struct s_list *next;
 	struct s_list *prev;
 }				t_list;
@@ -62,7 +64,7 @@ typedef struct s_struct {
 int		ft_strlen(char *s);
 char	*ft_strdup(char *str);
 int		ft_strcmp(char *s1, char *s2);
-t_list	*ft_lstnew(void *content, int type);
+t_list	*ft_lstnew(void *content, int type, int dq, int sq);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
 void	ft_lstclear(t_list **lst);
@@ -71,11 +73,13 @@ char	**ft_split(const char *s, char c);
 char	**ft_free_s(char **res, int i);
 char	*ft_strjoin(char *s1, char *s2, int mode);
 char	*ft_rm_p(char *line);
-void	ft_parse_line(t_struct *cfg, char *str);
+int		ft_parse_line(t_struct *cfg, char *str);
 int		ft_init_count_pipe(t_struct *cfg);
 void	ft_print_lst(t_struct *cfg);
 void	ft_is_file(t_struct *cfg);
 void	ft_exec(t_struct *cfg);
 char	*ft_strstr(char *str, char *to_find);
+
+/*check exi*/
 
 #endif
