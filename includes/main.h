@@ -61,6 +61,17 @@ typedef struct s_struct {
 	int		pipe;
 }				t_struct;
 
+typedef struct s_setup {
+	int		pn;
+	int		pp;
+	t_list	*pipN;
+	t_list	*pipP;
+	int		isRedO;
+	int		isRedI;
+	int		fdIn;
+	int		fdOut;
+}				t_setup;
+
 int		ft_strlen(char *s);
 char	*ft_strdup(char *str);
 int		ft_strcmp(char *s1, char *s2);
@@ -79,6 +90,8 @@ void	ft_print_lst(t_struct *cfg);
 void	ft_is_file(t_struct *cfg);
 void	ft_exec(t_struct *cfg);
 char	*ft_strstr(char *str, char *to_find);
+void	set_pipe(t_list *tmp, t_list *temp, int pp, int pn);
+void	get_pipe(t_setup *stp, t_list *tmp);
 
 /*check exi*/
 

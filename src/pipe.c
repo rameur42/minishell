@@ -69,3 +69,37 @@ void	ft_is_file(t_struct *cfg)
 		tmp = tmp->next;
 	}
 }
+
+void	set_pipe(t_list *tmp, t_list *temp, int pp, int pn)
+{
+	if (pp == 1)
+	{
+		dup2(tmp->prev->pipefd[0], 0);
+		close(tmp->prev->pipefd[0]);
+		close(tmp->prev->pipefd[1]);
+	}
+	if (pn == 1)
+	{
+		dup2(temp->pipefd[1], 1);
+		close(temp->pipefd[0]);
+		close(temp->pipefd[1]);
+	}
+}
+
+void	get_pipe(t_setup *stp, t_list *tmp)
+{
+	stp->pipP = tmp;
+	stp->pipN = tmp;
+	if (stp->pipP->prev)
+		if (stp->pipP->prev->type == 1)
+			stp->pp = 1;
+	while (stp->pipN)
+	{
+		if (stp->pipN->type == 1)
+		{
+			stp->pn = 1;
+			break;
+		}
+		stp->pipN = stp->pipN->next;
+	}
+}

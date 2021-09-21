@@ -40,10 +40,10 @@ int	ft_parse_line(t_struct *cfg, char *str)
 		//printf("tab[i] -> %s\n", tab[i]);
 		if (ft_strcmp(tab[i], "|") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 1, dq, sq));
-		else if (ft_strcmp(tab[i], ">") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 3, dq, sq));
 		else if (ft_strcmp(tab[i], ">>") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 4, dq, sq));
+		else if (ft_strcmp(tab[i], ">") == 0)
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 3, dq, sq));
 		else if (ft_strcmp(tab[i], "<") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 5, dq, sq));
 		else if (ft_strcmp(tab[i], "<<") == 0)
@@ -54,21 +54,20 @@ int	ft_parse_line(t_struct *cfg, char *str)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 7, dq, sq));
 		else if (tab[i][0] == '-')
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 2, dq, sq));
-		if (tab[i][0] == '\'')
+		/*else if (tab[i][0] == '\'')
 		{
 			 if (sq == 1)
 			 	sq = 0;
 			 else
 			 	sq = 1;
 		}
-		if (tab[i][ft_strlen(tab[i])])
+		else if (tab[i][ft_strlen(tab[i])])
 		{
 			if (sq == 1)
 				sq = 0;
 			else
 				sq = 1;
-		}
-		
+		}*/
 		else
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 0, dq, sq));
 		i++;

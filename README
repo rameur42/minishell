@@ -1,0 +1,6 @@
+->gerer les redirection en tout genre
+->mettre en place les check relatif au simple et double cote
+->creer les built-in et les integrer
+->gerer l'ajout et la modification des variables d'environnements
+->gerer les ctrl...
+->gerer $?

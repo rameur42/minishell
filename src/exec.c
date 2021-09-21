@@ -94,31 +94,49 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
+void	is_redirec(t_list *tmp, t_setup *stp)
 {
-	pid_t	pid;
-	int		ret;
-	int		statue;
-	int		pp;
-	int		pn;
-	t_list	*temp;
+	t_list *temp;
+	int res;
+	stp->isRedO = -1;
 
-	statue = 0;
 	temp = tmp;
-	pp = 0;
-	pn = 0;
-	pid = 0;
-	if (tmp->prev && tmp->prev->type == 1)
-		pp = 1;
-	while (temp)
+	res = 0;
+	while(temp && (temp->type == 2 || temp->type == 0 || temp->type == 9))
 	{
-		if (temp->type == 1)
+		if (temp->type == 3 || temp->type == 4)
 		{
-			pn = 1;
+			stp->isRedO = 1;
 			break ;
 		}
 		temp = temp->next;
 	}
+	if (temp && temp->type == 3 && temp->next)
+	{
+		stp->fdOut = open(temp->next->content,O_TRUNC | O_WRONLY | O_CREAT, 0644);
+		dup2(stp->fdOut, 1);
+	}
+	else if (temp && temp->type == 4 && temp->next)
+	{
+		stp->fdOut = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
+		dup2(stp->fdOut, 1);
+	}
+}
+
+void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
+{
+	t_setup	stp;
+	pid_t	pid;
+	int		ret;
+	int		statue;
+	t_list	*temp;
+
+	statue = 0;
+	temp = tmp;
+	stp.pp = 0;
+	stp.pn = 0;
+	pid = 0;
+	get_pipe(&stp, tmp);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -127,18 +145,8 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	else if (pid == 0)
 	{
-		if (pp == 1)
-		{
-			dup2(tmp->prev->pipefd[0], 0);
-			close(tmp->prev->pipefd[0]);
-			close(tmp->prev->pipefd[1]);
-		}
-		if (pn == 1)
-		{
-			dup2(temp->pipefd[1], 1);
-			close(temp->pipefd[0]);
-			close(temp->pipefd[1]);
-		}
+		set_pipe(tmp, stp.pipN, stp.pp, stp.pn);
+		is_redirec(tmp, &stp);
 		ft_cp_env(cfg);
 		ret = execve(cmd[0], cmd, cfg->tabEnv);
 		if (ret == -1)
@@ -147,17 +155,17 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 			exit (1);
 		}
 		ft_free_tab(cfg->tabEnv);
-		dup2(1, 1);
-		dup2(0, 0);
+		if (stp.isRedO == 1)
+			close(stp.fdOut);
 		exit(0);
 	}
 	else
 	{
-		if (pp == 1)
-			close(tmp->prev->pipefd[0]);
-		if (pn == 1)
-			close(temp->pipefd[1]);
 		waitpid(pid, &statue, 0);
+		if (stp.pp == 1)
+			close(tmp->prev->pipefd[0]);
+		if (stp.pn == 1)
+			close(stp.pipN->pipefd[1]);
 	}
 }
 
