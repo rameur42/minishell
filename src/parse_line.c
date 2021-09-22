@@ -44,10 +44,10 @@ int	ft_parse_line(t_struct *cfg, char *str)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 4, dq, sq));
 		else if (ft_strcmp(tab[i], ">") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 3, dq, sq));
-		else if (ft_strcmp(tab[i], "<") == 0)
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 5, dq, sq));
 		else if (ft_strcmp(tab[i], "<<") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 6, dq, sq));
+		else if (ft_strcmp(tab[i], "<") == 0)
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 5, dq, sq));
 		else if (ft_strcmp(tab[i], ";") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 8, dq, sq));
 		else if (tab[i][0] == '$')

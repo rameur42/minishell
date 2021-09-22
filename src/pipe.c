@@ -65,7 +65,12 @@ void	ft_is_file(t_struct *cfg)
 	{
 		if (tmp->type == 0)
 			if (is_file(cfg, tmp->content) == 0)
+			{
 				tmp->type = 9;
+				if (tmp->prev && (tmp->prev->type == 9 ||
+						tmp->prev->type == 6))
+					tmp->type = 0;
+			}
 		tmp = tmp->next;
 	}
 }

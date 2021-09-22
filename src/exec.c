@@ -94,26 +94,50 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
+void	ft_free_str(char *str)
+{
+	if (str)
+		free(str);
+	str = NULL;
+}
+int		is_v(int type)
+{
+	if (type == 2 || type == 0 || type == 9 ||
+			type == 3 || type == 4 || type == 5||
+				type == 6 )
+		return (1);
+	return (0);
+}
+
 void	is_redirec(t_list *tmp, t_setup *stp)
 {
 	t_list *temp;
 	int res;
+	char *buff;
+	
 	stp->isRedO = -1;
-
+	stp->isRedI = -1;
 	temp = tmp;
 	res = 0;
-	while(temp && (temp->type == 2 || temp->type == 0 || temp->type == 9))
+	while(temp && is_v(temp->type) == 1)
 	{
-		if (temp->type == 3 || temp->type == 4)
+		//printf("temp->content %s, temp->type = %d\n", temp->content, temp->type);
+		if (temp->type == 3 || temp->type == 4 ||
+			temp->type == 5 || temp->type == 6)
 		{
-			stp->isRedO = 1;
+			if (temp->type == 3 || temp->type == 4)
+				stp->isRedO = 1;
+			else if (temp->type == 5)
+				stp->isRedI = 1;
+			else if (temp->type == 6)
+				stp->isRedI = 2;
 			break ;
 		}
 		temp = temp->next;
 	}
 	if (temp && temp->type == 3 && temp->next)
 	{
-		stp->fdOut = open(temp->next->content,O_TRUNC | O_WRONLY | O_CREAT, 0644);
+		stp->fdOut = open(temp->next->content, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 		dup2(stp->fdOut, 1);
 	}
 	else if (temp && temp->type == 4 && temp->next)
@@ -121,13 +145,38 @@ void	is_redirec(t_list *tmp, t_setup *stp)
 		stp->fdOut = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
 		dup2(stp->fdOut, 1);
 	}
+	else if (temp && temp->type == 5 && temp->next)
+	{
+		stp->fdIn = open(temp->next->content, O_RDONLY);
+		dup2(stp->fdIn, 0);
+	}
+	else if (temp && temp->type == 6 && temp->next)
+	{
+		printf("hello there\n");
+		stp->fdIn = open("redirec.tmp", O_RDWR | O_CREAT | O_TRUNC | O_APPEND);
+		while (1)
+		{
+			buff = readline(">");
+			if (ft_strcmp(buff, temp->next->content) == 0)
+				break ;
+			write(stp->fdIn, buff, ft_strlen(buff));
+			write(stp->fdIn, "\n", 1);
+			ft_free_str(buff);
+		}
+		if (ft_strcmp(buff, temp->next->content) == 0)
+		{
+			printf("dup2?\n");
+			printf("fd->%d\n", stp->fdIn);
+			dup2(stp->fdIn, 0);
+		}
+		ft_free_str(buff);
+	}
 }
 
 void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 {
 	t_setup	stp;
 	pid_t	pid;
-	int		ret;
 	int		statue;
 	t_list	*temp;
 
@@ -148,15 +197,23 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		set_pipe(tmp, stp.pipN, stp.pp, stp.pn);
 		is_redirec(tmp, &stp);
 		ft_cp_env(cfg);
-		ret = execve(cmd[0], cmd, cfg->tabEnv);
-		if (ret == -1)
+		printf("stp.isRedI %d\n", stp.isRedI);
+		if (stp.isRedI == 2)
+			unlink("redirec.tmp");
+		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 		{
 			printf("execve failed\n");
 			exit (1);
 		}
-		ft_free_tab(cfg->tabEnv);
 		if (stp.isRedO == 1)
 			close(stp.fdOut);
+		if (stp.isRedI == 1)
+			close(stp.fdIn);
+		if (stp.isRedI == 2)
+		{
+			close(stp.fdIn);
+		}
+		ft_free_tab(cfg->tabEnv);
 		exit(0);
 	}
 	else
@@ -205,7 +262,7 @@ void	ft_exec(t_struct *cfg)
 		{
 			cmd = ft_init_cmd(tmp);
 			ft_get_path(cfg, cmd);
-			//ft_display_tab(cmd);
+			ft_display_tab(cmd);
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
 		}
