@@ -8,6 +8,7 @@ SRCS            = main.c\
 					src/parse_line.c\
 					src/pipe.c\
 					src/exec.c\
+					src/redirec.c\
 
 CC              = clang
 CFLAGS          = -g -Wall -Wextra -Werror -I ./includes
