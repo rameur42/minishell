@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/23 14:45:09 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/23 15:48:49 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	else
 	{
-		waitpid(-1, &statue, 0);
+		//waitpid(-1, &statue, 0);
 		if (stp.pp == 1)
 			close(tmp->prev->pipefd[0]);
 		if (stp.pn == 1)
@@ -171,22 +171,47 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 	}
 }
 
-void	ft_exec(t_struct *cfg)
+int		get_nb_cmd(t_struct *cfg)
 {
 	t_list *tmp;
-	char **cmd;
+	int res;
 
 	tmp = cfg->arg;
+	res = 0;
+	while (tmp)
+	{
+		if (tmp->type == 9)
+			res++;
+		tmp = tmp->next;
+	}
+	return (res);
+}
+
+void	ft_exec(t_struct *cfg)
+{
+	t_list	*tmp;
+	char	**cmd;
+	int		nbCmd;
+	int		statue;
+
+	tmp = cfg->arg;
+	nbCmd = 0;
+	nbCmd = get_nb_cmd(cfg);
 	while (tmp)
 	{
 		if (tmp->type == 9)
 		{
 			cmd = ft_init_cmd(tmp);
 			ft_get_path(cfg, cmd);
-			ft_display_tab(cmd);
+			//ft_display_tab(cmd);
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
 		}
 		tmp = tmp->next;
+	}
+	while (nbCmd > 0)
+	{
+		if (waitpid(-1, &statue, 0) > 0)
+			nbCmd--;
 	}
 }
