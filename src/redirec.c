@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 14:42:07 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/23 15:14:30 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/23 16:37:22 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		is_v(int type)
 	return (0);
 }
 
-void	is_redirec(t_list *tmp, t_setup *stp)
+int 	is_redirec(t_list *tmp, t_setup *stp)
 {
 	t_list *temp;
 	int res;
@@ -76,21 +76,43 @@ void	is_redirec(t_list *tmp, t_setup *stp)
 		}
 		temp = temp->next;
 	}
-	if (temp && temp->type == 3 && temp->next)
+	if (temp && temp->type == 3)
 	{
-		stp->fdOut = open(temp->next->content, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-		dup2(stp->fdOut, 1);
+		if (temp->next)
+        {
+            stp->fdOut = open(temp->next->content, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+		    dup2(stp->fdOut, 1);
+        }
+        else
+            return (ft_print_error("syntax error near unexpected token `newline'\n", 1));
+            
 	}
-	else if (temp && temp->type == 4 && temp->next)
+	else if (temp && temp->type == 4)
 	{
-		stp->fdOut = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
-		dup2(stp->fdOut, 1);
+		if (temp->next)
+        {
+            stp->fdOut = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
+		    dup2(stp->fdOut, 1);
+        }
+        else
+            return (ft_print_error("syntax error near unexpected token `newline'\n", 1));
 	}
-	else if (temp && temp->type == 5 && temp->next)
+	else if (temp && temp->type == 5)
 	{
-		stp->fdIn = open(temp->next->content, O_RDONLY);
-		dup2(stp->fdIn, 0);
+		if (temp->next)
+        {    
+            stp->fdIn = open(temp->next->content, O_RDONLY);
+	    	dup2(stp->fdIn, 0);
+        }
+        else
+            return (ft_print_error("syntax error near unexpected token `newline'\n", 1));
 	}
-	else if (temp && temp->type == 6 && temp->next)
-		d_in(temp, stp);
+	else if (temp && temp->type == 6)
+    {
+        if (temp->next)
+		    d_in(temp, stp);
+        else
+            return (ft_print_error("syntax error near unexpected token `newline'\n", 1));
+    }
+    return (0);
 }

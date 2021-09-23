@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:31:00 by rameur            #+#    #+#             */
-/*   Updated: 2021/07/26 22:32:16 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/23 16:33:36 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,17 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+
+int		ft_print_error(char *str, int res)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (res);
 }

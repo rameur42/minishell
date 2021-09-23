@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/23 15:48:49 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:14:11 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	else if (pid == 0)
 	{
 		set_pipe(tmp, stp.pipN, stp.pp, stp.pn);
-		is_redirec(tmp, &stp);
+		if (is_redirec(tmp, &stp) == 1)
+			exit(1);
 		ft_cp_env(cfg);
 		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 		{
@@ -139,7 +140,6 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	else
 	{
-		//waitpid(-1, &statue, 0);
 		if (stp.pp == 1)
 			close(tmp->prev->pipefd[0]);
 		if (stp.pn == 1)
@@ -187,6 +187,11 @@ int		get_nb_cmd(t_struct *cfg)
 	return (res);
 }
 
+/*void	ft_check_redO(t_list *tmp)
+{
+
+}*/
+
 void	ft_exec(t_struct *cfg)
 {
 	t_list	*tmp;
@@ -207,6 +212,10 @@ void	ft_exec(t_struct *cfg)
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
 		}
+		/*else if (tmp->type == 3)
+		{
+			if (tmp->prev && tmp->prev->type != 9)
+		}*/	
 		tmp = tmp->next;
 	}
 	while (nbCmd > 0)

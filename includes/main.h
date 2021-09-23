@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/09/23 14:44:36 by rameur           ###   ########.fr       */
+/*   Updated: 2021/09/23 16:33:45 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ char	*ft_strstr(char *str, char *to_find);
 void	set_pipe(t_list *tmp, t_list *temp, int pp, int pn);
 void	get_pipe(t_setup *stp, t_list *tmp);
 void	d_in(t_list *temp, t_setup *stp);
-void	is_redirec(t_list *tmp, t_setup *stp);
+int		is_redirec(t_list *tmp, t_setup *stp);
 void	ft_free_str(char *str);
+int		ft_print_error(char *str, int res);
 
 /*check exi*/
 
