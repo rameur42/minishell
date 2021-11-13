@@ -5,3 +5,8 @@
 ->gerer les ctrl...
 ->gerer $?
 ->gerer l'execution non procedurale | Done
+->gerer les commande avec absolute path (/bin/ls)
+->gere les commande avec relative path
+->variable globales
+->gerer la save du retour des commande executer pour "echo $?"
+->gerer $?

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/09/02 15:08:18 by rameur           ###   ########.fr       */
+/*   Updated: 2021/11/09 10:42:44 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av, char **env)
 			if (ft_init_count_pipe(&cfg) == 1)
 				return (0);
 			ft_is_file(&cfg);
-			//ft_print_lst(&cfg);
+			ft_print_lst(&cfg);
 			ft_exec(&cfg);
 			if (ft_strcmp(str, "exit") == 0)
 				return (0);
