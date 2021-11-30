@@ -46,6 +46,26 @@ void	print_env(t_struct *cfg)
 	}
 }
 
+void	ft_handler(int sign)
+{
+	//printf("\nsignal-->%d\n", sign);
+	if (sign == 2)
+		printf("\nminishell>");
+	else if (sign == 3)
+		printf("\b\b");
+}
+
+void	ft_signals()
+{
+	struct sigaction sig;
+
+	sig.sa_handler = &ft_handler;
+	sig.sa_flags = 0;
+	signal(SIGQUIT, SIG_IGN);
+	sigaction(SIGINT, &sig, 0);
+	sigaction(SIGQUIT, &sig, 0);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_struct cfg;
@@ -56,6 +76,7 @@ int	main(int ac, char **av, char **env)
 	cfg.arg = NULL;
 	cfg.pipe = -1;
 	(void)av;
+	ft_signals();
 	if (ac == 1)
 	{
 		ft_get_env(env, &cfg);
