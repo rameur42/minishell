@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 02:52:12 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/02 09:43:13 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/01 06:10:02 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int	ft_parse_line(t_struct *cfg, char *str)
 	while (tab[i])
 	{
 		//printf("tab[i] -> %s\n", tab[i]);
-		if (ft_strcmp(tab[i], "|") == 0)
+		if (ft_tokenize(cfg, tab[i]) == 1)
+			printf("jsp\n");
+		else if (ft_strcmp(tab[i], "|") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 1, dq, sq));
 		else if (ft_strcmp(tab[i], ">>") == 0)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(tab[i]), 4, dq, sq));
@@ -89,6 +91,6 @@ int	ft_parse_line(t_struct *cfg, char *str)
 		printf("Error unclosed double quote\n");
 		return (1);
 	}
-	return (0);
 	//ft_print_lst(cfg);
+	return (0);
 }

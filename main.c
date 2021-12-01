@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/11/09 10:42:44 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/01 06:11:07 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,22 @@ void	ft_handler(int sign)
 {
 	//printf("\nsignal-->%d\n", sign);
 	if (sign == 2)
-		printf("\nminishell>");
+	{
+		printf("\nminishell> ");
+	}
 	else if (sign == 3)
 		printf("\b\b");
 }
 
-void	ft_signals()
+/*void	ft_signals()
 {
 	struct sigaction sig;
 
 	sig.sa_handler = &ft_handler;
 	sig.sa_flags = 0;
-	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &sig, 0);
 	sigaction(SIGQUIT, &sig, 0);
-}
+}*/
 
 int	main(int ac, char **av, char **env)
 {
@@ -76,21 +77,21 @@ int	main(int ac, char **av, char **env)
 	cfg.arg = NULL;
 	cfg.pipe = -1;
 	(void)av;
-	ft_signals();
+	//ft_signals();
 	if (ac == 1)
 	{
 		ft_get_env(env, &cfg);
 		//print_env(&cfg);
 		while (1)
 		{
-			str = readline("minishell>");
+			str = readline("minishell> ");
 			add_history(str);
 			if (ft_parse_line(&cfg, str) == 1)
 				ft_lstclear(&cfg.arg);
 			if (ft_init_count_pipe(&cfg) == 1)
 				return (0);
 			ft_is_file(&cfg);
-			ft_print_lst(&cfg);
+			//ft_print_lst(&cfg);
 			ft_exec(&cfg);
 			if (ft_strcmp(str, "exit") == 0)
 				return (0);

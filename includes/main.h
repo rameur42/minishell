@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/11/09 10:43:49 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/01 06:05:29 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@
 ** ; -> 8;
 **cmd -> 9;
 */
+
+typedef struct s_tok {
+	char			c;
+	int				type;
+	struct s_tok	*next;
+}				t_tok;
 
 typedef struct s_list {
 	char	*content;
@@ -99,6 +105,8 @@ void	d_in(t_list *temp, t_setup *stp);
 int		is_redirec(t_list *tmp, t_setup *stp);
 void	ft_free_str(char *str);
 int		ft_print_error(char *str, int res);
+
+int		ft_tokenize(t_struct *cfg, char *str);
 
 /*check exi*/
 
