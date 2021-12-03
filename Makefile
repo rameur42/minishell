@@ -9,7 +9,8 @@ SRCS            = main.c\
 					src/pipe.c\
 					src/exec.c\
 					src/redirec.c\
-					src/tokenize.c
+					src/tokenize.c\
+					src/signal.c\
 
 CC              = clang
 CFLAGS          = -g -Wall -Wextra -Werror -I ./includes

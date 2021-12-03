@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/23 17:14:11 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/03 05:38:23 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	pid = 0;
 	get_pipe(&stp, tmp);
 	pid = fork();
+	ft_f_signals();
 	if (pid == -1)
 	{
 		printf("fork failed\n");
@@ -126,11 +127,13 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		if (is_redirec(tmp, &stp) == 1)
 			exit(1);
 		ft_cp_env(cfg);
+		printf("|| %s ||\n", cmd[0]);
 		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 		{
 			printf("execve failed\n");
 			exit (1);
 		}
+		printf("hello there\n");
 		if (stp.isRedO == 1)
 			close(stp.fdOut);
 		if (stp.isRedI == 1)
@@ -156,6 +159,10 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 
 	i = 0;
 	ret = -1;
+	printf("cmd->%s\n", cmd[0]);
+	ret = stat(cmd[0], &buff);
+	if (ret == 0)
+		return ;
 	while (cfg->path[i] && ret != 0)
 	{
 		buffer = ft_strjoin(cfg->path[i], cmd[0], 0);
@@ -187,11 +194,6 @@ int		get_nb_cmd(t_struct *cfg)
 	return (res);
 }
 
-/*void	ft_check_redO(t_list *tmp)
-{
-
-}*/
-
 void	ft_exec(t_struct *cfg)
 {
 	t_list	*tmp;
@@ -212,10 +214,6 @@ void	ft_exec(t_struct *cfg)
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
 		}
-		/*else if (tmp->type == 3)
-		{
-			if (tmp->prev && tmp->prev->type != 9)
-		}*/	
 		tmp = tmp->next;
 	}
 	while (nbCmd > 0)

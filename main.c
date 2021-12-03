@@ -6,19 +6,21 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/01 06:11:07 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/03 05:08:24 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	ft_get_env(char **env, t_struct *cfg)
+int		ft_get_env(char **env, t_struct *cfg)
 {
 	int i;
 
 	i = 0;
 	//printf("hello there\n");
-	while(env[i] != NULL)
+	if ((*env) == NULL)
+		return (1);
+	while(env && env[i] != NULL)
 	{
 		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0, 0));
 		i++;
@@ -32,6 +34,7 @@ void	ft_get_env(char **env, t_struct *cfg)
 		//printf("path->%s\n", cfg->path[i]);
 		i++;
 	}
+	return (0);
 }
 
 void	print_env(t_struct *cfg)
@@ -46,27 +49,6 @@ void	print_env(t_struct *cfg)
 	}
 }
 
-void	ft_handler(int sign)
-{
-	//printf("\nsignal-->%d\n", sign);
-	if (sign == 2)
-	{
-		printf("\nminishell> ");
-	}
-	else if (sign == 3)
-		printf("\b\b");
-}
-
-/*void	ft_signals()
-{
-	struct sigaction sig;
-
-	sig.sa_handler = &ft_handler;
-	sig.sa_flags = 0;
-	sigaction(SIGINT, &sig, 0);
-	sigaction(SIGQUIT, &sig, 0);
-}*/
-
 int	main(int ac, char **av, char **env)
 {
 	t_struct cfg;
@@ -76,26 +58,37 @@ int	main(int ac, char **av, char **env)
 	cfg.env = NULL;
 	cfg.arg = NULL;
 	cfg.pipe = -1;
+	cfg.sq = 0;
+	cfg.dq = 0;
 	(void)av;
-	//ft_signals();
 	if (ac == 1)
 	{
-		ft_get_env(env, &cfg);
+		if (ft_get_env(env, &cfg) == 1)
+			return (1);
 		//print_env(&cfg);
 		while (1)
 		{
+			ft_signals();
 			str = readline("minishell> ");
+			if (str == NULL)
+			{
+				write(1, "\n", 1);
+				break ;
+			}
+			if (ft_strcmp(str, "exit") == 0)
+				return (0);
 			add_history(str);
 			if (ft_parse_line(&cfg, str) == 1)
 				ft_lstclear(&cfg.arg);
-			if (ft_init_count_pipe(&cfg) == 1)
-				return (0);
-			ft_is_file(&cfg);
-			//ft_print_lst(&cfg);
-			ft_exec(&cfg);
-			if (ft_strcmp(str, "exit") == 0)
-				return (0);
-			ft_lstclear(&cfg.arg);
+			else
+			{
+				if (ft_init_count_pipe(&cfg) == 1)
+					return (0);
+				ft_is_file(&cfg);
+				ft_print_lst(&cfg);
+				ft_exec(&cfg);
+				ft_lstclear(&cfg.arg);
+			}
 			if (str)
 				free (str);
 			str = NULL;

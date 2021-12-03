@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/01 06:05:29 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/03 04:15:27 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@
 **cmd -> 9;
 */
 
+typedef struct s_glob {
+	int		p;
+}				t_glob;
+
 typedef struct s_tok {
 	char			c;
 	int				type;
@@ -66,6 +70,8 @@ typedef struct s_struct {
 	char	**path;
 	char	**tabEnv;
 	int		pipe;
+	int		sq;
+	int		dq;
 }				t_struct;
 
 typedef struct s_setup {
@@ -79,6 +85,7 @@ typedef struct s_setup {
 	int		fdOut;
 	int		stopIn;
 	int		redFd[2];
+
 }				t_setup;
 
 int		ft_strlen(char *s);
@@ -107,6 +114,10 @@ void	ft_free_str(char *str);
 int		ft_print_error(char *str, int res);
 
 int		ft_tokenize(t_struct *cfg, char *str);
+void	ft_signals();
+
+void	ft_signals();
+void	ft_f_signals(void);
 
 /*check exi*/
 
