@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 02:52:12 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/03 05:45:59 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/08 14:47:06 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_lst(t_struct *cfg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cfg->arg;
 	while (tmp)
@@ -26,7 +26,7 @@ void	ft_print_lst(t_struct *cfg)
 
 int	ft_parse_line(t_struct *cfg, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_tokenize(cfg, str);

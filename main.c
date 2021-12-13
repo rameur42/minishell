@@ -6,21 +6,20 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/03 05:08:24 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/08 14:29:47 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int		ft_get_env(char **env, t_struct *cfg)
+int	ft_get_env(char **env, t_struct *cfg)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	//printf("hello there\n");
 	if ((*env) == NULL)
 		return (1);
-	while(env && env[i] != NULL)
+	while (env && env[i] != NULL)
 	{
 		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0, 0));
 		i++;
@@ -39,7 +38,7 @@ int		ft_get_env(char **env, t_struct *cfg)
 
 void	print_env(t_struct *cfg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cfg->env;
 	while (tmp)
@@ -51,8 +50,8 @@ void	print_env(t_struct *cfg)
 
 int	main(int ac, char **av, char **env)
 {
-	t_struct cfg;
-	char *str;
+	t_struct	cfg;
+	char		*str;
 
 	str = NULL;
 	cfg.env = NULL;

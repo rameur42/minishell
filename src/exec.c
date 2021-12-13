@@ -6,15 +6,15 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/03 05:38:23 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/09 16:59:25 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int		ft_tab_count(t_list *arg)
+int	ft_tab_count(t_list *arg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	int		res;
 
 	if (arg == NULL)
@@ -31,7 +31,7 @@ int		ft_tab_count(t_list *arg)
 
 void	ft_display_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -43,7 +43,7 @@ void	ft_display_tab(char **tab)
 
 char	**ft_init_cmd(t_list *tmp)
 {
-	char **cmd;
+	char	**cmd;
 	int		nb;
 	int		i;
 
@@ -65,15 +65,15 @@ char	**ft_init_cmd(t_list *tmp)
 
 void	ft_cp_env(t_struct *cfg)
 {
-	int i;
-	t_list *tmp;
+	int		i;
+	t_list	*tmp;
 
 	tmp = cfg->env;
 	i = ft_lstsize(cfg->env);
 	cfg->tabEnv = malloc((i + 1) * sizeof(char *));
 	cfg->tabEnv[i] = NULL;
 	i = 0;
-	while(tmp)
+	while (tmp)
 	{
 		cfg->tabEnv[i] = ft_strdup(tmp->content);
 		tmp = tmp->next;
@@ -83,7 +83,7 @@ void	ft_cp_env(t_struct *cfg)
 
 void	ft_free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -127,11 +127,12 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		if (is_redirec(tmp, &stp) == 1)
 			exit(1);
 		ft_cp_env(cfg);
-		printf("|| %s ||\n", cmd[0]);
+		//printf("|| %s ||\n", cmd[0]);
 		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 		{
-			printf("execve failed\n");
-			exit (1);
+			printf("minishell: command not found: %s \n", cmd[0]);
+			ft_free_tab(cfg->tabEnv);
+			exit (0);
 		}
 		printf("hello there\n");
 		if (stp.isRedO == 1)
@@ -159,7 +160,7 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 
 	i = 0;
 	ret = -1;
-	printf("cmd->%s\n", cmd[0]);
+	//printf("cmd->%s\n", cmd[0]);
 	ret = stat(cmd[0], &buff);
 	if (ret == 0)
 		return ;
@@ -178,16 +179,16 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 	}
 }
 
-int		get_nb_cmd(t_struct *cfg)
+int	get_nb_cmd(t_struct *cfg)
 {
-	t_list *tmp;
-	int res;
+	t_list	*tmp;
+	int		res;
 
 	tmp = cfg->arg;
 	res = 0;
 	while (tmp)
 	{
-		if (tmp->type == 9)
+		if (tmp->type == 9 || tmp->type == 0)
 			res++;
 		tmp = tmp->next;
 	}
@@ -198,15 +199,15 @@ void	ft_exec(t_struct *cfg)
 {
 	t_list	*tmp;
 	char	**cmd;
-	int		nbCmd;
+	int		nb_cmd;
 	int		statue;
 
 	tmp = cfg->arg;
-	nbCmd = 0;
-	nbCmd = get_nb_cmd(cfg);
+	nb_cmd = 0;
+	nb_cmd = get_nb_cmd(cfg);
 	while (tmp)
 	{
-		if (tmp->type == 9)
+		if (tmp->type == 9 || tmp->type == 0)
 		{
 			cmd = ft_init_cmd(tmp);
 			ft_get_path(cfg, cmd);
@@ -216,9 +217,9 @@ void	ft_exec(t_struct *cfg)
 		}
 		tmp = tmp->next;
 	}
-	while (nbCmd > 0)
+	while (nb_cmd > 0)
 	{
 		if (waitpid(-1, &statue, 0) > 0)
-			nbCmd--;
+			nb_cmd--;
 	}
 }

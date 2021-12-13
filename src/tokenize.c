@@ -6,15 +6,15 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/03 05:46:27 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/08 14:51:50 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-t_tok   *ft_new(char c, int type)
+t_tok	*ft_new(char c, int type)
 {
-	t_tok *new_l;
+	t_tok	*new_l;
 
 	new_l = malloc(sizeof(t_tok));
 	if (new_l == NULL)
@@ -25,9 +25,9 @@ t_tok   *ft_new(char c, int type)
 	return (new_l);
 }
 
-void   ft_add_back(t_tok **al, t_tok *new)
+void	ft_add_back(t_tok **al, t_tok *new)
 {
-	t_tok *tmp;
+	t_tok	*tmp;
 
 	if (al == NULL)
 		return ;
@@ -42,10 +42,10 @@ void   ft_add_back(t_tok **al, t_tok *new)
 	tmp->next = new;
 }
 
-void    ft_clear(t_tok **lst)
+void	ft_clear(t_tok **lst)
 {
-	t_tok *tmp;
-	
+	t_tok	*tmp;
+
 	if (!(lst))
 		return ;
 	if ((*lst) == NULL)
@@ -58,10 +58,10 @@ void    ft_clear(t_tok **lst)
 	}
 }
 
-int		ft_check_token(t_tok *lst)
+int	ft_check_token(t_tok *lst)
 {
-	t_tok *tmp;
-	int i;
+	t_tok	*tmp;
+	int		i;
 
 	if (!lst)
 		return (-1);
@@ -76,11 +76,11 @@ int		ft_check_token(t_tok *lst)
 	return (0);
 }
 
-int		ft_count_l(t_tok *lst)
+int	ft_count_l(t_tok *lst)
 {
-	t_tok *tmp;
-	int ref;
-	int res;
+	t_tok	*tmp;
+	int		ref;
+	int		res;
 
 	tmp = lst;
 	ref = tmp->type;
@@ -93,7 +93,7 @@ int		ft_count_l(t_tok *lst)
 	return (res);
 }
 
-int		ft_count_w(t_tok *lst)
+int	ft_count_w(t_tok *lst)
 {
 	t_tok	*tmp;
 	int		res;
@@ -119,7 +119,7 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	char	*buff;
 	int		size;
 	int		nb_word;
-	int 	i;
+	int		i;
 	t_tok	*tmp;
 
 	tmp = lst;
@@ -135,7 +135,7 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 			buff[size - 1] = '\0';
 			while (tmp && size > 1)
 			{
- 				buff[i] = tmp->c;
+				buff[i] = tmp->c;
 				size--;
 				if (size == 1)
 					i = tmp->type;
@@ -154,11 +154,11 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	}
 }
 
-int		ft_tokenize(t_struct *cfg, char *str)
+int	ft_tokenize(t_struct *cfg, char *str)
 {
-	int i;
-	int f;
-	t_tok *lst;
+	int		i;
+	int		f;
+	t_tok	*lst;
 
 	i = 0;
 	f = 0;
@@ -180,9 +180,11 @@ int		ft_tokenize(t_struct *cfg, char *str)
 			else if (cfg->dq == 1)
 				cfg->dq = 0;
 		}
-		if (str[i] != '\'' && str[i] != '\"' && f == 0 && cfg->sq == 1 && cfg->dq == 0)
+		if (str[i] != '\'' && str[i] != '\"' && f == 0
+			&& cfg->sq == 1 && cfg->dq == 0)
 			ft_add_back(&lst, ft_new(str[i], 0));
-		else if (str[i] != '\'' && str[i] != '\"' && f == 0 && cfg->sq == 0 && cfg->dq == 1)
+		else if (str[i] != '\'' && str[i] != '\"' && f == 0
+			&& cfg->sq == 0 && cfg->dq == 1)
 			ft_add_back(&lst, ft_new(str[i], 0));
 		else if (str[i] == '|')
 			ft_add_back(&lst, ft_new(str[i], 1));
@@ -206,7 +208,8 @@ int		ft_tokenize(t_struct *cfg, char *str)
 		}
 		else
 		{
-			if (str[i] != '\'' && str[i] != '\"' && f == 0 && cfg->sq == 0 && cfg->dq == 0)
+			if (str[i] != '\'' && str[i] != '\"' && f == 0
+				&& cfg->sq == 0 && cfg->dq == 0)
 				ft_add_back(&lst, ft_new(str[i], 0));
 			else if (str[i] != '\'' && str[i] != '\"' && f == 1)
 				ft_add_back(&lst, ft_new(str[i], 2));

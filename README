@@ -5,6 +5,7 @@
 ->gere les commande avec relative path | Done
 ->mettre en place les check relatif au simple et double cote
 ->gerer la save du retour des commande executer pour "echo $?"
+->gerer "<<"
 
 ->creer les built-in et les integrer
 ->gerer l'ajout et la modification des variables d'environnements

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:36:24 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/02 09:41:58 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/09 16:12:21 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstnew(void *content, int type, int dq, int sq)
 {
-	t_list *new_list;
+	t_list	*new_list;
 
 	new_list = malloc(sizeof(t_list));
 	if (new_list == NULL)
@@ -30,7 +30,7 @@ t_list	*ft_lstnew(void *content, int type, int dq, int sq)
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (alst == NULL)
 		return ;
@@ -46,7 +46,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 	new->prev = tmp;
 }
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int		i;
 
@@ -63,7 +63,8 @@ int		ft_lstsize(t_list *lst)
 
 void	ft_lstclear(t_list **lst)
 {
-	t_list *tmp;
+	t_list	*tmp;
+
 	if (!(lst))
 		return ;
 	if ((*lst) == NULL)

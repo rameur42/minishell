@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:31:00 by rameur            #+#    #+#             */
-/*   Updated: 2021/09/23 16:33:36 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/09 16:12:41 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strlen(s1) != ft_strlen(s2))
@@ -28,9 +28,9 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-int		ft_print_error(char *str, int res)
+int	ft_print_error(char *str, int res)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

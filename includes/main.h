@@ -6,30 +6,30 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/03 04:15:27 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/09 17:43:17 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include <errno.h>
-#include <sys/ioctl.h>
-#include <termios.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <sys/time.h>
+# include <sys/resource.h>
+# include <signal.h>
+# include <sys/stat.h>
+# include <dirent.h>
+# include <errno.h>
+# include <sys/ioctl.h>
+# include <termios.h>
 
 /*index
 **file? ->0
@@ -55,14 +55,14 @@ typedef struct s_tok {
 }				t_tok;
 
 typedef struct s_list {
-	char	*content;
-	int		type;
-	int		pipefd[2];
-	int		dq;
-	int		sq;
-	struct s_list *next;
-	struct s_list *prev;
-}				t_list;
+	char			*content;
+	int				type;
+	int				pipefd[2];
+	int				dq;
+	int				sq;
+	struct s_list	*next;
+	struct s_list	*prev;
+}					t_list;
 
 typedef struct s_struct {
 	t_list	*env;
@@ -114,11 +114,11 @@ void	ft_free_str(char *str);
 int		ft_print_error(char *str, int res);
 
 int		ft_tokenize(t_struct *cfg, char *str);
-void	ft_signals();
+void	ft_signals(void);
 
-void	ft_signals();
+void	ft_signals(void);
 void	ft_f_signals(void);
 
-/*check exi*/
+/*check exit*/
 
 #endif

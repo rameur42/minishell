@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 02:37:34 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/03 02:38:37 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/09 16:13:39 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 void	ft_handler(int sign)
 {
 	(void)sign;
-
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
 
-void	ft_signals()
+void	ft_signals(void)
 {
 	signal(SIGINT, ft_handler);
 	signal(SIGQUIT, SIG_IGN);

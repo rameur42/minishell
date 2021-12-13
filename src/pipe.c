@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/03 02:46:41 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/09 16:13:55 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_init_count_pipe(t_struct *cfg)
 {
-	cfg->pipe = 0;
-	t_list *tmp;
+	t_list	*tmp;
 
+	cfg->pipe = 0;
 	tmp = cfg->arg;
 	while (tmp)
 	{
@@ -34,15 +34,15 @@ int	ft_init_count_pipe(t_struct *cfg)
 	return (0);
 }
 
-int		is_file(t_struct *cfg, char *file)
+int	is_file(t_struct *cfg, char *file)
 {
-	struct stat buff;
-	int	res;
-	int	i;
-	char *buffer;
+	struct stat	buff;
+	int			res;
+	int			i;
+	char		*buffer;
 
 	i = 0;
-	res =-1;
+	res = -1;
 	res = stat(file, &buff);
 	while (cfg->path[i] && res != 0)
 	{
@@ -59,19 +59,21 @@ int		is_file(t_struct *cfg, char *file)
 
 void	ft_is_file(t_struct *cfg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cfg->arg;
 	while (tmp)
 	{
 		if (tmp->type == 0)
+		{
 			if (is_file(cfg, tmp->content) == 0)
 			{
 				tmp->type = 9;
-				if (tmp->prev && (tmp->prev->type == 9 ||
-						tmp->prev->type == 6))
+				if (tmp->prev && (tmp->prev->type == 9
+						|| tmp->prev->type == 6))
 					tmp->type = 0;
 			}
+		}
 		tmp = tmp->next;
 	}
 }
@@ -104,7 +106,7 @@ void	get_pipe(t_setup *stp, t_list *tmp)
 		if (stp->pipN->type == 1)
 		{
 			stp->pn = 1;
-			break;
+			break ;
 		}
 		stp->pipN = stp->pipN->next;
 	}
