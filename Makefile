@@ -31,7 +31,7 @@ $(NAME):	$(OBJS)
 clean:
 		rm -f utils/*.o
 		rm -f src/*.o
-		rm -f built-in/*.o
+		rm -f built_in/*.o
 		rm -f *.o
 
 fclean:		clean

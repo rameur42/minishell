@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/20 19:31:25 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/20 21:46:06 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,9 +217,16 @@ void	ft_exec(t_struct *cfg)
 			{
 				if (tmp->next && tmp->next->type == 2)
 					ft_export(tmp->next->content, cfg);
+				else
+					ft_export(NULL, cfg);
 			}
 			else if (ft_strcmp(tmp->content, "unset") == 0)
-				ft_unset(tmp->content, cfg);
+			{
+				if (tmp->next && tmp->next->type == 2)
+					ft_unset(tmp->next->content, cfg);
+				else
+					ft_unset(NULL, cfg);
+			}
 		}
 		if (tmp->type == 9 || tmp->type == 0)
 		{
