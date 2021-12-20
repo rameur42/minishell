@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/09 17:43:17 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/20 19:31:10 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_struct {
 	int		pipe;
 	int		sq;
 	int		dq;
+	int		exit_code;
 }				t_struct;
 
 typedef struct s_setup {
@@ -114,10 +115,15 @@ void	ft_free_str(char *str);
 int		ft_print_error(char *str, int res);
 
 int		ft_tokenize(t_struct *cfg, char *str);
-void	ft_signals(void);
 
 void	ft_signals(void);
 void	ft_f_signals(void);
+
+int	ft_is_same(char *s1, char *s2);
+
+void	print_env(t_struct *cfg);
+int		ft_export(char *s, t_struct *cfg);
+int		ft_unset(char *s, t_struct *cfg);
 
 /*check exit*/
 

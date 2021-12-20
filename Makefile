@@ -11,7 +11,9 @@ SRCS            = main.c\
 					src/redirec.c\
 					src/tokenize.c\
 					src/signal.c\
-
+					built_in/export.c\
+					built_in/unset.c
+					
 CC              = clang
 CFLAGS          = -g -Wall -Wextra -Werror -I ./includes
 NAME            = minishell
@@ -29,6 +31,7 @@ $(NAME):	$(OBJS)
 clean:
 		rm -f utils/*.o
 		rm -f src/*.o
+		rm -f built-in/*.o
 		rm -f *.o
 
 fclean:		clean

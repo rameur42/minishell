@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/08 14:29:47 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/15 14:18:06 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(int ac, char **av, char **env)
 	cfg.pipe = -1;
 	cfg.sq = 0;
 	cfg.dq = 0;
+	cfg.exit_code = 0;
 	(void)av;
 	if (ac == 1)
 	{

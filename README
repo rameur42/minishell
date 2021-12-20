@@ -6,6 +6,9 @@
 ->mettre en place les check relatif au simple et double cote
 ->gerer la save du retour des commande executer pour "echo $?"
 ->gerer "<<"
+->integrer env | Done
+->coder export et l'integrer | Done
+->coder unset et l'integrer
 
 ->creer les built-in et les integrer
 ->gerer l'ajout et la modification des variables d'environnements

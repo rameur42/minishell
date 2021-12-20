@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/09 16:13:55 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/20 19:30:19 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,46 @@ int	is_file(t_struct *cfg, char *file)
 	return (1);
 }
 
+int	is_built_in(char *cmd)
+{
+	if (ft_strcmp("env", cmd) == 0)
+		return (1);
+	else if (ft_strcmp("export", cmd) == 0)
+		return (1);
+	else if (ft_strcmp("unset", cmd) == 0)
+		return (1);
+	return (0);
+}
+
 void	ft_is_file(t_struct *cfg)
 {
 	t_list	*tmp;
+	int		is_cmd;
 
 	tmp = cfg->arg;
+	is_cmd = 0;
 	while (tmp)
 	{
 		if (tmp->type == 0)
 		{
-			if (is_file(cfg, tmp->content) == 0)
+			if (is_built_in(tmp->content) == 1)
+			{
+				tmp->type = 10;
+				is_cmd = 1;
+			}
+			else if (is_cmd == 0 && is_file(cfg, tmp->content) == 0)
 			{
 				tmp->type = 9;
+				is_cmd = 1;
 				if (tmp->prev && (tmp->prev->type == 9
 						|| tmp->prev->type == 6))
 					tmp->type = 0;
 			}
+			else if (is_cmd == 1)
+				tmp->type = 2;
 		}
+		else if (tmp->type == 1 || tmp->type == 8)
+			is_cmd = 0;
 		tmp = tmp->next;
 	}
 }

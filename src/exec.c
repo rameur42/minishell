@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/09 16:59:25 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/20 19:31:25 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,12 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		//printf("|| %s ||\n", cmd[0]);
 		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 		{
-			printf("minishell: command not found: %s \n", cmd[0]);
+			printf("minsishell: command not found: %s \n", cmd[0]);
 			ft_free_tab(cfg->tabEnv);
+			cfg->exit_code = 1;
 			exit (0);
 		}
+		cfg->exit_code = 0;
 		printf("hello there\n");
 		if (stp.isRedO == 1)
 			close(stp.fdOut);
@@ -207,6 +209,18 @@ void	ft_exec(t_struct *cfg)
 	nb_cmd = get_nb_cmd(cfg);
 	while (tmp)
 	{
+		if (tmp->type == 10)
+		{
+			if (ft_strcmp(tmp->content, "env") == 0)
+				print_env(cfg);
+			else if (ft_strcmp(tmp->content, "export") == 0)
+			{
+				if (tmp->next && tmp->next->type == 2)
+					ft_export(tmp->next->content, cfg);
+			}
+			else if (ft_strcmp(tmp->content, "unset") == 0)
+				ft_unset(tmp->content, cfg);
+		}
 		if (tmp->type == 9 || tmp->type == 0)
 		{
 			cmd = ft_init_cmd(tmp);
