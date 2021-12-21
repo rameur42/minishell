@@ -12,6 +12,7 @@ SRCS            = main.c\
 					src/tokenize.c\
 					src/signal.c\
 					built_in/export.c\
+					built_in/export2.c\
 					built_in/unset.c
 					
 CC              = clang

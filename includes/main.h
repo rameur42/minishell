@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/20 19:31:10 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 15:58:19 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_list {
 
 typedef struct s_struct {
 	t_list	*env;
+	t_list	*exp;
 	t_list	*arg;
 	char	**path;
 	char	**tabEnv;
@@ -120,8 +121,9 @@ void	ft_signals(void);
 void	ft_f_signals(void);
 
 int	ft_is_same(char *s1, char *s2);
+void	ft_sort_lst(t_struct *cfg);
 
-void	print_env(t_struct *cfg);
+void	print_lst(t_list *tmp);
 int		ft_export(char *s, t_struct *cfg);
 int		ft_unset(char *s, t_struct *cfg);
 

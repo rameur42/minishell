@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/21 14:41:14 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:16:57 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ int	ft_get_env(char **env, t_struct *cfg)
 	return (0);
 }
 
-void	print_env(t_struct *cfg)
+void	print_lst(t_list *tmp)
 {
-	t_list	*tmp;
-
-	tmp = cfg->env;
 	while (tmp)
 	{
 		printf("%s\n", tmp->content);
@@ -56,6 +53,7 @@ int	main(int ac, char **av, char **env)
 	str = NULL;
 	cfg.env = NULL;
 	cfg.arg = NULL;
+	cfg.exp = NULL;
 	cfg.pipe = -1;
 	cfg.sq = 0;
 	cfg.dq = 0;
@@ -81,7 +79,11 @@ int	main(int ac, char **av, char **env)
 				str = NULL;
 			}
 			else if (ft_strcmp(str, "exit") == 0)
+			{
+				ft_lstclear(&cfg.env);
+				ft_lstclear(&cfg.exp);
 				return (0);
+			}
 			else
 			{
 				add_history(str);

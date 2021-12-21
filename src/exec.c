@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 14:49:10 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 15:57:57 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ void	ft_exec(t_struct *cfg)
 		if (tmp->type == 10)
 		{
 			if (ft_strcmp(tmp->content, "env") == 0)
-				print_env(cfg);
+				print_lst(cfg->env);
 			else if (ft_strcmp(tmp->content, "export") == 0)
 			{
 				if (tmp->next && tmp->next->type == 2)
