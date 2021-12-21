@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/20 21:46:06 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 14:49:10 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 	i = 0;
 	ret = -1;
 	//printf("cmd->%s\n", cmd[0]);
-	ret = stat(cmd[0], &buff);
 	if (ret == 0)
 		return ;
 	while (cfg->path[i] && ret != 0)
@@ -232,7 +231,7 @@ void	ft_exec(t_struct *cfg)
 		{
 			cmd = ft_init_cmd(tmp);
 			ft_get_path(cfg, cmd);
-			//ft_display_tab(cmd);
+			ft_display_tab(cmd);
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
 		}

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/15 14:18:06 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 14:41:14 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,27 @@ int	main(int ac, char **av, char **env)
 				write(1, "\n", 1);
 				break ;
 			}
-			if (ft_strcmp(str, "exit") == 0)
+			else if (ft_strlen(str) == 0)
+			{
+				free(str);
+				str = NULL;
+			}
+			else if (ft_strcmp(str, "exit") == 0)
 				return (0);
-			add_history(str);
-			if (ft_parse_line(&cfg, str) == 1)
-				ft_lstclear(&cfg.arg);
 			else
 			{
-				if (ft_init_count_pipe(&cfg) == 1)
-					return (0);
-				ft_is_file(&cfg);
-				ft_print_lst(&cfg);
-				ft_exec(&cfg);
-				ft_lstclear(&cfg.arg);
+				add_history(str);
+				if (ft_parse_line(&cfg, str) == 1)
+					ft_lstclear(&cfg.arg);
+				else
+				{
+					if (ft_init_count_pipe(&cfg) == 1)
+						return (0);
+					ft_is_file(&cfg);
+					ft_print_lst(&cfg);
+					ft_exec(&cfg);
+					ft_lstclear(&cfg.arg);
+				}
 			}
 			if (str)
 				free (str);

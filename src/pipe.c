@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/20 19:30:19 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 14:49:15 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ int	is_file(t_struct *cfg, char *file)
 
 	i = 0;
 	res = -1;
-	res = stat(file, &buff);
 	while (cfg->path[i] && res != 0)
 	{
 		buffer = ft_strjoin(cfg->path[i], file, 0);
 		res = stat(buffer, &buff);
-		//printf("res = %d buffer = %s\n", res, buffer);
+		printf("res = %d buffer = %s\n", res, buffer);
 		free(buffer);
 		i++;
 	}
