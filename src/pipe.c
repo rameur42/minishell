@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 18:18:54 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 18:39:54 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,3 +136,5 @@ void	get_pipe(t_setup *stp, t_list *tmp)
 		stp->pipN = stp->pipN->next;
 	}
 }
+
+//test
