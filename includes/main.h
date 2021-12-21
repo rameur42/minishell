@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/21 22:01:11 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 23:07:37 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ int		ft_strlen(char *s);
 char	*ft_strdup(char *str);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strjoin(char *s1, char *s2, int mode);
+char	*ft_substr(char *s, int start, int len);
+
 t_list	*ft_lstnew(void *content, int type, int dq, int sq);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -104,7 +107,6 @@ void	ft_lstclear(t_list **lst);
 char	**split_path(char **env);
 char	**ft_split(const char *s, char c);
 char	**ft_free_s(char **res, int i);
-char	*ft_strjoin(char *s1, char *s2, int mode);
 char	*ft_rm_p(char *line);
 int		ft_parse_line(t_struct *cfg, char *str);
 int		ft_init_count_pipe(t_struct *cfg);
@@ -134,7 +136,7 @@ int		ft_unset(char *s, t_struct *cfg);
 void    exec_exit(t_struct *cfg);
 void    exec_pwd(void);
 void    exec_echo(char **cmd);
-char    *exec_cd(char **av);
+void    exec_cd(t_struct *cfg, char **path);
 
 /*check exit*/
 

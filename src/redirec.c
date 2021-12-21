@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 14:42:07 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/08 14:36:53 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 23:52:59 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ int	is_v(int type)
 int	is_redirec(t_list *tmp, t_setup *stp)
 {
 	t_list	*temp;
-	int		res;
 
 	stp->isRedO = -1;
 	stp->isRedI = -1;
 	temp = tmp;
-	res = 0;
 	while (temp && is_v(temp->type) == 1)
 	{
 		if (temp->type == 3 || temp->type == 4

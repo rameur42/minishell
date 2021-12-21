@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 22:24:04 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 23:24:10 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,20 +205,6 @@ void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd)
 {
 	if (ft_strcmp(tmp->content, "env") == 0)
 		print_lst(cfg->env);
-	else if (ft_strcmp(tmp->content, "export") == 0)
-	{
-		if (tmp->next && tmp->next->type == 2)
-			ft_export(tmp->next->content, cfg);
-		else
-			ft_export(NULL, cfg);
-	}
-	else if (ft_strcmp(tmp->content, "unset") == 0)
-	{
-		if (tmp->next && tmp->next->type == 2)
-			ft_unset(tmp->next->content, cfg);
-		else
-			ft_unset(NULL, cfg);
-	}
 	else if (ft_strcmp(tmp->content, "pwd") == 0)
 		exec_pwd();
 	else if (ft_strcmp(tmp->content, "echo") == 0)
@@ -237,14 +223,28 @@ void	ft_exec(t_struct *cfg)
 	nb_cmd = get_nb_cmd(cfg);
 	while (tmp)
 	{
-		/*if (ft_strcmp(tmp->content, "cd") == 0)
+		if (tmp->type == 12)
 		{
 			cmd = ft_init_cmd(tmp);
-			exec_cd(cmd);
+			if (ft_strcmp(tmp->content, "cd") == 0)
+				exec_cd(cfg, cmd);
+			else if (ft_strcmp(tmp->content, "export") == 0)
+			{
+				if (tmp->next && tmp->next->type == 2)
+					ft_export(tmp->next->content, cfg);
+				else
+					ft_export(NULL, cfg);
+			}
+			else if (ft_strcmp(tmp->content, "unset") == 0)
+			{
+				if (tmp->next && tmp->next->type == 2)
+					ft_unset(tmp->next->content, cfg);
+				else
+					ft_unset(NULL, cfg);
+			}
 			ft_free_tab(cmd);
-			printf("WTF\n");
 		}
-		else */if (tmp->type == 9 || tmp->type == 0 ||
+		else if (tmp->type == 9 || tmp->type == 0 ||
 			tmp->type == 11)
 		{
 			cmd = ft_init_cmd(tmp);

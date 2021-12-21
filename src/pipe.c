@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 22:13:50 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 23:22:22 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,12 @@ void	ft_is_file(t_struct *cfg)
 		{
 			if (is_built_in(tmp->content) == 1)
 			{
-				if (is_cmd == 0)
+				if ((ft_strcmp(tmp->content, "cd") == 0 ||
+					ft_strcmp(tmp->content, "unset") == 0 ||
+					ft_strcmp(tmp->content, "export") == 0) &&
+					 is_cmd == 0)
+					tmp->type = 12;
+				else if (is_cmd == 0)
 					tmp->type = 11;
 				else
 					tmp->type = 2;

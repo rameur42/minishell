@@ -43,35 +43,45 @@ void    exec_pwd(void)
 	free(loc);
 }
 
-/*char    *exec_cd(char *path)
+void	exec_cd(t_struct *cfg, char **path)
 {
-    char *path;
+    char	*buffer;
+	char	*go_to;
+	int		i;
+	t_list *tmp;
 
-    path = 0;
-    if (av[2] && av[2][0] && av[2][1] && av[2][1] != '/' && av[2][1] != '~')
-    {
-        path = getcwd(path, 1024);
-        if (path != NULL)
+	i = 0;
+	tmp = cfg->env;
+	go_to = NULL;
+	buffer = NULL;
+	while (path[i])
+		i++;
+	if (i > 2)
+		return ;
+	else if (i == 1)
+	{
+		while (tmp)
 		{
-            path = ft_strjoin(path, "/", 0);
-            path = ft_strjoin(path, av[], 0);
-            if (chdir(path) == -1)
-            {
-                printf("Error\n");
-                return (0);
-            }
-            else
-                return (path);
-        }
-        else
-        {
-            printf("Error\n");
-            return (path);
-        }
-    }
-    else
-    {
-        path = ft_strjoin(path, av[2], 0);
-        return (path);
-    }
-}*/
+			if (ft_strncmp("HOME", tmp->content, 4) == 0)
+			{
+				chdir(ft_substr(tmp->content, 5, ft_strlen(tmp->content)));
+				return ;
+			}
+			tmp = tmp->next;
+		}
+		printf("minishell: cd: HOME not set\n");
+		return ;
+	}
+	if (ft_strncmp("/mnt", path[1], 4) == 0)
+	{
+		chdir(path[1]);
+		return ;
+	}
+	buffer = getcwd(buffer, 1024);
+	buffer = ft_strjoin(buffer, "/", 1);
+	go_to = ft_strjoin(buffer, path[1], 0);
+	if (chdir(go_to) != 0)
+		printf("minishell: cd: %s: No such file or directory\n", path[1]);
+	free(buffer);
+	free(go_to);
+}

@@ -4,6 +4,7 @@ SRCS            = main.c\
 					utils/lst.c\
 					utils/split.c\
 					utils/free.c\
+					utils/substr.c\
 					src/get_path.c\
 					src/parse_line.c\
 					src/pipe.c\
