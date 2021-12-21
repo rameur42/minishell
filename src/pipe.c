@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 18:18:54 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:13:50 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ int	is_built_in(char *cmd)
 		return (1);
 	else if (ft_strcmp("unset", cmd) == 0)
 		return (1);
+	else if (ft_strcmp("pwd", cmd) == 0)
+		return (1);
+	else if (ft_strcmp("echo", cmd) == 0)
+		return (1);
+	else if (ft_strcmp("cd", cmd) == 0)
+		return (1);
 	return (0);
 }
 
@@ -81,7 +87,7 @@ void	ft_is_file(t_struct *cfg)
 			if (is_built_in(tmp->content) == 1)
 			{
 				if (is_cmd == 0)
-					tmp->type = 10;
+					tmp->type = 11;
 				else
 					tmp->type = 2;
 				is_cmd = 1;

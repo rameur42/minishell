@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 15:57:57 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:24:04 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,19 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 			exit(1);
 		ft_cp_env(cfg);
 		//printf("|| %s ||\n", cmd[0]);
-		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
+		if (tmp->type != 11)
 		{
-			printf("minsishell: command not found: %s \n", cmd[0]);
-			ft_free_tab(cfg->tabEnv);
-			cfg->exit_code = 1;
-			exit (0);
+			if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
+			{
+				printf("minsishell: command not found: %s \n", cmd[0]);
+				ft_free_tab(cfg->tabEnv);
+				cfg->exit_code = 1;
+				exit (0);
+			}
 		}
+		else
+			ft_exec_built_in(cfg, tmp, cmd);
 		cfg->exit_code = 0;
-		printf("hello there\n");
 		if (stp.isRedO == 1)
 			close(stp.fdOut);
 		if (stp.isRedI == 1)
@@ -189,11 +193,36 @@ int	get_nb_cmd(t_struct *cfg)
 	res = 0;
 	while (tmp)
 	{
-		if (tmp->type == 9 || tmp->type == 0)
+		if (tmp->type == 9 || tmp->type == 0 ||
+			tmp->type == 11)
 			res++;
 		tmp = tmp->next;
 	}
 	return (res);
+}
+
+void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd)
+{
+	if (ft_strcmp(tmp->content, "env") == 0)
+		print_lst(cfg->env);
+	else if (ft_strcmp(tmp->content, "export") == 0)
+	{
+		if (tmp->next && tmp->next->type == 2)
+			ft_export(tmp->next->content, cfg);
+		else
+			ft_export(NULL, cfg);
+	}
+	else if (ft_strcmp(tmp->content, "unset") == 0)
+	{
+		if (tmp->next && tmp->next->type == 2)
+			ft_unset(tmp->next->content, cfg);
+		else
+			ft_unset(NULL, cfg);
+	}
+	else if (ft_strcmp(tmp->content, "pwd") == 0)
+		exec_pwd();
+	else if (ft_strcmp(tmp->content, "echo") == 0)
+		exec_echo(cmd);
 }
 
 void	ft_exec(t_struct *cfg)
@@ -208,29 +237,19 @@ void	ft_exec(t_struct *cfg)
 	nb_cmd = get_nb_cmd(cfg);
 	while (tmp)
 	{
-		if (tmp->type == 10)
-		{
-			if (ft_strcmp(tmp->content, "env") == 0)
-				print_lst(cfg->env);
-			else if (ft_strcmp(tmp->content, "export") == 0)
-			{
-				if (tmp->next && tmp->next->type == 2)
-					ft_export(tmp->next->content, cfg);
-				else
-					ft_export(NULL, cfg);
-			}
-			else if (ft_strcmp(tmp->content, "unset") == 0)
-			{
-				if (tmp->next && tmp->next->type == 2)
-					ft_unset(tmp->next->content, cfg);
-				else
-					ft_unset(NULL, cfg);
-			}
-		}
-		if (tmp->type == 9 || tmp->type == 0)
+		/*if (ft_strcmp(tmp->content, "cd") == 0)
 		{
 			cmd = ft_init_cmd(tmp);
-			ft_get_path(cfg, cmd);
+			exec_cd(cmd);
+			ft_free_tab(cmd);
+			printf("WTF\n");
+		}
+		else */if (tmp->type == 9 || tmp->type == 0 ||
+			tmp->type == 11)
+		{
+			cmd = ft_init_cmd(tmp);
+			if (tmp->type != 11)
+				ft_get_path(cfg, cmd);
 			ft_display_tab(cmd);
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/21 15:58:19 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:01:11 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 ** $ -> 7;
 ** ; -> 8;
 **cmd -> 9;
+**' ' -> 10
+**built-in -> 11
+**$? -> 12
 */
 
 typedef struct s_glob {
@@ -93,6 +96,7 @@ typedef struct s_setup {
 int		ft_strlen(char *s);
 char	*ft_strdup(char *str);
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 t_list	*ft_lstnew(void *content, int type, int dq, int sq);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -122,10 +126,15 @@ void	ft_f_signals(void);
 
 int	ft_is_same(char *s1, char *s2);
 void	ft_sort_lst(t_struct *cfg);
+void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd);
 
 void	print_lst(t_list *tmp);
 int		ft_export(char *s, t_struct *cfg);
 int		ft_unset(char *s, t_struct *cfg);
+void    exec_exit(t_struct *cfg);
+void    exec_pwd(void);
+void    exec_echo(char **cmd);
+char    *exec_cd(char **av);
 
 /*check exit*/
 

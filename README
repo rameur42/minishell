@@ -3,12 +3,13 @@
 ->gerer l'execution non procedurale | Done
 ->gerer les commande avec absolute path (/bin/ls) | Done
 ->gere les commande avec relative path | Done
-->mettre en place les check relatif au simple et double cote
+->mettre en place les check relatif au simple et double cote | done
 ->gerer la save du retour des commande executer pour "echo $?"
 ->gerer "<<"
 ->integrer env | Done
 ->coder export et l'integrer | Done
 ->coder unset et l'integrer | Done
+->export +=
+->gerer l'ajout et la modification des variables d'environnements
 
 ->creer les built-in et les integrer
-->gerer l'ajout et la modification des variables d'environnements

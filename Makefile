@@ -13,7 +13,9 @@ SRCS            = main.c\
 					src/signal.c\
 					built_in/export.c\
 					built_in/export2.c\
-					built_in/unset.c
+					built_in/unset.c\
+					built_in/built_in.c\
+					built_in/built_in_utils.c
 					
 CC              = clang
 CFLAGS          = -g -Wall -Wextra -Werror -I ./includes

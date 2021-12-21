@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/21 17:16:57 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/21 20:01:36 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	main(int ac, char **av, char **env)
 			}
 			else if (ft_strcmp(str, "exit") == 0)
 			{
-				ft_lstclear(&cfg.env);
-				ft_lstclear(&cfg.exp);
-				return (0);
+				if (str)
+					free (str);
+				exec_exit(&cfg);
 			}
 			else
 			{
