@@ -8,7 +8,7 @@
 ->gerer "<<"
 ->integrer env | Done
 ->coder export et l'integrer | Done
-->coder unset et l'integrer
+->coder unset et l'integrer | Done
 
 ->creer les built-in et les integrer
 ->gerer l'ajout et la modification des variables d'environnements
