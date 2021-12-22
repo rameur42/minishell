@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/21 20:01:36 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 21:14:09 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,29 @@
 int	ft_get_env(char **env, t_struct *cfg)
 {
 	int	i;
+	char *buff;
+	char *pwd;
 
 	i = 0;
+	pwd = NULL;
 	if ((*env) == NULL)
-		return (1);
+	{	
+		pwd = getcwd(pwd, 1024);
+		buff = ft_strjoin("PWD=", pwd, 0);
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(buff), 0, 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup("SHLVL=1"), 0, 0, 0));
+		free(pwd);
+		free(buff);
+		return (0);
+	}
 	while (env && env[i] != NULL)
 	{
 		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0, 0));
 		i++;
 	}
 	cfg->path = split_path(env);
+	if (cfg->path == NULL)
+		return (0);
 	cfg->path[0] = ft_rm_p(cfg->path[0]);
 	i = 0;
 	while (cfg->path[i])
@@ -54,11 +67,14 @@ int	main(int ac, char **av, char **env)
 	cfg.env = NULL;
 	cfg.arg = NULL;
 	cfg.exp = NULL;
+	cfg.path = NULL;
 	cfg.pipe = -1;
 	cfg.sq = 0;
 	cfg.dq = 0;
+	cfg.en = 0;
 	cfg.exit_code = 0;
 	(void)av;
+	ft_display_tab(env);
 	if (ac == 1)
 	{
 		if (ft_get_env(env, &cfg) == 1)
@@ -91,6 +107,7 @@ int	main(int ac, char **av, char **env)
 					ft_lstclear(&cfg.arg);
 				else
 				{
+					ft_var_env(&cfg);
 					if (ft_init_count_pipe(&cfg) == 1)
 						return (0);
 					ft_is_file(&cfg);

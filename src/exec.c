@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 23:24:10 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 19:10:38 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,32 @@ void	ft_free_str(char *str)
 	str = NULL;
 }
 
+void	ft_incr_shlvl(t_struct *cfg)
+{
+	int i;
+	int	shlvl;
+	char *buff;
+
+	i = 0;
+	shlvl = 0;
+	buff = NULL;
+	while (cfg->tabEnv[i])
+	{
+		if (strncmp("SHLVL", cfg->tabEnv[i], 4) == 0)
+		{
+			shlvl = ft_atoi(cfg->tabEnv[i]);
+			shlvl++;
+			buff = ft_itoa(shlvl);
+			free(cfg->tabEnv[i]);
+			cfg->tabEnv[i] = ft_strjoin("SHLVL=", buff, 0);
+			free(buff);
+			return ;
+			//printf("shlvl->%d\n", ft_atoi(cfg->tabEnv[i]));
+		}
+		i++;
+	}
+}
+
 void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 {
 	t_setup	stp;
@@ -127,12 +153,13 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		if (is_redirec(tmp, &stp) == 1)
 			exit(1);
 		ft_cp_env(cfg);
-		//printf("|| %s ||\n", cmd[0]);
 		if (tmp->type != 11)
 		{
+			if (strcmp("./minishell", cmd[0]) == 0)
+				ft_incr_shlvl(cfg);
 			if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 			{
-				printf("minsishell: command not found: %s \n", cmd[0]);
+				printf("minishell: command not found: %s \n", cmd[0]);
 				ft_free_tab(cfg->tabEnv);
 				cfg->exit_code = 1;
 				exit (0);
@@ -167,7 +194,7 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 	i = 0;
 	ret = -1;
 	//printf("cmd->%s\n", cmd[0]);
-	if (ret == 0)
+	if (ret == 0 || cfg->path == NULL)
 		return ;
 	while (cfg->path[i] && ret != 0)
 	{

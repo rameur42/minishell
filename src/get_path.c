@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:33 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/08 14:46:42 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 18:30:02 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ char	**split_path(char **env)
 	char	**path;
 
 	i = 0;
+	path = NULL;
 	while (env[i] != NULL)
 	{
-		if (env[i][0] == 'P' && env[i][1] == 'A'
+		if (env[i] && env[i][0] == 'P' && env[i][1] == 'A'
 			&& env[i][2] == 'T')
 			path = ft_split(env[i], ':');
 		i++;

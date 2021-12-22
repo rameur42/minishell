@@ -5,6 +5,8 @@ SRCS            = main.c\
 					utils/split.c\
 					utils/free.c\
 					utils/substr.c\
+					utils/atoi.c\
+					utils/itoa.c\
 					src/get_path.c\
 					src/parse_line.c\
 					src/pipe.c\
@@ -12,6 +14,7 @@ SRCS            = main.c\
 					src/redirec.c\
 					src/tokenize.c\
 					src/signal.c\
+					src/env_var.c\
 					built_in/export.c\
 					built_in/export2.c\
 					built_in/unset.c\

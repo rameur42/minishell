@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 18:06:59 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 21:45:56 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	ft_is_same(char *s1, char *s2)
 			return (1);
 		i++;
 	}
-	return (0);
+	//printf("strlenS2->%d, i->%d\n", ft_strlen(s2), ft_len_env(s1, 0));
+	if (ft_strlen(s2) == ft_len_env(s1, 0))
+		return (0);
+	return (1);
 }
 
 void	ft_modif_env(char *s, t_list *lst)
@@ -161,7 +164,7 @@ int	ft_export(char *s, t_struct *cfg)
 	if (cfg->exp == NULL)
 		ft_cp_lst(cfg);
 	//print_lst(cfg->exp);
-	printf("s->%s\n", s);
+	//printf("s->%s\n", s);
 	if (s == NULL)
 	{
 		ft_sort_lst(cfg);
@@ -174,10 +177,7 @@ int	ft_export(char *s, t_struct *cfg)
 		return (0);
 	}
 	if (ft_is_already_in(s, cfg->exp) == 1)
-	{
-		printf("fdp\n");
 		ft_modif_env(s, cfg->exp);
-	}
 	else
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0, 0));
 	if (ft_is_already(s, cfg->env) == 1)

@@ -4,12 +4,16 @@
 ->gerer les commande avec absolute path (/bin/ls) | Done
 ->gere les commande avec relative path | Done
 ->mettre en place les check relatif au simple et double cote | done
-->gerer la save du retour des commande executer pour "echo $?"
-->gerer "<<"
 ->integrer env | Done
 ->coder export et l'integrer | Done
 ->coder unset et l'integrer | Done
+->gerer env quand un minishell est lancer depui un minishell | DONE
+->ameliorer cd | Done 
+->gerer l'ajout et la modification des variables d'environnements | Done
+->gerer l'affichage des variable d'environnements avec echo $...
+->gerer la save du retour des commande executer pour "echo $?"
+->gerer "<<"
 ->export +=
-->gerer l'ajout et la modification des variables d'environnements
-
-->creer les built-in et les integrer
+->gerer env -i (creer les trois variables env)
+->gere ${}
+->gerer $() ()

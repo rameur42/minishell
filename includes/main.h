@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/21 23:07:37 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 21:45:06 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_struct {
 	int		pipe;
 	int		sq;
 	int		dq;
+	int		en;
 	int		exit_code;
 }				t_struct;
 
@@ -137,6 +138,12 @@ void    exec_exit(t_struct *cfg);
 void    exec_pwd(void);
 void    exec_echo(char **cmd);
 void    exec_cd(t_struct *cfg, char **path);
+void	ft_display_tab(char **tab);
+int		ft_atoi(char *str);
+char	*ft_itoa(int n);
+
+void	ft_var_env(t_struct *cfg);
+int		ft_len_env(char *s, int mode);
 
 /*check exit*/
 

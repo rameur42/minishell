@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 14:54:33 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 17:16:41 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 18:49:10 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_sort_lst(t_struct *cfg)
 	t_list *tmp;
 
 	tmp = cfg->exp;
-	printf("sort?->%d\n", ft_is_sort(tmp, tmp->next));
+	//printf("sort?->%d\n", ft_is_sort(tmp, tmp->next));
 	while (tmp->next)
 	{
 		if (ft_is_sort(tmp, tmp->next) == 0)

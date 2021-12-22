@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/08 14:51:50 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 21:51:16 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ int	ft_tokenize(t_struct *cfg, char *str)
 	i = 0;
 	f = 0;
 	lst = NULL;
+	cfg->en = 0;
 	printf("str->%s\n", str);
 	while (str[i])
 	{
@@ -187,32 +188,51 @@ int	ft_tokenize(t_struct *cfg, char *str)
 			&& cfg->sq == 0 && cfg->dq == 1)
 			ft_add_back(&lst, ft_new(str[i], 0));
 		else if (str[i] == '|')
+		{
 			ft_add_back(&lst, ft_new(str[i], 1));
+			cfg->en = 0;
+		}
 		else if (str[i] == '>')
+		{
 			ft_add_back(&lst, ft_new(str[i], 3));
+			cfg->en = 0;
+		}
 		else if (str[i] == '<')
+		{
 			ft_add_back(&lst, ft_new(str[i], 5));
+			cfg->en = 0;
+		}
 		else if (str[i] == '$')
+		{
 			ft_add_back(&lst, ft_new(str[i], 7));
+			cfg->en = 1;
+		}
 		else if (str[i] == ';')
+		{
 			ft_add_back(&lst, ft_new(str[i], 8));
+			cfg->en = 0;
+		}
 		else if (str[i] == '-')
 		{
 			f = 1;
+			cfg->en = 0;
 			ft_add_back(&lst, ft_new(str[i], 2));
 		}
 		else if (str[i] == ' ')
 		{
 			f = 0;
+			cfg->en = 0;
 			ft_add_back(&lst, ft_new(str[i], 10));
 		}
 		else
 		{
 			if (str[i] != '\'' && str[i] != '\"' && f == 0
-				&& cfg->sq == 0 && cfg->dq == 0)
+				&& cfg->sq == 0 && cfg->dq == 0 && cfg->en == 0)
 				ft_add_back(&lst, ft_new(str[i], 0));
 			else if (str[i] != '\'' && str[i] != '\"' && f == 1)
 				ft_add_back(&lst, ft_new(str[i], 2));
+			else if (str[i] != '\'' && str[i] != '\"' && cfg->en == 1)
+				ft_add_back(&lst, ft_new(str[i], 7));
 		}
 		i++;
 	}
