@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   built_in_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/23 18:51:33 by tgresle           #+#    #+#             */
+/*   Updated: 2021/12/23 18:53:46 by tgresle          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-void    ft_putchar(char c)
+void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }
 
-void    ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str && str[i])
-    {
-        ft_putchar(str[i]);
-        i++;
-    }
+	i = 0;
+	while (str && str[i])
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -29,10 +41,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void    error_args(int i)
+void	error_args(int i)
 {
-    if (i == 0)
-        ft_putstr("Error:\nNot enough args\n");
-    else 
-        ft_putstr("Error:\nToo many args\n");
+	if (i == 0)
+		ft_putstr("Error:\nNot enough args\n");
+	else
+		ft_putstr("Error:\nToo many args\n");
 }
