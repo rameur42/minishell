@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/23 17:16:03 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 18:56:22 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char *s1, char *s2, int mode);
 char	*ft_substr(char *s, int start, int len);
-
 t_list	*ft_lstnew(void *content, int type, int dq, int sq);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -128,33 +127,27 @@ void	d_in(t_list *temp, t_setup *stp);
 int		is_redirec(t_list *tmp, t_setup *stp);
 void	ft_free_str(char *str);
 int		ft_print_error(char *str, int res);
-
 int		ft_tokenize(t_struct *cfg, char *str);
-
 void	ft_signals(void);
 void	ft_f_signals(void);
-
-int	ft_is_same(char *s1, char *s2);
+int		ft_is_same(char *s1, char *s2);
 void	ft_sort_lst(t_struct *cfg);
 void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd);
-
 void	print_lst(t_list *tmp);
 int		ft_export(char *s, t_struct *cfg);
 int		ft_unset(char *s, t_struct *cfg);
-void    exec_exit(t_struct *cfg);
-void    exec_pwd(void);
-void    exec_echo(char **cmd);
-void    exec_cd(t_struct *cfg, char **path);
+void	exec_exit(t_struct *cfg);
+void	exec_pwd(void);
+void	exec_echo(char **cmd);
+void	exec_cd(t_struct *cfg, char **path);
 void	ft_display_tab(char **tab);
 int		ft_atoi(char *str);
 char	*ft_itoa(int n);
-
 void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
-
-
-
-
+void    exec_exit(t_struct *cfg);
+void    exec_echo(char **cmd);
+void    exec_pwd(void);
 /*check exit*/
 
 #endif
