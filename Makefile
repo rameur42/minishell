@@ -32,7 +32,7 @@ all:            $(NAME)
 .c.o:
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) 
 					${CC} -lreadline ${CFLAGS} ${OBJS} -o ${NAME}
 
 clean:

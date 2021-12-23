@@ -10,6 +10,7 @@
 ->gerer env quand un minishell est lancer depui un minishell | DONE
 ->ameliorer cd | Done 
 ->gerer l'ajout et la modification des variables d'environnements | Done
+
 ->gerer env -i (creer les trois variables env)
 ->gere ${}
 ->gerer $() ()
@@ -18,6 +19,10 @@
 	(premier char is alpha ou _ et only alphanumerique ou _)
 
 ->gerer l'affichage des variable d'environnements avec echo $... | Done
-->gerer "<<"
-->export +=
+->ameliorer la gestion de unset PATH
+->ameliorer l'interpretation d'exit
 ->gerer la save du retour des commande executer pour "echo $?"
+->ameliorer "<<"
+->ameliorer export (+=)
+->modifier l'interpretation des var d'environnement dans les doubles quotes
+->blinder Makefile

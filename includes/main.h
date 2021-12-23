@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/23 16:15:20 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 17:16:03 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,9 @@ char	*ft_itoa(int n);
 
 void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
+
+
+
 
 /*check exit*/
 
