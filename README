@@ -10,10 +10,14 @@
 ->gerer env quand un minishell est lancer depui un minishell | DONE
 ->ameliorer cd | Done 
 ->gerer l'ajout et la modification des variables d'environnements | Done
-->gerer l'affichage des variable d'environnements avec echo $...
-->gerer la save du retour des commande executer pour "echo $?"
-->gerer "<<"
-->export +=
 ->gerer env -i (creer les trois variables env)
 ->gere ${}
 ->gerer $() ()
+->trouver un solution pour la variable $_
+->ajouter les check de parsing pour export
+	(premier char is alpha ou _ et only alphanumerique ou _)
+
+->gerer l'affichage des variable d'environnements avec echo $... | Done
+->gerer "<<"
+->export +=
+->gerer la save du retour des commande executer pour "echo $?"

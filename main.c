@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/22 21:14:09 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/22 22:15:48 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	main(int ac, char **av, char **env)
 	cfg.sq = 0;
 	cfg.dq = 0;
 	cfg.en = 0;
-	cfg.exit_code = 0;
-	(void)av;
-	ft_display_tab(env);
+	//(void)av;
+	//ft_display_tab(env);
+	printf("av[0]->%s\n", av[0]);
 	if (ac == 1)
 	{
 		if (ft_get_env(env, &cfg) == 1)

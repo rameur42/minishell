@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/22 21:51:16 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 16:15:29 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,12 @@ int	ft_tokenize(t_struct *cfg, char *str)
 		}
 		else if (str[i] == '<')
 		{
-			ft_add_back(&lst, ft_new(str[i], 5));
+			if (str[i +1] && str[i + 1] == '<')
+				ft_add_back(&lst, ft_new(str[i], 6));
+			else if (str[i - 1] && str[i - 1] == '<')
+				ft_add_back(&lst, ft_new(str[i], 6));
+			else	
+				ft_add_back(&lst, ft_new(str[i], 5));
 			cfg->en = 0;
 		}
 		else if (str[i] == '$')

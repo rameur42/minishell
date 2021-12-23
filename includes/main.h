@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/22 21:45:06 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 16:15:20 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ typedef struct s_list {
 	struct s_list	*next;
 	struct s_list	*prev;
 }					t_list;
+
+/*
+** sq -> simple quote
+** dq -> double quote
+** en -> variable d'environnement
+** par -> parenthese
+*/
 
 typedef struct s_struct {
 	t_list	*env;
