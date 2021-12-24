@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 18:54:38 by tgresle           #+#    #+#             */
-/*   Updated: 2021/12/23 18:57:59 by tgresle          ###   ########.fr       */
+/*   Updated: 2021/12/24 11:21:52 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ void	exec_pwd(void)
 	else
 		printf("Error\n");
 	free(loc);
+}
+
+void	ft_refresh_pwd(t_struct *cfg, int mode)
+{
+	ft_modif_pwd(cfg->env, mode);
+	if (cfg->exp != NULL)
+		ft_modif_pwd(cfg->exp, mode);
 }

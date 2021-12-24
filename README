@@ -26,3 +26,44 @@
 ->ameliorer export (+=)
 ->modifier l'interpretation des var d'environnement dans les doubles quotes
 ->blinder Makefile
+
+
+
+cd :probleme chemin absolu marche quand incomplet et ne devrait pas
+minishell> cd ..
+str->cd ..
+content -> cd, type -> 12
+content -> .., type -> 2
+minishell> pwd
+str->pwd
+content -> pwd, type -> 11
+---->pwd
+/mnt/nfs/homes/tgresle/Desktop
+minishell> cd ..
+str->cd ..
+content -> cd, type -> 12
+content -> .., type -> 2
+minishell> pwd
+str->pwd
+content -> pwd, type -> 11
+---->pwd
+/mnt/nfs/homes/tgresle
+minishell> cd /Desktop
+str->cd /Desktop
+content -> cd, type -> 12
+content -> /Desktop, type -> 2
+minishell> pwd
+str->pwd
+content -> pwd, type -> 11
+---->pwd
+/mnt/nfs/homes/tgresle/Desktop
+
+bash:
+tgresle@e2r9p4:~/Desktop/minishell$ cd ..
+tgresle@e2r9p4:~/Desktop$ pwd
+/mnt/nfs/homes/tgresle/Desktop
+tgresle@e2r9p4:~/Desktop$ cd ..
+tgresle@e2r9p4:~$ pwd
+/mnt/nfs/homes/tgresle
+tgresle@e2r9p4:~$ cd /Desktop
+bash: cd: /Desktop: No such file or directory
