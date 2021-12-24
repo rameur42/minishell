@@ -10,8 +10,10 @@ SRCS            = main.c\
 					src/get_path.c\
 					src/parse_line.c\
 					src/pipe.c\
+					src/pipe2.c\
 					src/exec.c\
 					src/redirec.c\
+					src/redirec2.c\
 					src/tokenize.c\
 					src/signal.c\
 					src/env_var.c\

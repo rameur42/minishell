@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/24 11:39:44 by tgresle          ###   ########.fr       */
+/*   Updated: 2021/12/24 13:07:01 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ int		ft_is_already(char *s, t_list *lst);
 int		ft_is_same(char *s1, char *s2);
 void	ft_modif_env(char *s, t_list *lst);
 void	ft_cp_lst(t_struct *cfg);
+void	is_redirec_norm(t_list *temp, t_setup *stp);
+void	d_in_norm(t_setup *stp);
+void	d_in(t_list *temp, t_setup *stp);
+int		is_v(int type);
 
 /*check exit*/
 
