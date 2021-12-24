@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/22 19:10:38 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:25:55 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+	tab = NULL;
 }
 
 void	ft_free_str(char *str)
@@ -131,10 +132,10 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 {
 	t_setup	stp;
 	pid_t	pid;
-	int		statue;
+	int		status;
 	t_list	*temp;
 
-	statue = 0;
+	status = 0;
 	temp = tmp;
 	stp.pp = 0;
 	stp.pn = 0;
@@ -159,9 +160,9 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 				ft_incr_shlvl(cfg);
 			if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 			{
-				printf("minishell: command not found: %s \n", cmd[0]);
+				printf("exit_code->%d\n", cfg->exit_code);
+				printf("minishell: %s: command not found \n", cmd[0]);
 				ft_free_tab(cfg->tabEnv);
-				cfg->exit_code = 1;
 				exit (0);
 			}
 		}
@@ -194,11 +195,13 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 	i = 0;
 	ret = -1;
 	//printf("cmd->%s\n", cmd[0]);
-	if (ret == 0 || cfg->path == NULL)
+	split_path(cfg);
+	if (cfg->path == NULL)
 		return ;
 	while (cfg->path[i] && ret != 0)
 	{
-		buffer = ft_strjoin(cfg->path[i], cmd[0], 0);
+		buffer = ft_strjoin(cfg->path[i], "/", 0);
+		buffer = ft_strjoin(buffer, cmd[0], 1);
 		ret = stat(buffer, &buff);
 		if (ret == -1)
 			free(buffer);
@@ -236,6 +239,8 @@ void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd)
 		exec_pwd();
 	else if (ft_strcmp(tmp->content, "echo") == 0)
 		exec_echo(cmd);
+	else if (ft_strcmp(tmp->content, "exit") == 0)
+		exec_exit(cfg);
 }
 
 void	ft_exec(t_struct *cfg)
@@ -243,7 +248,7 @@ void	ft_exec(t_struct *cfg)
 	t_list	*tmp;
 	char	**cmd;
 	int		nb_cmd;
-	int		statue;
+	int		status;
 
 	tmp = cfg->arg;
 	nb_cmd = 0;
@@ -252,6 +257,9 @@ void	ft_exec(t_struct *cfg)
 	{
 		if (tmp->type == 12)
 		{
+			if (ft_strcmp(tmp->content, "exit") == 0 &&
+				tmp->prev == NULL)
+				exec_exit(cfg);
 			cmd = ft_init_cmd(tmp);
 			if (ft_strcmp(tmp->content, "cd") == 0)
 				exec_cd(cfg, cmd);
@@ -285,7 +293,10 @@ void	ft_exec(t_struct *cfg)
 	}
 	while (nb_cmd > 0)
 	{
-		if (waitpid(-1, &statue, 0) > 0)
+		if (waitpid(-1, &status, 0) > 0)
+		{
+			cfg->exit_code = WEXITSTATUS(status);
 			nb_cmd--;
+		}
 	}
 }

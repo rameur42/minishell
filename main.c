@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/22 22:15:48 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:28:31 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_get_env(char **env, t_struct *cfg)
 		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0, 0));
 		i++;
 	}
-	cfg->path = split_path(env);
+	//cfg->path = split_path(env);
 	if (cfg->path == NULL)
 		return (0);
 	cfg->path[0] = ft_rm_p(cfg->path[0]);
@@ -72,6 +72,7 @@ int	main(int ac, char **av, char **env)
 	cfg.sq = 0;
 	cfg.dq = 0;
 	cfg.en = 0;
+	cfg.exit_code = 0;
 	//(void)av;
 	//ft_display_tab(env);
 	printf("av[0]->%s\n", av[0]);
@@ -94,12 +95,12 @@ int	main(int ac, char **av, char **env)
 				free(str);
 				str = NULL;
 			}
-			else if (ft_strcmp(str, "exit") == 0)
+			/*else if (ft_strcmp(str, "exit") == 0)
 			{
 				if (str)
 					free (str);
 				exec_exit(&cfg);
-			}
+			}*/
 			else
 			{
 				add_history(str);
@@ -107,6 +108,9 @@ int	main(int ac, char **av, char **env)
 					ft_lstclear(&cfg.arg);
 				else
 				{
+					if (str)
+						free (str);
+					str = NULL;
 					ft_var_env(&cfg);
 					if (ft_init_count_pipe(&cfg) == 1)
 						return (0);

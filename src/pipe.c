@@ -6,7 +6,6 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/24 13:09:27 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +71,8 @@ int	is_built_in(char *cmd)
 		return (1);
 	else if (ft_strcmp("cd", cmd) == 0)
 		return (1);
+	else if (ft_strcmp("exit", cmd) == 0)
+		return (1);
 	return (0);
 }
 
@@ -90,7 +91,8 @@ void	ft_is_file(t_struct *cfg)
 			{
 				if ((ft_strcmp(tmp->content, "cd") == 0 ||
 					ft_strcmp(tmp->content, "unset") == 0 ||
-					ft_strcmp(tmp->content, "export") == 0) &&
+					ft_strcmp(tmp->content, "export") == 0 ||
+					ft_strcmp(tmp->content, "exit") == 0) &&
 					 is_cmd == 0)
 					tmp->type = 12;
 				else if (is_cmd == 0)
@@ -112,6 +114,12 @@ void	ft_is_file(t_struct *cfg)
 		}
 		else if (tmp->type == 1 || tmp->type == 8)
 			is_cmd = 0;
+		else if (tmp->type == 12)
+		{
+			free(tmp->content);
+			tmp->content = ft_strdup(ft_itoa(cfg->exit_code));
+			tmp->type = 2;
+		}
 		tmp = tmp->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/24 13:07:01 by tgresle          ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_list	*ft_lstnew(void *content, int type, int dq, int sq);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
 void	ft_lstclear(t_list **lst);
-char	**split_path(char **env);
+void	split_path(t_struct *cfg);
 char	**ft_split(const char *s, char c);
 char	**ft_free_s(char **res, int i);
 char	*ft_rm_p(char *line);
@@ -159,7 +159,6 @@ void	is_redirec_norm(t_list *temp, t_setup *stp);
 void	d_in_norm(t_setup *stp);
 void	d_in(t_list *temp, t_setup *stp);
 int		is_v(int type);
-
-/*check exit*/
+void	ft_free_tab(char **tab);
 
 #endif

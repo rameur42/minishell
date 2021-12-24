@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:33 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/22 18:30:02 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 18:14:44 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_rm_p(char *line)
 	return (res);
 }
 
-char	**split_path(char **env)
+/*char	**split_path(char **env)
 {
 	int		i;
 	char	**path;
@@ -53,4 +53,24 @@ char	**split_path(char **env)
 		i++;
 	}
 	return (path);
+}*/
+
+void	split_path(t_struct *cfg)
+{
+	t_list *tmp;
+
+	tmp = cfg->env;
+	if (cfg->path != NULL)
+		ft_free_tab(cfg->path);
+	cfg->path = NULL;
+	while (tmp)
+	{
+		if (ft_strncmp("PATH", tmp->content, 4) == 0)
+		{
+			cfg->path = ft_split(tmp->content, ':');
+			cfg->path[0] = ft_rm_p(cfg->path[0]);
+			return ;
+		}
+		tmp = tmp->next;
+	}
 }
