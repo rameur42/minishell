@@ -19,10 +19,12 @@
 	(premier char is alpha ou _ et only alphanumerique ou _)
 
 ->gerer l'affichage des variable d'environnements avec echo $... | Done
-->ameliorer la gestion de unset PATH
-->ameliorer l'interpretation d'exit
+->ameliorer la gestion de unset PATH | Done
+->ameliorer l'interpretation d'exit | Done
+->modifier l'interpretation des var d'environnement dans les doubles quotes | Done
 ->gerer la save du retour des commande executer pour "echo $?"
 ->ameliorer "<<"
+->ameliorer les redirection (ls < exit)
 ->ameliorer export (+=)
-->modifier l'interpretation des var d'environnement dans les doubles quotes
 ->blinder Makefile
+->revoir la gestion des espaces sur echo

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/23 16:15:29 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:24:30 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,12 +181,28 @@ int	ft_tokenize(t_struct *cfg, char *str)
 			else if (cfg->dq == 1)
 				cfg->dq = 0;
 		}
-		if (str[i] != '\'' && str[i] != '\"' && f == 0
-			&& cfg->sq == 1 && cfg->dq == 0)
-			ft_add_back(&lst, ft_new(str[i], 0));
+		if (str[i] == '$')
+		{
+			if (str[i + 1] && str[i + 1] == '?')
+				ft_add_back(&lst, ft_new(str[i], 12));
+			else if (cfg->sq == 0)
+				ft_add_back(&lst, ft_new(str[i], 7));
+			else
+				ft_add_back(&lst, ft_new(str[i], 0));
+			cfg->en = 1;
+		}
+		else if (str[i] == '?' && str[i - 1] && str[i - 1] == '$')
+				ft_add_back(&lst, ft_new(str[i], 12));
 		else if (str[i] != '\'' && str[i] != '\"' && f == 0
-			&& cfg->sq == 0 && cfg->dq == 1)
+			&& cfg->sq == 1 && cfg->dq == 0)
+		{
 			ft_add_back(&lst, ft_new(str[i], 0));
+		}
+		else if (str[i] != '\'' && str[i] != '\"' && f == 0
+			&& cfg->sq == 0 && cfg->dq == 1 && cfg->en == 0)
+		{
+			ft_add_back(&lst, ft_new(str[i], 0));
+		}
 		else if (str[i] == '|')
 		{
 			ft_add_back(&lst, ft_new(str[i], 1));
@@ -206,11 +222,6 @@ int	ft_tokenize(t_struct *cfg, char *str)
 			else	
 				ft_add_back(&lst, ft_new(str[i], 5));
 			cfg->en = 0;
-		}
-		else if (str[i] == '$')
-		{
-			ft_add_back(&lst, ft_new(str[i], 7));
-			cfg->en = 1;
 		}
 		else if (str[i] == ';')
 		{
@@ -234,7 +245,7 @@ int	ft_tokenize(t_struct *cfg, char *str)
 			if (str[i] != '\'' && str[i] != '\"' && f == 0
 				&& cfg->sq == 0 && cfg->dq == 0 && cfg->en == 0)
 				ft_add_back(&lst, ft_new(str[i], 0));
-			else if (str[i] != '\'' && str[i] != '\"' && f == 1)
+			else if (str[i] != '\'' && str[i] != '\"' && f == 1 && cfg->en == 0)
 				ft_add_back(&lst, ft_new(str[i], 2));
 			else if (str[i] != '\'' && str[i] != '\"' && cfg->en == 1)
 				ft_add_back(&lst, ft_new(str[i], 7));
