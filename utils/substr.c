@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:06:13 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 23:07:01 by rameur           ###   ########.fr       */
+/*   Updated: 2021/12/24 11:46:32 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_substr(char *s, int start, int len)
 	i = 0;
 	if (!(s) || start >= len)
 		return (NULL);
-	if (!(res = malloc(sizeof(char) * len + 1)))
+	res = malloc(sizeof(char) * len + 1);
+	if (!(res))
 		return (NULL);
 	if (ft_strlen(s) > start)
 	{

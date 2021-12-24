@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/24 11:29:45 by tgresle          ###   ########.fr       */
+/*   Updated: 2021/12/24 11:39:44 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,9 @@ int		ft_atoi(char *str);
 char	*ft_itoa(int n);
 void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
-void    exec_exit(t_struct *cfg);
-void    exec_echo(char **cmd);
-void    exec_pwd(void);
+void	exec_exit(t_struct *cfg);
+void	exec_echo(char **cmd);
+void	exec_pwd(void);
 void	ft_refresh_pwd(t_struct *cfg, int mode);
 void	ft_modif_pwd(t_list *lst, int mode);
 int		ft_is_c(char *s);
