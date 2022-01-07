@@ -1,15 +1,3 @@
-->gerer les redirection en tout genre | Done
-->gerer les ctrl... | Done
-->gerer l'execution non procedurale | Done
-->gerer les commande avec absolute path (/bin/ls) | Done
-->gere les commande avec relative path | Done
-->mettre en place les check relatif au simple et double cote | done
-->integrer env | Done
-->coder export et l'integrer | Done
-->coder unset et l'integrer | Done
-->gerer env quand un minishell est lancer depui un minishell | DONE
-->ameliorer cd | Done 
-->gerer l'ajout et la modification des variables d'environnements | Done
 
 ->gerer env -i (creer les trois variables env)
 ->gere ${}
@@ -18,13 +6,9 @@
 ->ajouter les check de parsing pour export
 	(premier char is alpha ou _ et only alphanumerique ou _)
 
-->gerer l'affichage des variable d'environnements avec echo $... | Done
-->ameliorer la gestion de unset PATH | Done
-->ameliorer l'interpretation d'exit | Done
-->modifier l'interpretation des var d'environnement dans les doubles quotes | Done
-->gerer la save du retour des commande executer pour "echo $?"
 ->ameliorer "<<"
 ->ameliorer les redirection (ls < exit)
 ->ameliorer export (+=)
 ->blinder Makefile
 ->revoir la gestion des espaces sur echo
+->gestion du absolute PATH sur cd
