@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 15:59:08 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/07 17:24:59 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/07 17:32:29 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 
 void	ft_tokenize1(t_struct *cfg, char *str, int *i)
 {
-	if (str[(*i)] == '\'')
+	if (str[(*i)] && str[(*i)] == '\'')
 	{
 		if (cfg->sq == 0)
 			cfg->sq = 1;
 		else if (cfg->sq == 1)
 			cfg->sq = 0;
 	}
-	else if (str[(*i)] == '\"')
+	else if (str[(*i)] && str[(*i)] == '\"')
 	{
 		if (cfg->dq == 0)
 			cfg->dq = 1;
