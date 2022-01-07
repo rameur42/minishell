@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/23 19:24:30 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/07 21:24:26 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,10 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(buff), i, 0, 0));
 			free(buff);
 			buff = NULL;
+			nb_word--;
 		}
 		else
 			tmp = tmp->next;
-		nb_word--;
 		//ft_print_lst(cfg);
 	}
 }
