@@ -5,57 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
+/*   Created: 2022/01/07 15:44:30 by tgresle           #+#    #+#             */
+/*   Updated: 2022/01/07 16:04:35 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-int	ft_init_count_pipe(t_struct *cfg)
-{
-	t_list	*tmp;
-
-	cfg->pipe = 0;
-	tmp = cfg->arg;
-	while (tmp)
-	{
-		if (tmp->type == 1)
-		{
-			if (pipe(tmp->pipefd) == -1)
-			{
-				perror("pipe failed\n");
-				return (1);
-			}
-			cfg->pipe++;
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	is_file(t_struct *cfg, char *file)
-{
-	struct stat	buff;
-	int			res;
-	int			i;
-	char		*buffer;
-
-	i = 0;
-	res = -1;
-	if (cfg->path == NULL)
-		return (0);
-	while (cfg->path[i] && res != 0)
-	{
-		buffer = ft_strjoin(cfg->path[i], file, 0);
-		res = stat(buffer, &buff);
-		//printf("res = %d buffer = %s\n", res, buffer);
-		free(buffer);
-		i++;
-	}
-	if (res == 0)
-		return (0);
-	return (1);
-}
 
 int	is_built_in(char *cmd)
 {
@@ -76,6 +31,34 @@ int	is_built_in(char *cmd)
 	return (0);
 }
 
+void	ft_is_file2(t_list *tmp, int *is_cmd, t_struct *cfg)
+{
+	if (is_built_in(tmp->content) == 1)
+	{
+		if ((ft_strcmp(tmp->content, "cd") == 0
+				|| ft_strcmp(tmp->content, "unset") == 0
+				|| ft_strcmp(tmp->content, "export") == 0
+				|| ft_strcmp(tmp->content, "exit") == 0)
+			&& (*is_cmd) == 0)
+			tmp->type = 12;
+		else if ((*is_cmd) == 0)
+			tmp->type = 11;
+		else
+			tmp->type = 2;
+		(*is_cmd) = 1;
+	}
+	else if ((*is_cmd) == 0 && is_file(cfg, tmp->content) == 0)
+	{
+		tmp->type = 9;
+		(*is_cmd) = 1;
+		if (tmp->prev && (tmp->prev->type == 9
+				|| tmp->prev->type == 6))
+			tmp->type = 0;
+	}
+	else if ((*is_cmd) == 1)
+		tmp->type = 2;
+}
+
 void	ft_is_file(t_struct *cfg)
 {
 	t_list	*tmp;
@@ -86,32 +69,7 @@ void	ft_is_file(t_struct *cfg)
 	while (tmp)
 	{
 		if (tmp->type == 0)
-		{
-			if (is_built_in(tmp->content) == 1)
-			{
-				if ((ft_strcmp(tmp->content, "cd") == 0 ||
-					ft_strcmp(tmp->content, "unset") == 0 ||
-					ft_strcmp(tmp->content, "export") == 0 ||
-					ft_strcmp(tmp->content, "exit") == 0) &&
-					 is_cmd == 0)
-					tmp->type = 12;
-				else if (is_cmd == 0)
-					tmp->type = 11;
-				else
-					tmp->type = 2;
-				is_cmd = 1;
-			}
-			else if (is_cmd == 0 && is_file(cfg, tmp->content) == 0)
-			{
-				tmp->type = 9;
-				is_cmd = 1;
-				if (tmp->prev && (tmp->prev->type == 9
-						|| tmp->prev->type == 6))
-					tmp->type = 0;
-			}
-			else if (is_cmd == 1)
-				tmp->type = 2;
-		}
+			ft_is_file2(tmp, &is_cmd, cfg);
 		else if (tmp->type == 1 || tmp->type == 8)
 			is_cmd = 0;
 		else if (tmp->type == 12)

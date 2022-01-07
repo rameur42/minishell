@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:33 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/23 18:14:44 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/07 15:53:29 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_rm_p(char *line)
 
 void	split_path(t_struct *cfg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cfg->env;
 	if (cfg->path != NULL)
