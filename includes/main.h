@@ -161,4 +161,6 @@ void	d_in(t_list *temp, t_setup *stp);
 int		is_v(int type);
 void	ft_free_tab(char **tab);
 
+
+aa
 #endif
