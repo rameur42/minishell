@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-
+/*   Created: 2022/01/07 15:57:36 by tgresle           #+#    #+#             */
+/*   Updated: 2022/01/07 17:25:08 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,15 @@ void	d_in_norm(t_setup *stp);
 void	d_in(t_list *temp, t_setup *stp);
 int		is_v(int type);
 void	ft_free_tab(char **tab);
+int		ft_init_count_pipe(t_struct *cfg);
+int		is_file(t_struct *cfg, char *file);
+t_tok	*ft_new(char c, int type);
+void	ft_add_back(t_tok **al, t_tok *new);
+void	ft_clear(t_tok **lst);
+int		ft_check_token(t_tok *lst);
+int		ft_count_l(t_tok *lst);
+int		ft_count_w(t_tok *lst);
+void	ft_tokenizer(t_struct *cfg, t_tok *lst);
+void	ft_tokenize1(t_struct *cfg, char *str, int *i);
 
 #endif

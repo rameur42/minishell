@@ -15,6 +15,8 @@ SRCS            = main.c\
 					src/redirec.c\
 					src/redirec2.c\
 					src/tokenize.c\
+					src/tokenize2.c\
+					src/tokenize3.c\
 					src/signal.c\
 					src/env_var.c\
 					built_in/export.c\
