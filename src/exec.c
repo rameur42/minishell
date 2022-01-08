@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/23 19:25:55 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 13:48:59 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	else if (pid == 0)
 	{
 		set_pipe(tmp, stp.pipN, stp.pp, stp.pn);
+		printf("to_exec->%s %d\n", tmp->content, tmp->type);
 		if (is_redirec(tmp, &stp) == 1)
 			exit(1);
 		ft_cp_env(cfg);
@@ -161,13 +162,15 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 			if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
 			{
 				printf("exit_code->%d\n", cfg->exit_code);
-				printf("minishell: %s: command not found \n", cmd[0]);
+				printf("minishell: %s: command not found\n", cmd[0]);
 				ft_free_tab(cfg->tabEnv);
-				exit (0);
+				exit (127);
 			}
 		}
 		else
-			ft_exec_built_in(cfg, tmp, cmd);
+			ft_exec_built_in(cfg, tmp);
+		dup2(1, 1);
+		dup2(0, 0);
 		cfg->exit_code = 0;
 		if (stp.isRedO == 1)
 			close(stp.fdOut);
@@ -231,14 +234,14 @@ int	get_nb_cmd(t_struct *cfg)
 	return (res);
 }
 
-void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd)
+void	ft_exec_built_in(t_struct *cfg, t_list *tmp)
 {
 	if (ft_strcmp(tmp->content, "env") == 0)
 		print_lst(cfg->env);
 	else if (ft_strcmp(tmp->content, "pwd") == 0)
 		exec_pwd();
 	else if (ft_strcmp(tmp->content, "echo") == 0)
-		exec_echo(cmd);
+		exec_echo(tmp);
 	else if (ft_strcmp(tmp->content, "exit") == 0)
 		exec_exit(cfg);
 }
@@ -282,20 +285,26 @@ void	ft_exec(t_struct *cfg)
 		else if (tmp->type == 9 || tmp->type == 0 ||
 			tmp->type == 11)
 		{
+			cfg->exit_code = 0;
 			cmd = ft_init_cmd(tmp);
 			if (tmp->type != 11)
 				ft_get_path(cfg, cmd);
 			ft_display_tab(cmd);
 			ft_exec_ft(cfg, cmd, tmp);
 			ft_free_tab(cmd);
+			if (cfg->exit_code == 127)
+				break ;
 		}
 		tmp = tmp->next;
 	}
+	printf("nb_cmd->%d\n", nb_cmd);
 	while (nb_cmd > 0)
 	{
 		if (waitpid(-1, &status, 0) > 0)
 		{
 			cfg->exit_code = WEXITSTATUS(status);
+			if (cfg->exit_code == 127)
+				return ;
 			nb_cmd--;
 		}
 	}

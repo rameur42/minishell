@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 14:42:07 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/21 23:52:59 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 10:34:50 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_v(int type)
 {
 	if (type == 2 || type == 0 || type == 9
 		|| type == 3 || type == 4 || type == 5
-		|| type == 6)
+		|| type == 6 || type == 11)
 		return (1);
 	return (0);
 }

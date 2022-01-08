@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/22 21:45:56 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 10:00:29 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_cp_lst(t_struct *cfg)
 	tmp = cfg->env;
 	while (tmp)
 	{
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(tmp->content), 0, 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(tmp->content), 0, 0));
 		tmp = tmp->next;
 	}
 }
@@ -173,16 +173,16 @@ int	ft_export(char *s, t_struct *cfg)
 	}
 	if (ft_is_c(s) == 0)
 	{
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0));
 		return (0);
 	}
 	if (ft_is_already_in(s, cfg->exp) == 1)
 		ft_modif_env(s, cfg->exp);
 	else
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0));
 	if (ft_is_already(s, cfg->env) == 1)
 		ft_modif_env(s, cfg->env);
 	else
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0));
 	return (0);
 }

@@ -9,23 +9,27 @@ void    exec_exit(t_struct *cfg)
 	exit (0);
 }
 
-void    exec_echo(char **cmd)
+void    exec_echo(t_list *tmp)
 {
 	int i;
 	int	f;
+	int	first;
 
 	i = 1;
-	if (cmd[1] && ft_strcmp(cmd[1], "-n") == 0)
+	first = 0;
+	tmp = tmp->next;
+	if (tmp && ft_strcmp(tmp->content, "-n") == 0)
 	{
 		f = 1;
-		i++;
+		tmp = tmp->next;
 	}
-	while (cmd[i])
+	while (tmp && (tmp->type == 2 || tmp->type == 0))
 	{
-		printf("%s", cmd[i]);
-		if (cmd[i + 1] != NULL)
+		if (tmp->ps == 1 && first == 1)
 			printf(" ");
-		i++;
+		first = 1;
+		printf("%s", tmp->content);
+		tmp = tmp->next;
 	}
 	if (f != 1)
 		printf("\n");
@@ -76,7 +80,7 @@ void	ft_modif_pwd(t_list *lst, int mode)
 		tmp = tmp->next;
 	}
 	if (mode == 1)
-		ft_lstadd_back(&lst, ft_lstnew(ft_strjoin("OLDPWD=", getcwd(buff, 1024), 0), 0, 0, 0));
+		ft_lstadd_back(&lst, ft_lstnew(ft_strjoin("OLDPWD=", getcwd(buff, 1024), 0), 0, 0));
 }
 
 void	ft_refresh_pwd(t_struct *cfg, int mode)
