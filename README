@@ -8,7 +8,7 @@
 
 ->revoir la gestion des espaces sur echo | Done (a recheck quand meme)
 ->ameliorer les commande not found | Done
-->ameliorer les redirection (ls < exit)
+->ameliorer les redirection (ls < exit) | Done
 ->ameliorer "<<"
 ->ameliorer export (+=, ...)
 ->gestion du absolute PATH sur cd
