@@ -10,6 +10,6 @@
 ->ameliorer les commande not found | Done
 ->ameliorer les redirection (ls < exit) | Done
 ->ameliorer "<<"
-->ameliorer export (+=, ...)
+->ameliorer export (+=, alphanum)
 ->gestion du absolute PATH sur cd
 ->blinder Makefile
