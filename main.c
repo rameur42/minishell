@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2021/12/23 19:28:31 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 10:23:30 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	ft_get_env(char **env, t_struct *cfg)
 	{	
 		pwd = getcwd(pwd, 1024);
 		buff = ft_strjoin("PWD=", pwd, 0);
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(buff), 0, 0, 0));
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup("SHLVL=1"), 0, 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(buff), 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup("SHLVL=1"), 0, 0));
 		free(pwd);
 		free(buff);
 		return (0);
 	}
 	while (env && env[i] != NULL)
 	{
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(env[i]), 0, 0));
 		i++;
 	}
 	//cfg->path = split_path(env);
@@ -73,9 +73,8 @@ int	main(int ac, char **av, char **env)
 	cfg.dq = 0;
 	cfg.en = 0;
 	cfg.exit_code = 0;
-	//(void)av;
+	(void)av;
 	//ft_display_tab(env);
-	printf("av[0]->%s\n", av[0]);
 	if (ac == 1)
 	{
 		if (ft_get_env(env, &cfg) == 1)
@@ -115,7 +114,7 @@ int	main(int ac, char **av, char **env)
 					if (ft_init_count_pipe(&cfg) == 1)
 						return (0);
 					ft_is_file(&cfg);
-					ft_print_lst(&cfg);
+					//ft_print_lst(&cfg);
 					ft_exec(&cfg);
 					ft_lstclear(&cfg.arg);
 				}

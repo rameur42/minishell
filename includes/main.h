@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2021/12/23 18:08:10 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 09:59:36 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ typedef struct s_tok {
 	char			c;
 	int				type;
 	struct s_tok	*next;
+	struct s_tok	*prev;
 }				t_tok;
 
 typedef struct s_list {
 	char			*content;
 	int				type;
 	int				pipefd[2];
-	int				dq;
-	int				sq;
+	int				ps;
 	struct s_list	*next;
 	struct s_list	*prev;
 }					t_list;
@@ -72,6 +72,7 @@ typedef struct s_list {
 ** dq -> double quote
 ** en -> variable d'environnement
 ** par -> parenthese
+** ps -> space before?
 */
 
 typedef struct s_struct {
@@ -108,7 +109,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char *s1, char *s2, int mode);
 char	*ft_substr(char *s, int start, int len);
 
-t_list	*ft_lstnew(void *content, int type, int dq, int sq);
+t_list	*ft_lstnew(void *content, int type, int ps);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
 void	ft_lstclear(t_list **lst);
@@ -136,14 +137,14 @@ void	ft_f_signals(void);
 
 int	ft_is_same(char *s1, char *s2);
 void	ft_sort_lst(t_struct *cfg);
-void	ft_exec_built_in(t_struct *cfg, t_list *tmp, char **cmd);
+void	ft_exec_built_in(t_struct *cfg, t_list *tmp);
 
 void	print_lst(t_list *tmp);
 int		ft_export(char *s, t_struct *cfg);
 int		ft_unset(char *s, t_struct *cfg);
 void    exec_exit(t_struct *cfg);
 void    exec_pwd(void);
-void    exec_echo(char **cmd);
+void    exec_echo(t_list *tmp);
 void    exec_cd(t_struct *cfg, char **path);
 void	ft_display_tab(char **tab);
 int		ft_atoi(char *str);

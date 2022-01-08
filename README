@@ -6,9 +6,10 @@
 ->ajouter les check de parsing pour export
 	(premier char is alpha ou _ et only alphanumerique ou _)
 
-->ameliorer "<<"
+->revoir la gestion des espaces sur echo | Done (a recheck quand meme)
+->ameliorer les commande not found | Done
 ->ameliorer les redirection (ls < exit)
-->ameliorer export (+=)
-->blinder Makefile
-->revoir la gestion des espaces sur echo
+->ameliorer "<<"
+->ameliorer export (+=, ...)
 ->gestion du absolute PATH sur cd
+->blinder Makefile

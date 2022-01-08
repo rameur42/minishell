@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/07 21:24:26 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 10:08:39 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_tok	*ft_new(char c, int type)
 	new_l->c = c;
 	new_l->type = type;
 	new_l->next = NULL;
+	new_l->prev = NULL;
 	return (new_l);
 }
 
@@ -40,6 +41,7 @@ void	ft_add_back(t_tok **al, t_tok *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_clear(t_tok **lst)
@@ -120,6 +122,7 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	int		size;
 	int		nb_word;
 	int		i;
+	int		ps;
 	t_tok	*tmp;
 
 	tmp = lst;
@@ -128,6 +131,10 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	{
 		if (tmp->type != 10)
 		{
+			if (tmp->prev && tmp->prev->type == 10)
+				ps = 1;
+			else
+				ps = 0;
 			i = 0;
 			size = ft_count_l(tmp);
 			//printf("hello world %d %d %c\n", nb_word, size, tmp->c);
@@ -143,7 +150,7 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 					i++;
 				tmp = tmp->next;
 			}
-			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(buff), i, 0, 0));
+			ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(buff), i, ps));
 			free(buff);
 			buff = NULL;
 			nb_word--;
@@ -164,7 +171,7 @@ int	ft_tokenize(t_struct *cfg, char *str)
 	f = 0;
 	lst = NULL;
 	cfg->en = 0;
-	printf("str->%s\n", str);
+	//printf("str->%s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '\'')

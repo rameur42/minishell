@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/23 19:29:24 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 13:48:30 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,18 @@ int	is_file(t_struct *cfg, char *file)
 	res = -1;
 	if (cfg->path == NULL)
 		return (0);
+	file = ft_strjoin("/", file, 0);
 	while (cfg->path[i] && res != 0)
 	{
 		buffer = ft_strjoin(cfg->path[i], file, 0);
 		res = stat(buffer, &buff);
-		//printf("res = %d buffer = %s\n", res, buffer);
-		free(buffer);
+		if (res == 0)
+		{
+			free(buffer);
+			return (0);
+		}
 		i++;
 	}
-	if (res == 0)
-		return (0);
 	return (1);
 }
 
@@ -84,6 +86,7 @@ void	ft_is_file(t_struct *cfg)
 
 	tmp = cfg->arg;
 	is_cmd = 0;
+	split_path(cfg);
 	while (tmp)
 	{
 		if (tmp->type == 0)
