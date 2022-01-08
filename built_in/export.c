@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/08 18:51:09 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/08 19:01:15 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,7 +343,6 @@ int	ft_export(char *s, t_struct *cfg)
 		ft_modif_env(s, cfg->exp);
 	else if (ft_is_a_plus(s))
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0));
-	//attention aux free avec les strdup
 	else
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0));
 	if (ft_is_already(s, cfg->env) == 1)
