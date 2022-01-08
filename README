@@ -10,6 +10,6 @@
 ->ameliorer les commande not found | Done
 ->ameliorer les redirection (ls < exit) | Done
 ->ameliorer "<<"
-->ameliorer export (+=, alphanum)
+->ameliorer export (+=, alphanum) | Done a check par reda
 ->gestion du absolute PATH sur cd
 ->blinder Makefile
