@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/08 13:48:30 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/08 15:14:54 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,16 @@
 int	ft_init_count_pipe(t_struct *cfg)
 {
 	t_list	*tmp;
+	char *path;
+	char *buff;
+	char *pwd;
+	struct stat buf;
 
 	cfg->pipe = 0;
+	buff = NULL;
+	path = NULL;
+	pwd = NULL;
+	pwd = getcwd(pwd, 1024);
 	tmp = cfg->arg;
 	while (tmp)
 	{
@@ -28,6 +36,24 @@ int	ft_init_count_pipe(t_struct *cfg)
 				return (1);
 			}
 			cfg->pipe++;
+		}
+		else if (tmp->type == 5)
+		{
+			if (tmp->next)
+			{
+				buff = ft_strjoin("/", tmp->next->content, 0);
+				path = ft_strjoin(pwd, buff, 0);
+				//printf("path %s\n", path);
+				if (stat(path, &buf) != 0)
+				{
+					printf("minishell: %s: No such file or directory\n", tmp->next->content);
+					free(buff);
+					free(path);
+					return (1);
+				}
+				free(buff);
+				free(path);
+			}
 		}
 		tmp = tmp->next;
 	}
