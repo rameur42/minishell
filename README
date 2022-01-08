@@ -4,7 +4,7 @@
 ->gerer $() ()
 ->trouver un solution pour la variable $_
 ->ajouter les check de parsing pour export
-	(premier char is alpha ou _ et only alphanumerique ou _)
+	(premier char is alpha ou _ et only alphanumerique ou _) Done a check
 
 ->revoir la gestion des espaces sur echo | Done (a recheck quand meme)
 ->ameliorer les commande not found | Done
