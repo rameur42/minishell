@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/08 15:12:44 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 15:20:19 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,148 @@ void	print_lst(t_list *tmp)
 		printf("%s\n", tmp->content);
 		tmp = tmp->next;
 	}
+}
+
+int	is_redir(int type)
+{
+	if (type >= 3 && type <= 6)
+		return (1);
+	return (0);
+}
+
+void	f_d_in(char *str)
+{
+	char *buff;
+
+	while (1)
+	{
+		buff = readline(">");
+		if (ft_strcmp(buff, str) == 0)
+		{
+			free(buff);
+			return ;
+		}
+		free(buff);
+	}
+}
+
+int	ft_set_redir(t_list *tmp)
+{
+	if (tmp->type == 3)
+	{
+		if (tmp->prev && (tmp->prev->type != 0 && tmp->prev->type != 9 &&
+				tmp->prev->type != 11 && tmp->prev->type != 2))
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->prev->content);
+			return (1);
+		}
+		if (tmp->next && (tmp->next->type == 0 || tmp->next->type == 9 ||
+				tmp->next->type == 11 || tmp->next->type == 2))
+		{
+			tmp->fd = open(tmp->next->content, O_TRUNC | O_WRONLY
+					| O_CREAT, 0644);
+			tmp->next->type = 2;
+		}
+		else if (tmp->next)
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->next->content);
+			return (1);
+		}
+		else
+		{
+			printf("syntax error near unexpected token `newline'\n");
+			return (1);
+		}
+	}
+	else if (tmp->type == 4)
+	{
+		if (tmp->prev && (tmp->prev->type != 0 && tmp->prev->type != 9 &&
+			tmp->prev->type != 11 && tmp->prev->type != 2))
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->prev->content);
+			return (1);
+		}
+		if (tmp->next && (tmp->next->type == 0 || tmp->next->type == 9 ||
+				tmp->next->type == 11 || tmp->next->type == 2))
+		{
+			tmp->fd = open(tmp->next->content, O_RDWR | O_CREAT | O_APPEND);
+			tmp->next->type = 2;
+		}
+		else if (tmp->next)
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->next->content);
+			return (1);
+		}
+		else
+		{
+			printf("syntax error near unexpected token `newline'\n");
+			return (1);
+		}
+	}
+	else if (tmp->type == 5)
+	{
+		if (tmp->prev && (tmp->prev->type != 0 && tmp->prev->type != 9 &&
+			tmp->prev->type != 11 && tmp->prev->type != 2))
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->prev->content);
+			return (1);
+		}
+		if (tmp->next && (tmp->next->type == 0 || tmp->next->type == 9 ||
+				tmp->next->type == 11 || tmp->next->type == 2))
+		{
+			tmp->fd = open(tmp->next->content, O_RDONLY);
+			tmp->next->type = 2;
+		}
+		else if (tmp->next)
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->next->content);
+			return (1);
+		}
+		else
+		{
+			printf("syntax error near unexpected token `newline'\n");
+			return (1);
+		}
+	}
+	else if (tmp->type == 6)
+	{
+		if (tmp->prev && (tmp->prev->type != 0 && tmp->prev->type != 9 &&
+			tmp->prev->type != 11 && tmp->prev->type != 2))
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->prev->content);
+			return (1);
+		}
+		if (!tmp->prev && tmp->next && (tmp->next->type == 0 || tmp->next->type == 9 ||
+				tmp->next->type == 11 || tmp->next->type == 2))
+		{
+			f_d_in(tmp->next->content);
+			tmp->next->type = 2;
+		}
+		if (tmp->next && (tmp->next->type != 0 && tmp->next->type != 9 &&
+				tmp->next->type != 11 && tmp->next->type != 2))
+		{
+			printf("syntax error near unexpected token '%s'\n", tmp->next->content);
+			return (1);
+		}
+		else if (tmp->next)
+			tmp->next->type = 2;
+	}
+	return (0);
+}
+
+int	ft_init_redir(t_struct *cfg)
+{
+	t_list *tmp;
+
+	tmp = cfg->arg;
+	while (tmp)
+	{
+		if (is_redir(tmp->type) == 1)
+			if (ft_set_redir(tmp) == 1)
+				return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -111,10 +253,10 @@ int	main(int ac, char **av, char **env)
 						free (str);
 					str = NULL;
 					ft_var_env(&cfg);
-					if (ft_init_count_pipe(&cfg) == 0)
+					if (ft_init_count_pipe(&cfg) == 0 && ft_init_redir(&cfg) == 0)
 					{
 						ft_is_file(&cfg);
-						//ft_print_lst(&cfg);
+						ft_print_lst(&cfg);
 						ft_exec(&cfg);
 					}
 					ft_lstclear(&cfg.arg);

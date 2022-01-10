@@ -9,7 +9,9 @@
 ->revoir la gestion des espaces sur echo | Done (a recheck quand meme)
 ->ameliorer les commande not found | Done
 ->ameliorer les redirection (ls < exit) | Done
-->ameliorer "<<"
+->ameliorer les redirection
+	->ameliorer "<<"
+	->ameliorer >
 ->ameliorer export (+=, alphanum) | Done a check par reda
 ->gestion du absolute PATH sur cd
 ->blinder Makefile
