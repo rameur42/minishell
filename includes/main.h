@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/08 09:59:36 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 13:20:32 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_list {
 	int				type;
 	int				pipefd[2];
 	int				ps;
+	int				fd;
 	struct s_list	*next;
 	struct s_list	*prev;
 }					t_list;

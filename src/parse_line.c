@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 02:52:12 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/08 14:47:06 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 14:11:43 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_parse_line(t_struct *cfg, char *str)
 
 	i = 0;
 	ft_tokenize(cfg, str);
+	print_lst(cfg->arg);
 	if (cfg->sq == 1)
 	{
 		printf("Error unclosed quote\n");

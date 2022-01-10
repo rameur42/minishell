@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 14:42:07 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/08 10:34:50 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:12:53 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,36 +77,17 @@ int	is_redirec(t_list *tmp, t_setup *stp)
 	if (temp && temp->type == 3)
 	{
 		if (temp->next)
-		{
-			stp->fdOut = open(temp->next->content, O_TRUNC | O_WRONLY
-					| O_CREAT, 0644);
-			dup2(stp->fdOut, 1);
-		}
-		else
-			return (ft_print_error(
-					"syntax error near unexpected token `newline'\n", 1));
+			dup2(temp->fd, 1);
 	}
 	else if (temp && temp->type == 4)
 	{
 		if (temp->next)
-		{
-			stp->fdOut = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
-			dup2(stp->fdOut, 1);
-		}
-		else
-			return (ft_print_error(
-					"syntax error near unexpected token `newline'\n", 1));
+			dup2(temp->fd, 1);
 	}
 	else if (temp && temp->type == 5)
 	{
 		if (temp->next)
-		{
-			stp->fdIn = open(temp->next->content, O_RDONLY);
-			dup2(stp->fdIn, 0);
-		}
-		else
-			return (ft_print_error(
-					"syntax error near unexpected token `newline'\n", 1));
+			dup2(temp->fd, 0);
 	}
 	else if (temp && temp->type == 6)
 	{
