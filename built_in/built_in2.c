@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/10 17:23:43 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/10 18:21:25 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,18 @@ void	exec_pwd(void)
 	free(loc);
 }
 
+int	ft_modif_pwd_norm(t_list *tmp, char *buff)
+{
+	if (ft_is_same(tmp->content, "PWD") == 0)
+	{
+		free(tmp->content);
+		tmp->content = ft_strjoin("PWD=", getcwd(buff, 1024), 0);
+		free(buff);
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_modif_pwd(t_list *lst, int mode)
 {
 	t_list	*tmp;
@@ -80,15 +92,8 @@ void	ft_modif_pwd(t_list *lst, int mode)
 			}
 		}
 		else if (mode == 2)
-		{
-			if (ft_is_same(tmp->content, "PWD") == 0)
-			{
-				free(tmp->content);
-				tmp->content = ft_strjoin("PWD=", getcwd(buff, 1024), 0);
-				free(buff);
+			if (ft_modif_pwd_norm(tmp, buff))
 				return ;
-			}
-		}
 		tmp = tmp->next;
 	}
 	if (mode == 1)

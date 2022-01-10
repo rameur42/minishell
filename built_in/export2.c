@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 14:54:33 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 17:12:57 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/10 18:43:25 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,18 @@ void	ft_sort_lst(t_struct *cfg)
 			tmp = tmp->next;
 		}
 	}
+}
+
+int	ft_is_c(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
 }
