@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/22 21:48:52 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 19:39:40 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_len_env(char *s, int mode)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && s[i] != '=')
@@ -35,17 +35,12 @@ void	ft_rm_one(t_list *tmp)
 	free(tmp);
 }
 
-void	set_var(t_struct *cfg, t_list *to_check)
+int	set_var_norm(t_list *to_check, char *buff)
 {
-	t_list *tmp;
-	char *buff;
-
-	tmp = cfg->env;
-	buff = NULL;
 	if (ft_strlen(to_check->content) == 1)
 	{
 		to_check->type = 0;
-		return ;
+		return (1);
 	}
 	else
 	{
@@ -55,12 +50,24 @@ void	set_var(t_struct *cfg, t_list *to_check)
 		free(buff);
 		printf("to_check %s\n", to_check->content);
 	}
+	return (0);
+}
+
+void	set_var(t_struct *cfg, t_list *to_check)
+{
+	t_list	*tmp;
+	char	*buff;
+
+	tmp = cfg->env;
+	buff = NULL;
+	if (set_var_norm(to_check, buff))
+		return ;
 	while (tmp)
 	{
-		//if (ft_strncmp(tmp->content, to_check->content, ft_strlen(to_check->content)) == 0)
 		if (ft_is_same(tmp->content, to_check->content) == 0)
 		{
-			buff = ft_substr(tmp->content, ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
+			buff = ft_substr(tmp->content,
+					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
 			free(to_check->content);
 			to_check->content = ft_strdup(buff);
 			free(buff);
@@ -72,16 +79,15 @@ void	set_var(t_struct *cfg, t_list *to_check)
 	ft_rm_one(to_check);
 }
 
-
 void	ft_var_env(t_struct *cfg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cfg->arg;
 	while (tmp)
 	{
 		if (tmp->type == 7)
 			set_var(cfg, tmp);
-		tmp = tmp->next;	
+		tmp = tmp->next;
 	}
 }
