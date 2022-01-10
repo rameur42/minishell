@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/08 15:00:47 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 14:55:12 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,17 +268,29 @@ void	ft_exec(t_struct *cfg)
 				exec_cd(cfg, cmd);
 			else if (ft_strcmp(tmp->content, "export") == 0)
 			{
-				if (tmp->next && tmp->next->type == 2)
-					ft_export(tmp->next->content, cfg);
-				else
+				if (!(tmp->next && tmp->next->type == 2))
 					ft_export(NULL, cfg);
+				else
+				{
+					while (tmp->next && tmp->next->type == 2)
+					{
+						tmp = tmp->next;
+						ft_export(tmp->content, cfg);
+					}
+				}
 			}
 			else if (ft_strcmp(tmp->content, "unset") == 0)
 			{
-				if (tmp->next && tmp->next->type == 2)
-					ft_unset(tmp->next->content, cfg);
-				else
+				if (!(tmp->next && tmp->next->type == 2))
 					ft_unset(NULL, cfg);
+				else
+				{
+					while (tmp->next && tmp->next->type == 2)
+					{
+						tmp = tmp->next;
+						ft_unset(tmp->content, cfg);
+					}
+				}	
 			}
 			ft_free_tab(cmd);
 		}
