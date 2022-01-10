@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/10 16:36:14 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 17:33:19 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ int	ft_get_env(char **env, t_struct *cfg);
 
 int	ft_init_3(t_list *tmp);
 int	ft_init_4(t_list *tmp);
+void	ft_modif_pwd(t_list *lst, int mode);
+void	ft_refresh_pwd(t_struct *cfg, int mode);
 
 /*check exit*/
 

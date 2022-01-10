@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 16:35:11 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/10 17:49:58 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ int	ft_is_already_in(char *s, t_list *lst)
 		i = 0;
 		if (s[i] == tmp->content[i])
 		{
-			while (s[i] && tmp->content[i] && s[i] != '+' && s[i] != '=')
+			while (s[i] && tmp->content[i] && tmp->content[i] != '=' && s[i] != '+' && s[i] != '=')
 				i++;
 			if ((!(s[i]) && (tmp->content[i] == '=' || !(tmp->content[i]))) || (s[i] && (s[i] == '=' || (tmp->content[i - 1] && s[i - 1]
 				&& tmp->content[i - 1] == s[i - 1] && s[i] == '+'

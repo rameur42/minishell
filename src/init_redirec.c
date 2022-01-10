@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:25:56 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 16:40:35 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:49:03 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,4 @@ int	ft_init_4(t_list *tmp)
 		return (ft_print_red_error(tmp->next->content, 1));
 	else
 		return (ft_print_red_error("newline", 1));
-}
-
-int	ft_init_5(t_list *tmp)
-{
-	
 }

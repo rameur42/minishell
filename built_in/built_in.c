@@ -1,94 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   built_in.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 17:05:08 by tgresle           #+#    #+#             */
+/*   Updated: 2022/01/10 17:40:51 by tgresle          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
-
-void    exec_exit(t_struct *cfg)
-{
-	ft_lstclear(&cfg->env);
-	if (cfg->exp != NULL)
-		ft_lstclear(&cfg->exp);
-	printf("exit\n");
-	exit (0);
-}
-
-void    exec_echo(t_list *tmp)
-{
-	int i;
-	int	f;
-	int	first;
-
-	i = 1;
-	first = 0;
-	tmp = tmp->next;
-	if (tmp && ft_strcmp(tmp->content, "-n") == 0)
-	{
-		f = 1;
-		tmp = tmp->next;
-	}
-	while (tmp && (tmp->type == 2 || tmp->type == 0))
-	{
-		if (tmp->ps == 1 && first == 1)
-			printf(" ");
-		first = 1;
-		printf("%s", tmp->content);
-		tmp = tmp->next;
-	}
-	if (f != 1)
-		printf("\n");
-}
-
-void    exec_pwd(void)
-{
-    char *loc;
-
-    loc = NULL;
-	loc = getcwd(loc, 1024);
-	if (loc != NULL)
-	    printf("%s\n", loc);
-	else
-	    printf("Error\n");
-	free(loc);
-}
-
-void	ft_modif_pwd(t_list *lst, int mode)
-{
-	t_list *tmp;
-	char *buff;
-
-	tmp = lst;
-	buff = NULL;
-	while (tmp)
-	{
-		if (mode == 1)
-		{
-			if (ft_is_same(tmp->content, "OLDPWD") == 0)
-			{
-				free(tmp->content);
-				tmp->content = ft_strjoin("OLDPWD=", getcwd(buff, 1024), 0);
-				free(buff);
-				return ;
-			}
-		}
-		else if (mode == 2)
-		{
-			if (ft_is_same(tmp->content, "PWD") == 0)
-			{
-				free(tmp->content);
-				tmp->content = ft_strjoin("PWD=", getcwd(buff,1024), 0);
-				free(buff);
-				return ;
-			}
-		}
-		tmp = tmp->next;
-	}
-	if (mode == 1)
-		ft_lstadd_back(&lst, ft_lstnew(ft_strjoin("OLDPWD=", getcwd(buff, 1024), 0), 0, 0));
-}
-
-void	ft_refresh_pwd(t_struct *cfg, int mode)
-{
-	ft_modif_pwd(cfg->env, mode);
-	if (cfg->exp != NULL)
-		ft_modif_pwd(cfg->exp, mode);
-}
 
 int	ft_is_absolute(char *path)
 {
@@ -110,54 +32,58 @@ void	ft_use_absolute(t_struct *cfg, char *path)
 		ft_refresh_pwd(cfg, 2);
 }
 
-void	exec_cd(t_struct *cfg, char **path)
+void	exec_cd_norm(t_list *tmp, t_struct *cfg)
 {
-    char	*buffer;
-	char	*go_to;
-	int		i;
-	t_list *tmp;
-	struct stat buff;
-
-	i = 0;
-	tmp = cfg->env;
-	go_to = NULL;
-	buffer = NULL;
-	while (path[i])
-		i++;
-	if (i > 2)
-		return ;
-	else if (i == 1 || (i == 2 && ft_strcmp(path[1], "~") == 0))
+	while (tmp)
 	{
-		while (tmp)
+		if (ft_strncmp("HOME", tmp->content, 4) == 0)
 		{
-			if (ft_strncmp("HOME", tmp->content, 4) == 0)
-			{
-				ft_refresh_pwd(cfg, 1);
-				chdir(ft_substr(tmp->content, 5, ft_strlen(tmp->content)));
-				ft_refresh_pwd(cfg, 2);
-				return ;
-			}
-			tmp = tmp->next;
+			ft_refresh_pwd(cfg, 1);
+			chdir(ft_substr(tmp->content, 5, ft_strlen(tmp->content)));
+			ft_refresh_pwd(cfg, 2);
+			return ;
 		}
-		printf("minishell: cd: HOME not set\n");
-		return ;
+		tmp = tmp->next;
 	}
-	if (ft_is_absolute(path[1]))
-	{
-		ft_use_absolute(cfg, path[1]);
-		return ;
-	}
+	printf("minishell: cd: HOME not set\n");
+}
+
+void	exec_cd_norm2(t_struct *cfg, char **path)
+{
+	char		*buffer;
+	char		*go_to;
+	struct stat	buff;
+
+	buffer = NULL;
 	buffer = getcwd(buffer, 1024);
 	buffer = ft_strjoin(buffer, "/", 1);
 	go_to = ft_strjoin(buffer, path[1], 0);
 	stat(go_to, &buff);
 	if (buff.st_mode == 16877)
 		ft_refresh_pwd(cfg, 1);
-	//printf("stat->%d %u\n", stat(go_to, &buff), buff.st_mode);
 	if (chdir(go_to) != 0)
 		printf("minishell: cd: %s: No such file or directory\n", path[1]);
 	else
 		ft_refresh_pwd(cfg, 2);
 	free(buffer);
 	free(go_to);
+}
+
+void	exec_cd(t_struct *cfg, char **path)
+{
+	int			i;
+	t_list		*tmp;
+
+	i = 0;
+	tmp = cfg->env;
+	while (path[i])
+		i++;
+	if (i > 2)
+		return ;
+	else if (i == 1 || (i == 2 && ft_strcmp(path[1], "~") == 0))
+		exec_cd_norm(tmp, cfg);
+	else if (ft_is_absolute(path[1]))
+		ft_use_absolute(cfg, path[1]);
+	else
+		exec_cd_norm2(cfg, path);
 }
