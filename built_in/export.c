@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/08 19:01:15 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/10 16:35:11 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_is_same(char *s1, char *s2)
 		i++;
 	}
 	//printf("strlenS2->%d, i->%d\n", ft_strlen(s2), ft_len_env(s1, 0));
-	if (ft_strlen(s2) == ft_len_env(s1, 0) || ft_len_env(s1, 0) == ft_len_env(s2, 0))
+	if (ft_len_env(s2, 0) == ft_len_env(s1, 0))
 		return (0);
 	return (1);
 }
@@ -156,6 +156,18 @@ char	*ft_strjoin_export(char *s1, char *s2)
 	return (str);
 }
 
+int	ft_dont_use(char *s1)
+{
+	int i;
+
+	i = 0;
+	while (s1 && s1[i] && s1[i] != '=')
+		i++;
+	if (!(s1[i]))
+		return (1);
+	return (0);
+}
+
 void	ft_modif_env(char *s, t_list *lst)
 {
 	t_list	*new;
@@ -170,6 +182,8 @@ void	ft_modif_env(char *s, t_list *lst)
 		}
 		else if (ft_is_same(s, new->content) == 0)
 		{
+			if (ft_dont_use(s))
+				return ;
 			free(new->content);
 			new->content = ft_strdup(s);
 			return ;
@@ -204,10 +218,10 @@ int	ft_is_already_in(char *s, t_list *lst)
 		{
 			while (s[i] && tmp->content[i] && s[i] != '+' && s[i] != '=')
 				i++;
-			if (s[i] && (s[i] == '=' || (tmp->content[i - 1] && s[i - 1]
+			if ((!(s[i]) && (tmp->content[i] == '=' || !(tmp->content[i]))) || (s[i] && (s[i] == '=' || (tmp->content[i - 1] && s[i - 1]
 				&& tmp->content[i - 1] == s[i - 1] && s[i] == '+'
-				&& s[i + 1] && s[i + 1] == '=')))
-				return (1);
+				&& s[i + 1] && s[i + 1] == '='))))
+					return (1);
 		}
 		tmp = tmp->next;
 	}
@@ -293,9 +307,12 @@ int	ft_check_export(char *s)
 	int i;
 
 	i = 0;
+	if (s && s[0] && (s[0] == '=' || s[0] == '+'))
+		return (0);
 	while (s && s[i] && s[i] != '=')
 	{
-		if ((s[0] && s[0] < 58 && s[0] > 47)
+		if ((s[0] && s[0] != '_' && (!(s[0] < 91 && s[0] > 64)
+			&& !(s[0] < 123 && s[0] > 96)))
 			|| (!(s[i] < 123 && s[i] > 96) && !(s[i] < 91 && s[i] > 64)
 			&& !(s[i] < 58 && s[i] > 47) && s[i] != '_'
 			&& s[i] != '=' && !(s[i] && s[i + 1]
@@ -334,13 +351,13 @@ int	ft_export(char *s, t_struct *cfg)
 		ft_print_export_error(s, ft_check_export(s));
 		return (0);
 	}
-	if (ft_is_c(s) == 0)
+	if (ft_is_already_in(s, cfg->exp) == 1)
+		ft_modif_env(s, cfg->exp);
+	else if (ft_is_c(s) == 0)
 	{
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0));
 		return (0);
 	}
-	if (ft_is_already_in(s, cfg->exp) == 1)
-		ft_modif_env(s, cfg->exp);
 	else if (ft_is_a_plus(s))
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0));
 	else
