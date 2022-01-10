@@ -17,6 +17,10 @@ SRCS            = main.c\
 					src/env_var.c\
 					src/env.c\
 					src/init_redirec.c\
+					src/init_redir2.c\
+					src/lst_token.c\
+					src/count.c\
+					src/parse_token.c\
 					built_in/export.c\
 					built_in/export2.c\
 					built_in/unset.c\
