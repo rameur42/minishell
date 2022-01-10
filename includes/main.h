@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/10 13:20:32 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:36:14 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,12 @@ void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
 
 void	ft_free_tab(char **tab);
+
+int	ft_get_env(char **env, t_struct *cfg);
+
+int	ft_init_3(t_list *tmp);
+int	ft_init_4(t_list *tmp);
+
 /*check exit*/
 
 #endif
