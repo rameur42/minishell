@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:45:58 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 13:51:59 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 15:45:05 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	ft_incr_shlvl(t_struct *cfg)
 	i = 0;
 	shlvl = 0;
 	buff = NULL;
-	while (cfg->tabEnv[i])
+	while (cfg->tab_env[i])
 	{
-		if (strncmp("SHLVL", cfg->tabEnv[i], 4) == 0)
+		if (strncmp("SHLVL", cfg->tab_env[i], 4) == 0)
 		{
-			shlvl = ft_atoi(cfg->tabEnv[i]);
+			shlvl = ft_atoi(cfg->tab_env[i]);
 			shlvl++;
 			buff = ft_itoa(shlvl);
-			free(cfg->tabEnv[i]);
-			cfg->tabEnv[i] = ft_strjoin("SHLVL=", buff, 0);
+			free(cfg->tab_env[i]);
+			cfg->tab_env[i] = ft_strjoin("SHLVL=", buff, 0);
 			free(buff);
 			return ;
 		}
