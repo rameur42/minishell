@@ -6,7 +6,6 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 08:58:51 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 13:28:11 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +74,18 @@ void	set_pipe(t_list *tmp, t_list *temp, int pp, int pn)
 
 void	get_pipe(t_setup *stp, t_list *tmp)
 {
-	stp->pipP = tmp;
-	stp->pipN = tmp;
-	if (stp->pipP->prev)
-		if (stp->pipP->prev->type == 1)
+	stp->pip_p = tmp;
+	stp->pip_n = tmp;
+	if (stp->pip_p->prev)
+		if (stp->pip_p->prev->type == 1)
 			stp->pp = 1;
-	while (stp->pipN)
+	while (stp->pip_n)
 	{
-		if (stp->pipN->type == 1)
+		if (stp->pip_n->type == 1)
 		{
 			stp->pn = 1;
 			break ;
 		}
-		stp->pipN = stp->pipN->next;
+		stp->pip_n = stp->pip_n->next;
 	}
 }

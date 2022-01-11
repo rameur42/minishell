@@ -6,7 +6,6 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:50:15 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 12:57:54 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +29,79 @@ void	ft_is_quotes(t_struct *cfg, char *str, int i)
 	}
 }
 
-void	ft_is_env(t_struct *cfg, char *str, int i, t_tok *lst)
+int	ft_is_env(t_struct *cfg, char *str, int i, t_tok **lst)
 {
 	if (str[i] == '$')
 	{
 		if (str[i + 1] && str[i + 1] == '?')
-			ft_add_back(&lst, ft_new(str[i], 12));
+			ft_add_back(lst, ft_new(str[i], 12));
 		else if (cfg->sq == 0)
-			ft_add_back(&lst, ft_new(str[i], 7));
+			ft_add_back(lst, ft_new(str[i], 7));
 		else
-			ft_add_back(&lst, ft_new(str[i], 0));
+			ft_add_back(lst, ft_new(str[i], 0));
 		cfg->en = 1;
+		return (1);
 	}
 	else if (str[i] == '?' && str[i - 1] && str[i - 1] == '$')
-		ft_add_back(&lst, ft_new(str[i], 12));
+	{
+		ft_add_back(lst, ft_new(str[i], 12));
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_is_in_quotes(t_struct *cfg, char c, int f, t_tok **lst)
+{
+	if (c != '\'' && c != '\"' && f == 0
+		&& cfg->sq == 1 && cfg->dq == 0)
+	{
+		ft_add_back(lst, ft_new(c, 0));
+		return (1);
+	}
+	else if (c != '\'' && c != '\"' && f == 0
+		&& cfg->sq == 0 && cfg->dq == 1
+		&& cfg->en == 0 && c != '$')
+	{
+		ft_add_back(lst, ft_new(c, 0));
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_is_pipe(t_struct *cfg, char *str, int i, t_tok **lst)
+{
+	if (str[i] == '|')
+	{
+		ft_add_back(lst, ft_new(str[i], 1));
+		cfg->en = 0;
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_is_redir(t_struct *cfg, char *str, int i, t_tok **lst)
+{
+	if (str[i] == '>')
+	{
+		if (str[i + 1] && str[i + 1] == '>')
+			ft_add_back(lst, ft_new(str[i], 4));
+		else if (str[i - 1] && str[i - 1] == '>')
+			ft_add_back(lst, ft_new(str[i], 4));
+		else
+			ft_add_back(lst, ft_new(str[i], 3));
+		cfg->en = 0;
+		return (1);
+	}
+	else if (str[i] == '<')
+	{
+		if (str[i + 1] && str[i + 1] == '<')
+			ft_add_back(lst, ft_new(str[i], 6));
+		else if (str[i - 1] && str[i - 1] == '<')
+			ft_add_back(lst, ft_new(str[i], 6));
+		else
+			ft_add_back(lst, ft_new(str[i], 5));
+		cfg->en = 0;
+		return (1);
+	}
+	return (0);
 }
