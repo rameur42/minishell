@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:53 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 16:54:07 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:33:17 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	is_file(t_struct *cfg, char *file)
 			free(file);
 			return (0);
 		}
+		free(buffer);
+		buffer = NULL;
 		i++;
 	}
-	free(buffer);
 	free(file);
 	return (1);
 }
