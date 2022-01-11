@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:18:41 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 14:55:12 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 14:51:39 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	ft_cp_env(t_struct *cfg)
 
 	tmp = cfg->env;
 	i = ft_lstsize(cfg->env);
-	cfg->tabEnv = malloc((i + 1) * sizeof(char *));
-	cfg->tabEnv[i] = NULL;
+	cfg->tab_env = malloc((i + 1) * sizeof(char *));
+	cfg->tab_env[i] = NULL;
 	i = 0;
 	while (tmp)
 	{
-		cfg->tabEnv[i] = ft_strdup(tmp->content);
+		cfg->tab_env[i] = ft_strdup(tmp->content);
 		tmp = tmp->next;
 		i++;
 	}
@@ -111,18 +111,18 @@ void	ft_incr_shlvl(t_struct *cfg)
 	i = 0;
 	shlvl = 0;
 	buff = NULL;
-	while (cfg->tabEnv[i])
+	while (cfg->tab_env[i])
 	{
-		if (strncmp("SHLVL", cfg->tabEnv[i], 4) == 0)
+		if (strncmp("SHLVL", cfg->tab_env[i], 4) == 0)
 		{
-			shlvl = ft_atoi(cfg->tabEnv[i]);
+			shlvl = ft_atoi(cfg->tab_env[i]);
 			shlvl++;
 			buff = ft_itoa(shlvl);
-			free(cfg->tabEnv[i]);
-			cfg->tabEnv[i] = ft_strjoin("SHLVL=", buff, 0);
+			free(cfg->tab_env[i]);
+			cfg->tab_env[i] = ft_strjoin("SHLVL=", buff, 0);
 			free(buff);
 			return ;
-			//printf("shlvl->%d\n", ft_atoi(cfg->tabEnv[i]));
+			//printf("shlvl->%d\n", ft_atoi(cfg->tab_env[i]));
 		}
 		i++;
 	}
@@ -150,7 +150,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 	}
 	else if (pid == 0)
 	{
-		set_pipe(tmp, stp.pipN, stp.pp, stp.pn);
+		set_pipe(tmp, stp.pip_n, stp.pp, stp.pn);
 		printf("to_exec->%s %d\n", tmp->content, tmp->type);
 		if (is_redirec(tmp, &stp) == 1)
 			exit(1);
@@ -159,11 +159,11 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		{
 			if (strcmp("./minishell", cmd[0]) == 0)
 				ft_incr_shlvl(cfg);
-			if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
+			if (execve(cmd[0], cmd, cfg->tab_env) == -1)
 			{
 				printf("exit_code->%d\n", cfg->exit_code);
 				printf("minishell: %s: command not found\n", cmd[0]);
-				ft_free_tab(cfg->tabEnv);
+				ft_free_tab(cfg->tab_env);
 				exit (127);
 			}
 		}
@@ -172,11 +172,11 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		dup2(1, 1);
 		dup2(0, 0);
 		cfg->exit_code = 0;
-		if (stp.isRedO == 1)
-			close(stp.fdOut);
-		if (stp.isRedI == 1)
-			close(stp.fdIn);
-		ft_free_tab(cfg->tabEnv);
+		if (stp.is_red_o == 1)
+			close(stp.fd_out);
+		if (stp.is_red_i == 1)
+			close(stp.fd_in);
+		ft_free_tab(cfg->tab_env);
 		exit(0);
 	}
 	else
@@ -184,7 +184,7 @@ void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
 		if (stp.pp == 1)
 			close(tmp->prev->pipefd[0]);
 		if (stp.pn == 1)
-			close(stp.pipN->pipefd[1]);
+			close(stp.pip_n->pipefd[1]);
 	}
 }
 
