@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:48:04 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 15:48:06 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 15:51:54 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	ft_init_5(t_list *tmp)
 	if (tmp->prev && (tmp->prev->type != 0 && tmp->prev->type != 9
 			&& tmp->prev->type != 11 && tmp->prev->type != 2))
 		return (ft_print_red_error(tmp->prev->content, 1));
-	if (tmp->prev)
+	if (tmp->next)
 	{
-		tmp->fd = open(tmp->prev->content, O_RDONLY);
+		tmp->fd = open(tmp->next->content, O_RDONLY);
 		tmp->next->type = 2;
 	}
 	else if (tmp->next)
