@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/11 16:47:51 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:42:54 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_minishell(t_struct *cfg)
 	if (str == NULL)
 	{
 		write(1, "\n", 1);
+		ft_lstclear(&cfg->env);
 		return (1);
 	}
 	else if (ft_strlen(str) == 0)

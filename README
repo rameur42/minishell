@@ -9,9 +9,12 @@
 ->revoir la gestion des espaces sur echo | Done (a recheck quand meme)
 ->ameliorer les commande not found | Done
 ->ameliorer les redirection (ls < exit) | Done
-->ameliorer les redirection
+->ameliorer les redirection| Done
 	->ameliorer "<<"
 	->ameliorer >
 ->ameliorer export (+=, alphanum) | Done a check par reda
-->gestion du absolute PATH sur cd
+->gestion du absolute PATH sur cd | Done
 ->blinder Makefile
+->reparer env
+->rev $PWD
+->export b=" -l" puis ls$PWD
