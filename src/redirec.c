@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 14:42:07 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 18:19:32 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 14:52:27 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,30 @@ void	d_in(t_list *temp, t_setup *stp)
 {
 	char	*buff;
 
-	stp->stopIn = 0;
-	pipe(stp->redFd);
+	stp->stop_in = 0;
+	pipe(stp->red_fd);
 	while (1)
 	{
 		buff = readline(">");
 		if (ft_strcmp(buff, temp->next->content) == 0)
 		{
-			stp->stopIn = 1;
+			stp->stop_in = 1;
 			break ;
 		}
-		write(stp->redFd[1], buff, ft_strlen(buff));
-		write(stp->redFd[1], "\n", 1);
+		write(stp->red_fd[1], buff, ft_strlen(buff));
+		write(stp->red_fd[1], "\n", 1);
 		ft_free_str(buff);
 	}
-	if (stp->stopIn == 1)
+	if (stp->stop_in == 1)
 	{
-		dup2(stp->redFd[0], 0);
-		close(stp->redFd[0]);
-		close(stp->redFd[1]);
+		dup2(stp->red_fd[0], 0);
+		close(stp->red_fd[0]);
+		close(stp->red_fd[1]);
 	}
 	else
 	{
-		close(stp->redFd[0]);
-		close(stp->redFd[1]);
+		close(stp->red_fd[0]);
+		close(stp->red_fd[1]);
 	}
 }
 
@@ -56,8 +56,8 @@ int	is_redirec(t_list *tmp, t_setup *stp)
 {
 	t_list	*temp;
 
-	stp->isRedO = -1;
-	stp->isRedI = -1;
+	stp->is_red_o = -1;
+	stp->is_red_i = -1;
 	temp = tmp;
 	while (temp && is_v(temp->type) == 1)
 	{
@@ -65,11 +65,11 @@ int	is_redirec(t_list *tmp, t_setup *stp)
 			|| temp->type == 5 || temp->type == 6)
 		{
 			if (temp->type == 3 || temp->type == 4)
-				stp->isRedO = 1;
+				stp->is_red_o = 1;
 			else if (temp->type == 5)
-				stp->isRedI = 1;
+				stp->is_red_i = 1;
 			else if (temp->type == 6)
-				stp->isRedI = 2;
+				stp->is_red_i = 2;
 			break ;
 		}
 		temp = temp->next;
@@ -78,7 +78,7 @@ int	is_redirec(t_list *tmp, t_setup *stp)
 	{
 		if (temp->next)
 		{
-			//stp->fdOut = open(temp->next->content, O_TRUNC | O_WRONLY
+			//stp->fd_out = open(temp->next->content, O_TRUNC | O_WRONLY
 			//		| O_CREAT, 0644);
 			dup2(temp->fd, 1);
 		}
@@ -90,7 +90,7 @@ int	is_redirec(t_list *tmp, t_setup *stp)
 	{
 		if (temp->next)
 		{
-			//stp->fdOut = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
+			//stp->fd_out = open(temp->next->content, O_RDWR | O_CREAT | O_APPEND);
 			dup2(temp->fd, 1);
 		}
 		/*else
@@ -101,7 +101,7 @@ int	is_redirec(t_list *tmp, t_setup *stp)
 	{
 		if (temp->next)
 		{
-			//stp->fdIn = open(temp->next->content, O_RDONLY);
+			//stp->fd_in = open(temp->next->content, O_RDONLY);
 			dup2(temp->fd, 0);
 		}
 	}
