@@ -10,16 +10,32 @@ SRCS            = main.c\
 					src/get_path.c\
 					src/parse_line.c\
 					src/pipe.c\
+					src/pipe2.c\
+					src/pipe3.c\
 					src/exec.c\
+					src/exec2.c\
+					src/exec3.c\
+					src/exec4.c\
 					src/redirec.c\
 					src/tokenize.c\
 					src/signal.c\
 					src/env_var.c\
+					src/env.c\
+					src/init_redirec.c\
+					src/init_redir2.c\
+					src/lst_token.c\
+					src/count.c\
+					src/parse_token.c\
+					src/parse_token2.c\
 					built_in/export.c\
 					built_in/export2.c\
+					built_in/export3.c\
+					built_in/export4.c\
+					built_in/export5.c\
 					built_in/unset.c\
 					built_in/built_in.c\
-					built_in/built_in_utils.c
+					built_in/built_in2.c\
+					built_in/built_in3.c\
 					
 CC              = clang
 CFLAGS          = -g -Wall -Wextra -Werror -I ./includes
