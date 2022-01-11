@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   substr.c                                           :+:      :+:    :+:   */
+/*   built_in3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 23:06:13 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 17:20:08 by tgresle          ###   ########.fr       */
+/*   Created: 2022/01/10 17:32:37 by tgresle           #+#    #+#             */
+/*   Updated: 2022/01/10 17:32:45 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-char	*ft_substr(char *s, int start, int len)
+void	ft_refresh_pwd(t_struct *cfg, int mode)
 {
-	char	*res;
-	int		i;
-
-	i = 0;
-	if (!(s) || start >= len)
-		return (NULL);
-	res = malloc(sizeof(char) * len + 1);
-	if (!(res))
-		return (NULL);
-	if (ft_strlen(s) > start)
-	{
-		while (s[start] && i < len)
-		{
-			res[i] = s[start];
-			i++;
-			start++;
-		}
-	}
-	res[i] = '\0';
-	return (res);
+	ft_modif_pwd(cfg->env, mode);
+	if (cfg->exp != NULL)
+		ft_modif_pwd(cfg->exp, mode);
 }

@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/10 18:59:16 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +159,22 @@ int	ft_get_env(char **env, t_struct *cfg);
 /*init_redirec.c*/
 int	ft_init_3(t_list *tmp);
 int	ft_init_4(t_list *tmp);
+void	ft_modif_pwd(t_list *lst, int mode);
+void	ft_refresh_pwd(t_struct *cfg, int mode);
+int		ft_is_c(char *s);
+int	ft_is_already(char *s, t_list *lst);
+int	ft_is_same(char *s1, char *s2);
+int	ft_is_to_add(char *s1, char *s2);
+char	*ft_strjoin_export2(char *s1, char *s2, int k);
+int	ft_dont_use(char *s1);
+void	ft_modif_env(char *s, t_list *lst);
+void	ft_cp_lst(t_struct *cfg);
+char	*ft_correct_s(char *s);
+int	ft_is_a_plus(char *s);
+void	ft_print_export_error(char *s, int i);
+int	ft_check_export(char *s);
+int	ft_is_already_in(char *s, t_list *lst);
+char	*ft_strjoin_export(char *s1, char *s2);
 int	ft_init_5(t_list *tmp);
 int	ft_init_6(t_list *tmp);
 

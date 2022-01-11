@@ -23,8 +23,13 @@ SRCS            = main.c\
 					src/parse_token.c\
 					built_in/export.c\
 					built_in/export2.c\
+					built_in/export3.c\
+					built_in/export4.c\
+					built_in/export5.c\
 					built_in/unset.c\
 					built_in/built_in.c\
+					built_in/built_in2.c\
+					built_in/built_in3.c\
 					built_in/built_in_utils.c
 					
 CC              = clang
