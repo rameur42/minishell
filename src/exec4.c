@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 14:31:48 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 16:12:11 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_exec_norm_3(t_struct *cfg, t_list *tmp, char **cmd)
 	cmd = ft_init_cmd(tmp);
 	if (tmp->type != 11)
 		ft_get_path(cfg, cmd);
-	ft_display_tab(cmd);
+	//ft_display_tab(cmd);
 	ft_exec_ft(cfg, cmd, tmp);
 	ft_free_tab(cmd);
 	if (cfg->exit_code == 127)

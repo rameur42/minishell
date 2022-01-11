@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:45:58 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 15:45:05 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 17:22:58 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_get_path(t_struct *cfg, char **cmd)
 
 	i = 0;
 	ret = -1;
+	buffer = NULL;
 	split_path(cfg);
 	if (cfg->path == NULL)
 		return ;

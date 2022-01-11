@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:10:06 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 13:37:28 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 16:01:42 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int	ft_init_count_pipe(t_struct *cfg)
 				return (1);
 		tmp = tmp->next;
 	}
+	free(pwd);
 	return (0);
 }
