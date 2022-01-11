@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
+/*   Updated: 2022/01/11 15:38:43 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +210,6 @@ int		ft_count_l(t_tok *lst);
 int		ft_count_w(t_tok *lst);
 /*parse_token.c*/
 void	ft_is_quotes(t_struct *cfg, char *str, int i);
-void	ft_is_env(t_struct *cfg, char *str, int i, t_tok *lst);
 /*pipe.c*/
 int		is_file(t_struct *cfg, char *file);
 int		is_built_in(char *cmd);
