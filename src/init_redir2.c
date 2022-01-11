@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:03:39 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 16:11:20 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:44:33 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,5 @@ int	ft_init_redir(t_struct *cfg)
 				return (1);
 		tmp = tmp->next;
 	}
-	//rint_lst(cfg->arg);
 	return (0);
 }

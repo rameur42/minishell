@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 20:17:18 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:50:44 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,33 +52,10 @@ int	set_var_norm(t_list *to_check, char *buff)
 	return (0);
 }
 
-void	set_var(t_struct *cfg, t_list *to_check)
-{
-	t_list	*tmp;
-	char	*buff;
-
-	tmp = cfg->env;
-	buff = NULL;
-	if (set_var_norm(to_check, buff))
-		return ;
-	while (tmp)
-	{
-		if (ft_is_same(tmp->content, to_check->content) == 0)
-		{
-			buff = ft_substr(tmp->content,
-					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
-			ft_tokenize_env(cfg, buff);
-			return ;
-		}
-		tmp = tmp->next;
-	}
-	ft_rm_one(to_check);
-}
-
 void	ft_f_arg(t_struct *cfg)
 {
-	t_list *tmp;
-	t_list *buff;
+	t_list	*tmp;
+	t_list	*buff;
 
 	tmp = cfg->arg;
 	buff = NULL;
@@ -114,13 +91,13 @@ void	ft_var_env(t_struct *cfg)
 			set_var(cfg, tmp);
 			if (tmp->prev)
 				tmp->prev->next = cfg->tenv;
+			else if (tmp->prev == NULL)
+				cfg->arg = cfg->tenv;
 			while (cfg->tenv->next)
 				cfg->tenv = cfg->tenv->next;
 			if (tmp->next)
-			{
-				tmp->next->prev = cfg->tenv;			
-				cfg->tenv->next = tmp->next;
-			}
+				tmp->next->prev = cfg->tenv;
+			cfg->tenv->next = tmp->next;
 			free(tmp->content);
 			free(tmp);
 			tmp = cfg->tenv;

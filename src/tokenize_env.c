@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 19:19:37 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:50:41 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,27 @@ void	ft_tokenize_env(t_struct *cfg, char *str)
 	}
 	ft_tokenizer_env(cfg, lst);
 	ft_clear(&lst);
+}
+
+void	set_var(t_struct *cfg, t_list *to_check)
+{
+	t_list	*tmp;
+	char	*buff;
+
+	tmp = cfg->env;
+	buff = NULL;
+	if (set_var_norm(to_check, buff))
+		return ;
+	while (tmp)
+	{
+		if (ft_is_same(tmp->content, to_check->content) == 0)
+		{
+			buff = ft_substr(tmp->content,
+					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
+			ft_tokenize_env(cfg, buff);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	ft_rm_one(to_check);
 }

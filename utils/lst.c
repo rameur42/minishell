@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:36:24 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 16:29:39 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:37:03 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void	ft_lstclear(t_list **lst)
 		if (tmp->fd != -1)
 			close(tmp->fd);
 		free(tmp);
+		tmp = NULL;
 	}
 }
