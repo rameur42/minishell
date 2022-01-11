@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 16:14:09 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:50:44 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,31 @@ int	set_var_norm(t_list *to_check, char *buff)
 	return (0);
 }
 
-void	set_var(t_struct *cfg, t_list *to_check)
+void	ft_f_arg(t_struct *cfg)
 {
 	t_list	*tmp;
-	char	*buff;
+	t_list	*buff;
 
-	tmp = cfg->env;
+	tmp = cfg->arg;
 	buff = NULL;
-	if (set_var_norm(to_check, buff))
-		return ;
-	while (tmp)
+	while (tmp->next)
 	{
-		if (ft_is_same(tmp->content, to_check->content) == 0)
+		if (tmp->next)
 		{
-			buff = ft_substr(tmp->content,
-					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
-			free(to_check->content);
-			to_check->content = ft_strdup(buff);
-			free(buff);
-			to_check->type = 0;
-			return ;
+			if (tmp->type == 0 && tmp->next->type == 0)
+			{
+				tmp->content = ft_strjoin(tmp->content, tmp->next->content, 1);
+				buff = tmp->next;
+				tmp->next = tmp->next->next;
+				if (tmp->next)
+					tmp->next->prev = tmp;
+				free(buff->content);
+				free(buff);
+			}
 		}
-		tmp = tmp->next;
+		if (tmp->next)
+			tmp = tmp->next;
 	}
-	ft_rm_one(to_check);
 }
 
 void	ft_var_env(t_struct *cfg)
@@ -86,7 +87,23 @@ void	ft_var_env(t_struct *cfg)
 	while (tmp)
 	{
 		if (tmp->type == 7)
+		{
 			set_var(cfg, tmp);
+			if (tmp->prev)
+				tmp->prev->next = cfg->tenv;
+			else if (tmp->prev == NULL)
+				cfg->arg = cfg->tenv;
+			while (cfg->tenv->next)
+				cfg->tenv = cfg->tenv->next;
+			if (tmp->next)
+				tmp->next->prev = cfg->tenv;
+			cfg->tenv->next = tmp->next;
+			free(tmp->content);
+			free(tmp);
+			tmp = cfg->tenv;
+			ft_f_arg(cfg);
+			cfg->tenv = NULL;
+		}
 		tmp = tmp->next;
 	}
 }

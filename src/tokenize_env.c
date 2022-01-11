@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize.c                                         :+:      :+:    :+:   */
+/*   tokenize_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 19:46:07 by rameur           ###   ########.fr       */
+/*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
+/*   Updated: 2022/01/11 20:50:41 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
+void	ft_make_env_lst(t_struct *cfg, t_tok **tmp)
 {
 	int		ps;
 	int		i;
@@ -37,11 +37,11 @@ void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
 			i++;
 		(*tmp) = (*tmp)->next;
 	}
-	ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(buff), i, ps));
+	ft_lstadd_back(&cfg->tenv, ft_lstnew(ft_strdup(buff), i, ps));
 	free(buff);
 }
 
-void	ft_tokenizer(t_struct *cfg, t_tok *lst)
+void	ft_tokenizer_env(t_struct *cfg, t_tok *lst)
 {
 	int		nb_word;
 	t_tok	*tmp;
@@ -52,16 +52,15 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	{
 		if (tmp->type != 10)
 		{
-			ft_make_arg_lst(cfg, &tmp);
+			ft_make_env_lst(cfg, &tmp);
 			nb_word--;
 		}
 		else
 			tmp = tmp->next;
 	}
-	cfg->en = 0;
 }
 
-void	ft_tokenize(t_struct *cfg, char *str)
+void	ft_tokenize_env(t_struct *cfg, char *str)
 {
 	int		i;
 	int		f;
@@ -86,6 +85,29 @@ void	ft_tokenize(t_struct *cfg, char *str)
 		}
 		i++;
 	}
-	ft_tokenizer(cfg, lst);
+	ft_tokenizer_env(cfg, lst);
 	ft_clear(&lst);
+}
+
+void	set_var(t_struct *cfg, t_list *to_check)
+{
+	t_list	*tmp;
+	char	*buff;
+
+	tmp = cfg->env;
+	buff = NULL;
+	if (set_var_norm(to_check, buff))
+		return ;
+	while (tmp)
+	{
+		if (ft_is_same(tmp->content, to_check->content) == 0)
+		{
+			buff = ft_substr(tmp->content,
+					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
+			ft_tokenize_env(cfg, buff);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	ft_rm_one(to_check);
 }

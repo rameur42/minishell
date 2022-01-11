@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/11 15:38:43 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 20:51:29 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_struct {
 	t_list	*env;
 	t_list	*exp;
 	t_list	*arg;
+	t_list	*tenv;
 	char	**path;
 	char	**tab_env;
 	int		pipe;
@@ -189,6 +190,9 @@ char	*ft_itoa(int n);
 /*src/env_var.c*/
 void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
+int	set_var_norm(t_list *to_check, char *buff);
+void	ft_rm_one(t_list *tmp);
+
 /*src/env.c*/
 int		ft_get_env(char **env, t_struct *cfg);
 /*init_redirec.c*/
@@ -234,5 +238,9 @@ int		ft_is_redir(t_struct *cfg, char *str, int i, t_tok **lst);
 /*parse_token2.c*/
 int		ft_is_arg_space(t_struct *cfg, char c, int *f, t_tok **lst);
 void	ft_last_token(t_struct *cfg, char c, int f, t_tok **lst);
+/*src/tokenize_env.c*/
+void	ft_tokenize_env(t_struct *cfg, char *str);
+void	ft_tokenizer_env(t_struct *cfg, t_tok *lst);
+void	set_var(t_struct *cfg, t_list *to_check);
 
 #endif
