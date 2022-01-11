@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/10 16:36:14 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 18:59:16 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,10 +157,26 @@ int		ft_len_env(char *s, int mode);
 void	ft_free_tab(char **tab);
 
 int	ft_get_env(char **env, t_struct *cfg);
-
+/*init_redirec.c*/
 int	ft_init_3(t_list *tmp);
 int	ft_init_4(t_list *tmp);
+int	ft_init_5(t_list *tmp);
+int	ft_init_6(t_list *tmp);
 
-/*check exit*/
+int	ft_init_redir(t_struct *cfg);
+void	f_d_in(char *str);
+/*lst_token.c*/
+t_tok	*ft_new(char c, int type);
+void	ft_add_back(t_tok **al, t_tok *new);
+void	ft_clear(t_tok **lst);
+/*count.c*/
+int	ft_check_token(t_tok *lst);
+int	ft_is_red(t_tok *tmp, int ref);
+int	ft_count_l(t_tok *lst);
+int	ft_count_w(t_tok *lst);
+/*parse_token.c*/
+void	ft_is_quotes(t_struct *cfg, char *str, int i);
+void	ft_is_env(t_struct *cfg, char *str, int i, t_tok *lst);
+
 
 #endif

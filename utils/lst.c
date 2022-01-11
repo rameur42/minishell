@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:36:24 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 13:21:02 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/10 18:26:24 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list	*ft_lstnew(void *content, int type, int ps)
 	new_list->content = content;
 	new_list->type = type;
 	new_list->ps = ps;
-	new_list->fd = 0;
+	new_list->fd = -1;
 	new_list->next = NULL;
 	new_list->prev = NULL;
 	return (new_list);
@@ -79,6 +79,8 @@ void	ft_lstclear(t_list **lst)
 			close(tmp->pipefd[0]);
 			close(tmp->pipefd[1]);
 		}
+		if (tmp->fd < 0)
+			close(tmp->fd);
 		free(tmp);
 	}
 }
