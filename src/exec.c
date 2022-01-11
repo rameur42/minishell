@@ -33,9 +33,9 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 	dup2(1, 1);
 	dup2(0, 0);
 	cfg->exit_code = 0;
-	if (stp->isRedO == 1)
+	if (stp->is_red_o == 1)
 		close(stp->fdOut);
-	if (stp->isRedI == 1)
+	if (stp->is_red_i == 1)
 		close(stp->fdIn);
 	ft_free_tab(cfg->tabEnv);
 }
