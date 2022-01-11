@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:46:04 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 13:48:15 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 15:45:05 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	ft_cp_env(t_struct *cfg)
 
 	tmp = cfg->env;
 	i = ft_lstsize(cfg->env);
-	cfg->tabEnv = malloc((i + 1) * sizeof(char *));
-	cfg->tabEnv[i] = NULL;
+	cfg->tab_env = malloc((i + 1) * sizeof(char *));
+	cfg->tab_env[i] = NULL;
 	i = 0;
 	while (tmp)
 	{
-		cfg->tabEnv[i] = ft_strdup(tmp->content);
+		cfg->tab_env[i] = ft_strdup(tmp->content);
 		tmp = tmp->next;
 		i++;
 	}

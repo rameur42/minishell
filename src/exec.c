@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/0
+/*   Created: 2022/01/11 15:46:05 by tgresle           #+#    #+#             */
+/*   Updated: 2022/01/11 15:46:06 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -13,7 +14,7 @@
 
 void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 {
-	set_pipe(tmp, stp->pipN, stp->pp, stp->pn);
+	set_pipe(tmp, stp->pip_n, stp->pp, stp->pn);
 	if (is_redirec(tmp, stp) == 1)
 		exit(1);
 	ft_cp_env(cfg);
@@ -21,10 +22,10 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 	{
 		if (strcmp("./minishell", cmd[0]) == 0)
 			ft_incr_shlvl(cfg);
-		if (execve(cmd[0], cmd, cfg->tabEnv) == -1)
+		if (execve(cmd[0], cmd, cfg->tab_env) == -1)
 		{
 			printf("minishell: %s: command not found\n", cmd[0]);
-			ft_free_tab(cfg->tabEnv);
+			ft_free_tab(cfg->tab_env);
 			exit (127);
 		}
 	}
@@ -34,10 +35,10 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 	dup2(0, 0);
 	cfg->exit_code = 0;
 	if (stp->is_red_o == 1)
-		close(stp->fdOut);
+		close(stp->fd_out);
 	if (stp->is_red_i == 1)
-		close(stp->fdIn);
-	ft_free_tab(cfg->tabEnv);
+		close(stp->fd_in);
+	ft_free_tab(cfg->tab_env);
 }
 
 void	exec_ft_norm_2(t_setup *stp, t_list *tmp)
@@ -45,7 +46,7 @@ void	exec_ft_norm_2(t_setup *stp, t_list *tmp)
 	if (stp->pp == 1)
 		close(tmp->prev->pipefd[0]);
 	if (stp->pn == 1)
-		close(stp->pipN->pipefd[1]);
+		close(stp->pip_n->pipefd[1]);
 }
 
 void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp)
