@@ -27,6 +27,7 @@ SRCS            = main.c\
 					src/count.c\
 					src/parse_token.c\
 					src/parse_token2.c\
+					src/tokenize_env.c\
 					built_in/export.c\
 					built_in/export2.c\
 					built_in/export3.c\

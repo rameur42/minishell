@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/11 15:38:43 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 19:04:53 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_struct {
 	t_list	*env;
 	t_list	*exp;
 	t_list	*arg;
+	t_list	*tenv;
 	char	**path;
 	char	**tab_env;
 	int		pipe;
@@ -234,5 +235,9 @@ int		ft_is_redir(t_struct *cfg, char *str, int i, t_tok **lst);
 /*parse_token2.c*/
 int		ft_is_arg_space(t_struct *cfg, char c, int *f, t_tok **lst);
 void	ft_last_token(t_struct *cfg, char c, int f, t_tok **lst);
+/*src/tokenize_env.c*/
+void	ft_tokenize_env(t_struct *cfg, char *str);
+void	ft_tokenizer_env(t_struct *cfg, t_tok *lst);
+
 
 #endif
