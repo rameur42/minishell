@@ -6,6 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
+/*   Updated: 2022/01/11 14:10:19 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +193,22 @@ int	ft_count_w(t_tok *lst);
 /*parse_token.c*/
 void	ft_is_quotes(t_struct *cfg, char *str, int i);
 void	ft_is_env(t_struct *cfg, char *str, int i, t_tok *lst);
-
+/*pipe.c*/
+int		is_file(t_struct *cfg, char *file);
+int		is_built_in(char *cmd);
+/*exec.c*/
+void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp);
+/*exec2.c*/
+int		t_tab_count(t_list *arg);
+void	ft_display_tab(char **tab);
+char	**ft_init_cmd(t_list *tmp);
+void	ft_cp_env(t_struct *cfg);
+void	ft_free_tab(char **tab);
+/*exec3.c*/
+void	ft_free_str(char *str);
+void	ft_incr_shlvl(t_struct *cfg);
+void	ft_get_path(t_struct *cfg, char **cmd);
+int		get_nb_cmd(t_struct *cfg);
+void	ft_exec_built_in(t_struct *cfg, t_list *tmp);
 
 #endif

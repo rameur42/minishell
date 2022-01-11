@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:50:15 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 18:59:13 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 12:57:54 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void	ft_is_quotes(t_struct *cfg, char *str, int i)
 {
 	if (str[i] == '\'')
-		{
-			if (cfg->sq == 0)
-				cfg->sq = 1;
-			else if (cfg->sq == 1)
-				cfg->sq = 0;
-		}
-		else if (str[i] == '\"')
-		{
-			if (cfg->dq == 0)
-				cfg->dq = 1;
-			else if (cfg->dq == 1)
-				cfg->dq = 0;
-		}
+	{
+		if (cfg->sq == 0)
+			cfg->sq = 1;
+		else if (cfg->sq == 1)
+			cfg->sq = 0;
+	}
+	else if (str[i] == '\"')
+	{
+		if (cfg->dq == 0)
+			cfg->dq = 1;
+		else if (cfg->dq == 1)
+			cfg->dq = 0;
+	}
 }
 
 void	ft_is_env(t_struct *cfg, char *str, int i, t_tok *lst)
