@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:47:03 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/09 16:13:08 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:11:31 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ char	*ft_strjoin(char *s1, char *s2, int mode)
 	j = 0;
 	if (!(s1) || !(s2))
 		return (NULL);
-	res = malloc((ft_strlen((char *)s1)
-				+ ft_strlen((char*)s2) + 1) * sizeof(char));
+	res = malloc((ft_strlen(s1)
+				+ ft_strlen(s2) + 1) * sizeof(char));
 	if (res == NULL)
 		return (NULL);
 	while (s1[i])

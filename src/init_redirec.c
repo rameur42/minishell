@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:48:04 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 15:51:54 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 16:14:28 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ int	ft_init_3(t_list *tmp)
 	if (tmp->next && (tmp->next->type == 0 || tmp->next->type == 9
 			|| tmp->next->type == 11 || tmp->next->type == 2))
 	{
-		printf("tmp->content %s\n", tmp->next->content);
 		tmp->fd = open(tmp->next->content, O_TRUNC | O_WRONLY
 				| O_CREAT, 0644);
-		printf("FD = %d\n", tmp->fd);
 		tmp->next->type = 2;
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:53 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 15:47:55 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 16:54:07 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ int	is_file(t_struct *cfg, char *file)
 		if (res == 0)
 		{
 			free(buffer);
+			free(file);
 			return (0);
 		}
 		i++;
 	}
+	free(buffer);
+	free(file);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/10 18:21:19 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 16:47:51 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_init_cfg(t_struct *cfg)
 	cfg->arg = NULL;
 	cfg->exp = NULL;
 	cfg->path = NULL;
+	cfg->tab_env = NULL;
 	cfg->pipe = -1;
 	cfg->sq = 0;
 	cfg->dq = 0;
@@ -45,7 +46,7 @@ void	ft_to_exec(char *str, t_struct *cfg)
 		if (ft_init_count_pipe(cfg) == 0 && ft_init_redir(cfg) == 0)
 		{
 			ft_is_file(cfg);
-			ft_print_lst(cfg);
+			//ft_print_lst(cfg);
 			ft_exec(cfg);
 		}
 		ft_lstclear(&cfg->arg);

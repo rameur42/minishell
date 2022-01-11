@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 19:39:40 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 16:14:09 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	set_var_norm(t_list *to_check, char *buff)
 		free(to_check->content);
 		to_check->content = ft_strdup(buff);
 		free(buff);
-		printf("to_check %s\n", to_check->content);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:33 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 14:25:03 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:21:47 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ char	*ft_rm_p(char *line)
 
 	j = 0;
 	i = ft_strlen(line);
+	res = NULL;
 	if (i < 5)
 		return (NULL);
-	i -= 3;
+	i -= 5;
 	res = malloc(i + 1 * sizeof(char));
 	if (res == NULL)
 		return (NULL);

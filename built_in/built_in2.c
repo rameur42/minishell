@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/10 18:21:25 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/11 16:06:25 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	exec_exit(t_struct *cfg)
 {
 	ft_lstclear(&cfg->env);
+	ft_lstclear(&cfg->arg);
 	if (cfg->exp != NULL)
 		ft_lstclear(&cfg->exp);
+	if (cfg->path != NULL)
+		ft_free_tab(cfg->path);
 	printf("exit\n");
 	exit (0);
 }

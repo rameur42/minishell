@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 02:37:34 by rameur            #+#    #+#             */
-/*   Updated: 2021/12/22 19:08:00 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/11 16:15:04 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_signals(void)
 
 void	ft_f_handle_c(int sig)
 {
-	printf("WTF\n");
 	if (sig == SIGINT)
 		write(1, "\n", 1);
 	else if (sig == SIGQUIT)
