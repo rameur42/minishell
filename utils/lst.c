@@ -6,13 +6,13 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:36:24 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 20:37:03 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:00:40 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-t_list	*ft_lstnew(void *content, int type, int ps)
+t_list	*ft_lstnew(void *content, int type, int ps, int pn)
 {
 	t_list	*new_list;
 
@@ -22,6 +22,7 @@ t_list	*ft_lstnew(void *content, int type, int ps)
 	new_list->content = content;
 	new_list->type = type;
 	new_list->ps = ps;
+	new_list->pn = pn;
 	new_list->fd = -1;
 	new_list->next = NULL;
 	new_list->prev = NULL;

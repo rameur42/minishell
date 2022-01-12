@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 20:50:41 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:32:48 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 void	ft_make_env_lst(t_struct *cfg, t_tok **tmp)
 {
 	int		ps;
+	int		pn;
 	int		i;
 	int		size;
 	char	*buff;
 
-	if ((*tmp)->prev && (*tmp)->prev->type == 10)
-		ps = 1;
-	else
-		ps = 0;
+	ps = ft_check_pspace(*tmp);
+	pn = ft_check_nspace(*tmp);
 	i = 0;
 	size = ft_count_l((*tmp));
 	buff = malloc(size * sizeof(char));
@@ -37,7 +36,7 @@ void	ft_make_env_lst(t_struct *cfg, t_tok **tmp)
 			i++;
 		(*tmp) = (*tmp)->next;
 	}
-	ft_lstadd_back(&cfg->tenv, ft_lstnew(ft_strdup(buff), i, ps));
+	ft_lstadd_back(&cfg->tenv, ft_lstnew(ft_strdup(buff), i, ps, pn));
 	free(buff);
 }
 
@@ -105,6 +104,7 @@ void	set_var(t_struct *cfg, t_list *to_check)
 			buff = ft_substr(tmp->content,
 					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
 			ft_tokenize_env(cfg, buff);
+			free(buff);
 			return ;
 		}
 		tmp = tmp->next;

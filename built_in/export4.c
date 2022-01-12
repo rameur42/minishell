@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:53:31 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/10 18:57:29 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 10:05:34 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_cp_lst(t_struct *cfg)
 	tmp = cfg->env;
 	while (tmp)
 	{
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(tmp->content), 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(tmp->content), 0, 0, 0));
 		tmp = tmp->next;
 	}
 }
