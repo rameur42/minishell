@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/10 19:21:15 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 10:05:16 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,16 @@ int	ft_export(char *s, t_struct *cfg)
 		ft_modif_env(s, cfg->exp);
 	else if (ft_is_c(s) == 0)
 	{
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0, 0));
 		return (0);
 	}
 	else if (ft_is_a_plus(s))
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0, 0));
 	else
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0));
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0, 0));
 	if (ft_is_already(s, cfg->env) == 1)
 		ft_modif_env(s, cfg->env);
 	else
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0, 0));
 	return (0);
 }

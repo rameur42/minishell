@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 20:50:44 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:42:01 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	ft_f_arg(t_struct *cfg)
 	{
 		if (tmp->next)
 		{
-			if (tmp->type == 0 && tmp->next->type == 0)
+			if (tmp->type == 0 && tmp->next->type == 0 && tmp->next->ps == 0
+				 && tmp->pn == 0)
 			{
 				tmp->content = ft_strjoin(tmp->content, tmp->next->content, 1);
 				buff = tmp->next;
@@ -90,13 +91,19 @@ void	ft_var_env(t_struct *cfg)
 		{
 			set_var(cfg, tmp);
 			if (tmp->prev)
+			{
 				tmp->prev->next = cfg->tenv;
+				cfg->tenv->ps = tmp->prev->pn;
+			}
 			else if (tmp->prev == NULL)
 				cfg->arg = cfg->tenv;
 			while (cfg->tenv->next)
 				cfg->tenv = cfg->tenv->next;
 			if (tmp->next)
+			{
 				tmp->next->prev = cfg->tenv;
+				cfg->tenv->pn = tmp->next->ps;
+			}
 			cfg->tenv->next = tmp->next;
 			free(tmp->content);
 			free(tmp);

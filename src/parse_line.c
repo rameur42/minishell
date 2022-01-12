@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 02:52:12 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 20:43:46 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:34:07 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_lst(t_struct *cfg)
 	tmp = cfg->arg;
 	while (tmp)
 	{
-		printf("content -> %s, type -> %d\n", tmp->content, tmp->type);
+		printf("content -> %s, type -> %d |%d|%d\n", tmp->content, tmp->type, tmp->ps, tmp->pn);
 		tmp = tmp->next;
 	}
 }

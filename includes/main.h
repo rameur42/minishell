@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/11 20:51:29 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:39:15 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_list {
 	int				type;
 	int				pipefd[2];
 	int				ps;
+	int				pn;
+	int				ns;
 	int				fd;
 	struct s_list	*next;
 	struct s_list	*prev;
@@ -73,7 +75,8 @@ typedef struct s_list {
 ** dq -> double quote
 ** en -> variable d'environnement
 ** par -> parenthese
-** ps -> space before?
+** ps -> space before
+** pn -> space next
 */
 
 typedef struct s_struct {
@@ -116,7 +119,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 /*utils/substr.c*/
 char	*ft_substr(char *s, int start, int len);
 /*utils.lst.c*/
-t_list	*ft_lstnew(void *content, int type, int ps);
+t_list	*ft_lstnew(void *content, int type, int ps, int pn);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
 void	ft_lstclear(t_list **lst);
@@ -144,6 +147,9 @@ void	ft_free_tab(char **tab);
 
 /*src/tokenize.c*/
 void	ft_tokenize(t_struct *cfg, char *str);
+int		ft_check_pspace(t_tok *tmp);
+int		ft_check_nspace(t_tok *tmp);
+
 /*src/signal.c*/
 void	ft_signals(void);
 void	ft_f_signals(void);
@@ -190,8 +196,9 @@ char	*ft_itoa(int n);
 /*src/env_var.c*/
 void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
-int	set_var_norm(t_list *to_check, char *buff);
+int		set_var_norm(t_list *to_check, char *buff);
 void	ft_rm_one(t_list *tmp);
+void	ft_f_arg(t_struct *cfg);
 
 /*src/env.c*/
 int		ft_get_env(char **env, t_struct *cfg);

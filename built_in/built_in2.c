@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 16:06:25 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:06:00 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ void	ft_modif_pwd(t_list *lst, int mode)
 	}
 	if (mode == 1)
 		ft_lstadd_back(&lst, ft_lstnew(ft_strjoin("OLDPWD=",
-					getcwd(buff, 1024), 0), 0, 0));
+					getcwd(buff, 1024), 0), 0, 0, 0));
 }

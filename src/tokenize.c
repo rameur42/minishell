@@ -6,23 +6,49 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/11 19:46:07 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 10:27:31 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
+int	ft_check_pspace(t_tok *tmp)
+{
+	if (tmp->prev && tmp->prev->type == 10)
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_check_nspace(t_tok *tmp)
+{
+	int size;
+
+	size = ft_count_l(tmp);
+	size--;
+	while (tmp->next && size > 1)
+	{
+		tmp = tmp->next;
+		size--;
+	}
+	if (tmp->next)
+		if (tmp->next->type == 10)
+			return (1);
+	printf("c = %c\n", tmp->c);
+	return (0);
+}
+
 void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
 {
 	int		ps;
+	int		pn;
 	int		i;
 	int		size;
 	char	*buff;
 
-	if ((*tmp)->prev && (*tmp)->prev->type == 10)
-		ps = 1;
-	else
-		ps = 0;
+
+	ps = ft_check_pspace(*tmp);
+	pn = ft_check_nspace(*tmp);
 	i = 0;
 	size = ft_count_l((*tmp));
 	buff = malloc(size * sizeof(char));
@@ -37,7 +63,7 @@ void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
 			i++;
 		(*tmp) = (*tmp)->next;
 	}
-	ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(buff), i, ps));
+	ft_lstadd_back(&cfg->arg, ft_lstnew(ft_strdup(buff), i, ps, pn));
 	free(buff);
 }
 
