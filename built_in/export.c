@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 16:21:37 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 16:28:10 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	correct_env(char *s, t_struct *cfg)
 	if (ft_is_already(s, cfg->env) == 1)
 		ft_modif_env(s, cfg->env);
 	else if (ft_is_a_plus(s))
-		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0, 0));
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_correct_s(s), 0, 0, 0));
 	else
 		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0, 0));
 }
