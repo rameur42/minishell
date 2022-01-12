@@ -20,6 +20,7 @@ SRCS            = main.c\
 					src/tokenize.c\
 					src/signal.c\
 					src/env_var.c\
+					src/env_var_norm.c\
 					src/env.c\
 					src/init_redirec.c\
 					src/init_redir2.c\

@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 02:52:12 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 11:14:34 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 17:43:17 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	ft_print_lst(t_struct *cfg)
+/* void	ft_print_lst(t_struct *cfg)
 {
 	t_list	*tmp;
 
 	tmp = cfg->arg;
 	while (tmp)
 	{
-		printf("content -> %s, type -> %d |%d|%d\n", tmp->content, tmp->type, tmp->ps, tmp->pn);
+		printf("content -> %s, type -> %d |%d|%d\n",
+			tmp->content, tmp->type, tmp->ps, tmp->pn);
 		tmp = tmp->next;
 	}
-}
+} */
 
 int	ft_parse_line(t_struct *cfg, char *str)
 {

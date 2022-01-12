@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 11:40:21 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 17:41:42 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ void	ft_f_arg(t_struct *cfg)
 
 	tmp = cfg->arg;
 	buff = NULL;
-	ft_print_lst(cfg);
 	while (tmp->next)
 	{
 		if (tmp->next)
 		{
 			if (tmp->type == 0 && tmp->next->type == 0 && tmp->next->ps == 0
-				 && tmp->pn == 0)
+				&& tmp->pn == 0)
 			{
 				tmp->content = ft_strjoin(tmp->content, tmp->next->content, 1);
 				buff = tmp->next;
@@ -104,17 +103,7 @@ void	ft_var_env(t_struct *cfg)
 					cfg->arg = cfg->tenv;
 				while (cfg->tenv->next)
 					cfg->tenv = cfg->tenv->next;
-				if (tmp->next)
-				{
-					tmp->next->prev = cfg->tenv;
-					cfg->tenv->pn = tmp->next->ps;
-				}
-				cfg->tenv->next = tmp->next;
-				free(tmp->content);
-				free(tmp);
-				tmp = cfg->tenv;
-				ft_f_arg(cfg);
-				cfg->tenv = NULL;
+				var_env_norm(tmp, cfg);
 			}
 		}
 		tmp = tmp->next;

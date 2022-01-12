@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 16:33:28 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 17:23:21 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	ft_make_env_lst(t_struct *cfg, t_tok **tmp)
 	while ((*tmp) && size > 1)
 	{
 		buff[i] = (*tmp)->c;
-		size--;
-		if (size == 1)
+		if (--size == 1)
 			i = (*tmp)->type;
 		else
 			i++;

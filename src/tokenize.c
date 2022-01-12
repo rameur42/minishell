@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 16:33:45 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 17:20:43 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_pspace(t_tok *tmp)
 
 int	ft_check_nspace(t_tok *tmp)
 {
-	int size;
+	int	size;
 
 	size = ft_count_l(tmp);
 	size--;
@@ -45,7 +45,6 @@ void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
 	int		size;
 	char	*buff;
 
-
 	ps = ft_check_pspace(*tmp);
 	pn = ft_check_nspace(*tmp);
 	i = 0;
@@ -57,8 +56,7 @@ void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
 	while ((*tmp) && size > 1)
 	{
 		buff[i] = (*tmp)->c;
-		size--;
-		if (size == 1)
+		if (--size == 1)
 			i = (*tmp)->type;
 		else
 			i++;

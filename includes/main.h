@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/12 11:40:47 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 17:31:33 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,9 +200,10 @@ int		ft_len_env(char *s, int mode);
 int		set_var_norm(t_list *to_check, char *buff);
 void	ft_rm_one(t_struct *cfg, t_list *tmp);
 void	ft_f_arg(t_struct *cfg);
-
 /*src/env.c*/
 int		ft_get_env(char **env, t_struct *cfg);
+/*src/env_var_norm.c*/
+void	var_env_norm(t_list *tmp, t_struct *cfg);
 /*init_redirec.c*/
 int		ft_init_3(t_list *tmp);
 int		ft_init_4(t_list *tmp);
