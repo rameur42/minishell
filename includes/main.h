@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/12 10:39:15 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 11:40:47 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ t_list	*ft_lstnew(void *content, int type, int ps, int pn);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
 void	ft_lstclear(t_list **lst);
+int		ft_lstsize(t_list *lst);
 /*src/get_path.c*/
 void	split_path(t_struct *cfg);
 char	*ft_rm_p(char *line);
@@ -197,7 +198,7 @@ char	*ft_itoa(int n);
 void	ft_var_env(t_struct *cfg);
 int		ft_len_env(char *s, int mode);
 int		set_var_norm(t_list *to_check, char *buff);
-void	ft_rm_one(t_list *tmp);
+void	ft_rm_one(t_struct *cfg, t_list *tmp);
 void	ft_f_arg(t_struct *cfg);
 
 /*src/env.c*/
@@ -248,6 +249,6 @@ void	ft_last_token(t_struct *cfg, char c, int f, t_tok **lst);
 /*src/tokenize_env.c*/
 void	ft_tokenize_env(t_struct *cfg, char *str);
 void	ft_tokenizer_env(t_struct *cfg, t_tok *lst);
-void	set_var(t_struct *cfg, t_list *to_check);
+int		set_var(t_struct *cfg, t_list *to_check);
 
 #endif
