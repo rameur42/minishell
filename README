@@ -15,3 +15,5 @@
 ->ameliorer export (+=, alphanum) | Done a check par reda
 ->gestion du absolute PATH sur cd | Done
 ->blinder Makefile
+->unclosed double quote
+

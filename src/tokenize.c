@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 10:27:31 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 11:22:28 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_check_nspace(t_tok *tmp)
 	if (tmp->next)
 		if (tmp->next->type == 10)
 			return (1);
-	printf("c = %c\n", tmp->c);
 	return (0);
 }
 
@@ -73,6 +72,8 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	t_tok	*tmp;
 
 	tmp = lst;
+	if (cfg->dq == 1 || cfg->sq == 1)
+		return ;
 	nb_word = ft_count_w(lst);
 	while (tmp && nb_word > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 10:42:01 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 11:02:22 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_f_arg(t_struct *cfg)
 
 	tmp = cfg->arg;
 	buff = NULL;
+	ft_print_lst(cfg);
 	while (tmp->next)
 	{
 		if (tmp->next)
