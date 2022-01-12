@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 11:02:22 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 11:40:21 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ int	ft_len_env(char *s, int mode)
 	return (i);
 }
 
-void	ft_rm_one(t_list *tmp)
+void	ft_rm_one(t_struct *cfg, t_list *tmp)
 {
 	if (tmp->prev != NULL)
 		tmp->prev->next = tmp->next;
+	if (tmp->prev == NULL)
+		cfg->arg = tmp->next;
 	if (tmp->next != NULL)
 		tmp->next->prev = tmp->prev;
 	free(tmp->content);
 	free(tmp);
+	tmp = NULL;
 }
 
 int	set_var_norm(t_list *to_check, char *buff)
@@ -90,27 +93,29 @@ void	ft_var_env(t_struct *cfg)
 	{
 		if (tmp->type == 7)
 		{
-			set_var(cfg, tmp);
-			if (tmp->prev)
+			if (set_var(cfg, tmp) == 1)
 			{
-				tmp->prev->next = cfg->tenv;
-				cfg->tenv->ps = tmp->prev->pn;
+				if (tmp->prev)
+				{
+					tmp->prev->next = cfg->tenv;
+					cfg->tenv->ps = tmp->prev->pn;
+				}
+				else if (tmp->prev == NULL)
+					cfg->arg = cfg->tenv;
+				while (cfg->tenv->next)
+					cfg->tenv = cfg->tenv->next;
+				if (tmp->next)
+				{
+					tmp->next->prev = cfg->tenv;
+					cfg->tenv->pn = tmp->next->ps;
+				}
+				cfg->tenv->next = tmp->next;
+				free(tmp->content);
+				free(tmp);
+				tmp = cfg->tenv;
+				ft_f_arg(cfg);
+				cfg->tenv = NULL;
 			}
-			else if (tmp->prev == NULL)
-				cfg->arg = cfg->tenv;
-			while (cfg->tenv->next)
-				cfg->tenv = cfg->tenv->next;
-			if (tmp->next)
-			{
-				tmp->next->prev = cfg->tenv;
-				cfg->tenv->pn = tmp->next->ps;
-			}
-			cfg->tenv->next = tmp->next;
-			free(tmp->content);
-			free(tmp);
-			tmp = cfg->tenv;
-			ft_f_arg(cfg);
-			cfg->tenv = NULL;
 		}
 		tmp = tmp->next;
 	}
