@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:46:04 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 16:39:52 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 16:32:18 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ char	**ft_init_cmd(t_list *tmp)
 	i = 0;
 	nb = ft_tab_count(tmp->next) + 1;
 	cmd = malloc((nb + 1) * sizeof(char *));
-	cmd[nb] = NULL;
 	if (!cmd)
 		return (NULL);
+	cmd[nb] = NULL;
 	while (nb > 0)
 	{
 		cmd[i] = ft_strdup(tmp->content);
@@ -71,6 +71,8 @@ void	ft_cp_env(t_struct *cfg)
 	tmp = cfg->env;
 	i = ft_lstsize(cfg->env);
 	cfg->tab_env = malloc((i + 1) * sizeof(char *));
+	if (!(cfg->tab_env))
+		return ;
 	cfg->tab_env[i] = NULL;
 	i = 0;
 	while (tmp)
