@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/12 11:21:13 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 17:43:47 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_lst(t_list *tmp)
 {
 	while (tmp)
 	{
-		printf("content = %s  type = %d, fd = %d\n", tmp->content, tmp->type, tmp->fd);
+		printf("%s\n", tmp->content);
 		tmp = tmp->next;
 	}
 }
@@ -46,9 +46,7 @@ void	ft_to_exec(char *str, t_struct *cfg)
 		ft_var_env(cfg);
 		if (ft_init_count_pipe(cfg) == 0 && ft_init_redir(cfg) == 0)
 		{
-			//ft_print_lst(cfg);
 			ft_is_file(cfg);
-			//ft_print_lst(cfg);
 			ft_exec(cfg);
 		}
 		ft_lstclear(&cfg->arg);
