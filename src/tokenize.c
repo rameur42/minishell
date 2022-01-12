@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 11:22:28 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 16:33:45 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	ft_make_arg_lst(t_struct *cfg, t_tok **tmp)
 	i = 0;
 	size = ft_count_l((*tmp));
 	buff = malloc(size * sizeof(char));
+	if (!buff)
+		return ;
 	buff[size - 1] = '\0';
 	while ((*tmp) && size > 1)
 	{

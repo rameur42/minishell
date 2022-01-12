@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 11:43:04 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 16:33:28 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_make_env_lst(t_struct *cfg, t_tok **tmp)
 	i = 0;
 	size = ft_count_l((*tmp));
 	buff = malloc(size * sizeof(char));
+	if (!buff)
+		return ;
 	buff[size - 1] = '\0';
 	while ((*tmp) && size > 1)
 	{
