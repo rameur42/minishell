@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:14:18 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 14:11:50 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 16:21:37 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,16 @@ int	export_norm(t_struct *cfg, char *s)
 	return (1);
 }
 
-/* char	*check_char_spec(char *s)
+void	correct_env(char *s, t_struct *cfg)
 {
-	int		i;
-	char	*str;
-
-	i = 0;
-	str = 0;
-	if (s && (ft_strcmp(s, "\\") == 0 || ft_strcmp(s, "$") == 0
-		|| ft_strcmp(s, "\t") == 0 || ft_strcmp(s, "\n") == 0
-		|| ft_strcmp(s, "\a") == 0 || ft_strcmp(s, "\b") == 0
-		|| ft_strcmp(s, "\v") == 0 || ft_strcmp(s, "\f") == 0
-		|| ft_strcmp(s, "\r") == 0))
-	{
-		printf("check\n");
-		str = ft_strjoin("\\", s, 0);
-		printf("%s\n", str);
-		free (s);
-	}
+	if (ft_is_already(s, cfg->env) == 1)
+		ft_modif_env(s, cfg->env);
+	else if (ft_is_a_plus(s))
+		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0, 0));
 	else
-		str = s;
-	return (str);
+		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0, 0));
 }
- */
+
 int	ft_export(char *s, t_struct *cfg)
 {
 	int	i;
@@ -102,7 +89,6 @@ int	ft_export(char *s, t_struct *cfg)
 
 	i = 0;
 	j = 0;
-	//s = check_char_spec(s);
 	if (export_norm(cfg, s) == 0)
 		return (0);
 	if (ft_is_already_in(s, cfg->exp) == 1)
@@ -116,9 +102,6 @@ int	ft_export(char *s, t_struct *cfg)
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_correct_s(s), 0, 0, 0));
 	else
 		ft_lstadd_back(&cfg->exp, ft_lstnew(ft_strdup(s), 0, 0, 0));
-	if (ft_is_already(s, cfg->env) == 1)
-		ft_modif_env(s, cfg->env);
-	else
-		ft_lstadd_back(&cfg->env, ft_lstnew(ft_strdup(s), 0, 0, 0));
+	correct_env(s, cfg);
 	return (0);
 }
