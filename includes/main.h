@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 15:35:20 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 16:47:35 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void	ft_f_arg(t_struct *cfg);
 int		ft_get_env(char **env, t_struct *cfg);
 /*src/env_var_norm.c*/
 void	var_env_norm(t_list *tmp, t_struct *cfg);
+void	ft_var_env_norm(t_struct *cfg, t_list *tmp);
 /*init_redirec.c*/
 int		ft_init_3(t_list *tmp);
 int		ft_init_4(t_list *tmp);

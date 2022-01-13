@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 15:03:57 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:48:01 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,7 @@ void	ft_var_env(t_struct *cfg)
 		{
 			if (set_var(cfg, tmp) == 1)
 			{
-				if (tmp->prev)
-				{
-					tmp->prev->next = cfg->tenv;
-					cfg->tenv->ps = tmp->prev->pn;
-				}
-				else if (tmp->prev == NULL)
-					cfg->arg = cfg->tenv;
+				ft_var_env_norm(cfg, tmp);
 				while (cfg->tenv->next)
 					cfg->tenv = cfg->tenv->next;
 				var_env_norm(tmp, cfg);
