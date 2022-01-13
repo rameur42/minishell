@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 11:47:37 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 14:18:15 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,6 @@ void	d_in(t_list *temp, t_setup *stp);
 int		is_redirec(t_list *tmp, t_setup *stp);
 void	ft_free_str(char *str);
 void	ft_exec_built_in(t_struct *cfg, t_list *tmp);
-void	ft_free_tab(char **tab);
-
 /*src/tokenize.c*/
 void	ft_tokenize(t_struct *cfg, char *str);
 int		ft_check_pspace(t_tok *tmp);

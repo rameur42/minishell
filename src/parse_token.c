@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:32 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 15:47:34 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 13:34:03 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_is_env(t_struct *cfg, char *str, int i, t_tok **lst)
 		cfg->en = 1;
 		return (1);
 	}
-	else if (str[i] == '?' && str[i - 1] && str[i - 1] == '$')
+	else if (str[i] == '?' && i != 0 && str[i - 1] && str[i - 1] == '$')
 	{
 		ft_add_back(lst, ft_new(str[i], 12));
 		return (1);

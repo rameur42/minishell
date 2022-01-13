@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 19:25:47 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 14:28:43 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	ft_var_env(t_struct *cfg)
 				while (cfg->tenv->next)
 					cfg->tenv = cfg->tenv->next;
 				var_env_norm(tmp, cfg);
+				tmp = cfg->tenv;
+				cfg->tenv = NULL;
 			}
 		}
 		tmp = tmp->next;

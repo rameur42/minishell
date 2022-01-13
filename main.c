@@ -6,14 +6,17 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 11:53:24 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 13:56:41 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	print_lst(t_list *tmp)
+void	print_lst(t_list *lst)
 {
+	t_list *tmp;
+	
+	tmp = lst;
 	while (tmp)
 	{
 		printf("%s\n", tmp->content);

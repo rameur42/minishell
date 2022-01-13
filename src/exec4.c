@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
+/*   Updated: 2022/01/13 14:22:46 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +40,10 @@ void	ft_exec_norm_2(t_list *tmp, t_struct *cfg)
 	}	
 }
 
-int	ft_exec_norm_3(t_struct *cfg, t_list *tmp, char **cmd)
+int	ft_exec_norm_3(t_struct *cfg, t_list *tmp)
 {
+	char **cmd;
+
 	cfg->exit_code = 0;
 	cmd = ft_init_cmd(tmp);
 	if (tmp->type != 11)
@@ -59,14 +62,11 @@ void	ft_exec_norm_4(t_struct *cfg)
 
 	status = 0;
 	nb_cmd = get_nb_cmd(cfg);
-	printf("nb_cmd->%d\n", nb_cmd);
 	while (nb_cmd > 0)
 	{
 		if (waitpid(-1, &status, 0) > 0)
 		{
 			cfg->exit_code = WEXITSTATUS(status);
-			/*0if (cfg->exit_code == 127)
-				return ;*/
 			nb_cmd--;
 		}
 	}
@@ -78,7 +78,7 @@ void	ft_exec(t_struct *cfg)
 	char	**cmd;
 
 	tmp = cfg->arg;
-	while (tmp)
+	while (tmp && cfg->exit_code != 127)
 	{
 		if (tmp->type == 12)
 		{
@@ -94,7 +94,7 @@ void	ft_exec(t_struct *cfg)
 			ft_free_tab(cmd);
 		}
 		else if (tmp->type == 9 || tmp->type == 0 || tmp->type == 11)
-			if (ft_exec_norm_3(cfg, tmp, cmd))
+			if (ft_exec_norm_3(cfg, tmp))
 				break ;
 		tmp = tmp->next;
 	}
