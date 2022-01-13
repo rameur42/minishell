@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 15:11:55 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:35:20 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 **built-in -> 11
 **$? -> 12
 */
-
 
 typedef struct s_glob {
 	int		p;
@@ -189,6 +188,7 @@ void	ft_modif_pwd(t_list *lst, int mode);
 void	ft_refresh_pwd(t_struct *cfg, int mode);
 int		check_exit(char *s);
 void	control_exit_return(t_list *tmp, int *dont_exit);
+void	ft_modif_pwd_norm2(t_list *tmp, char *buff);
 /*utils/atoi.c*/
 int		ft_atoi(char *str);
 /*utils/itoa.c*/

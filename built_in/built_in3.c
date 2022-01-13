@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:32:37 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 11:53:27 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 15:35:16 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ void	control_exit_return(t_list *tmp, int *dont_exit)
 			}
 		}
 	}
+}
+
+void	ft_modif_pwd_norm2(t_list *tmp, char *buff)
+{
+	free(tmp->content);
+	buff = getcwd(buff, 1024);
+	tmp->content = ft_strjoin("OLDPWD=", buff, 0);
+	free(buff);
 }
