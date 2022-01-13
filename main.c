@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
 /*   Updated: 2022/01/13 16:14:06 by tgresle          ###   ########.fr       */
@@ -37,6 +37,7 @@ int	is_invalid(t_struct *cfg)
 		if (tmp->type == 0)
 		{
 			printf("minishell: %s: command not found\n", tmp->content);
+			cfg->exit_code = 127;
 			return (1);
 		}
 		tmp = tmp->next;
