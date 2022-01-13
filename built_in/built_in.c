@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:05:08 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 16:26:33 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:34:44 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_use_absolute(t_struct *cfg, char *path)
 {
 	struct stat	buff;
 
+	buff.st_mode = 0;
 	stat(path, &buff);
 	if (buff.st_mode == 16877)
 		ft_refresh_pwd(cfg, 1);

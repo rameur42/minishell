@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:46:05 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:45:46 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:32:36 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	exec_ft_norm_3(t_struct *cfg)
 {
+	close(0);
+	close(1);
 	cfg->exit_code = 0;
 	ft_free_tab(cfg->tab_env);
 	ft_lstclear(&cfg->env);
@@ -38,14 +40,13 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 		{
 			if (cfg->exit_code != 127)
 				printf("minishell: %s: command not found\n", cmd[0]);
-			ft_free_tab(cfg->tab_env);
+			exec_ft_norm_3(cfg);
+			ft_free_tab(cmd);
 			exit (127);
 		}
 	}
 	else
 		ft_exec_built_in(cfg, tmp);
-	dup2(1, 1);
-	dup2(0, 0);
 	exec_ft_norm_3(cfg);
 	ft_free_tab(cmd);
 }
