@@ -100,8 +100,6 @@ typedef struct s_setup {
 	t_list	*pip_p;
 	int		is_red_o;
 	int		is_red_i;
-	int		fd_in;
-	int		fd_out;
 	int		stop_in;
 	int		red_fd[2];
 

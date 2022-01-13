@@ -67,7 +67,7 @@ void	ft_to_exec(char *str, t_struct *cfg)
 		if (ft_init_count_pipe(cfg) == 0 && ft_init_redir(cfg) == 0)
 		{
 			ft_is_file(cfg);
-			//ft_print_lst(cfg);
+			ft_print_lst(cfg);
 			if (is_invalid(cfg) == 0)
 				ft_exec(cfg);
 		}
