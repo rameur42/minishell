@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:02 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/12 19:25:49 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 14:28:56 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	var_env_norm(t_list *tmp, t_struct *cfg)
 	cfg->tenv->next = tmp->next;
 	free(tmp->content);
 	free(tmp);
-	tmp = cfg->tenv;
+	//tmp = cfg->tenv;
 	ft_f_arg(cfg);
-	cfg->tenv = NULL;
+	//cfg->tenv = NULL;
 }
