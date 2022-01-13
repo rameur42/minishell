@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 14:22:46 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:18:01 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_exec_norm_2(t_list *tmp, t_struct *cfg)
 
 int	ft_exec_norm_3(t_struct *cfg, t_list *tmp)
 {
-	char **cmd;
+	char	**cmd;
 
 	cfg->exit_code = 0;
 	cmd = ft_init_cmd(tmp);

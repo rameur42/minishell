@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:05:08 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 14:59:00 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:31:14 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_use_absolute(t_struct *cfg, char *path)
 
 void	exec_cd_norm(t_list *tmp, t_struct *cfg)
 {
-	char *buff;
+	char	*buff;
 
 	buff = NULL;
 	while (tmp)
