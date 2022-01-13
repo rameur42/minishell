@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:27:15 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 13:36:12 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 20:31:48 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	is_file_norm_2(t_list *tmp, int *is_cmd)
 void	is_file_norm_3(t_list *tmp, t_struct *cfg)
 {
 	free(tmp->content);
-	tmp->content = ft_strdup(ft_itoa(cfg->exit_code));
+	tmp->content = ft_strdup_free(ft_itoa(cfg->exit_code));
 	tmp->type = 2;
 }
 

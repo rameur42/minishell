@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 16:47:35 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 20:31:35 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		ft_strlen(char *s);
 char	*ft_strdup(char *str);
 char	*ft_strstr(char *str, char *to_find);
 char	*ft_strjoin(char *s1, char *s2, int mode);
+char	*ft_strdup_free(char *str);
 /*utils/ft_strcmp.c*/
 int		ft_strcmp(char *s1, char *s2);
 int		ft_print_error(char *str, int res);

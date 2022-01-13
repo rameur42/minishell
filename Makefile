@@ -40,7 +40,8 @@ SRCS            = main.c\
 					built_in/built_in3.c\
 					
 CC              = clang
-CFLAGS          = -g -Wall -Wextra -Werror -I ./includes
+LIB				= ./includes/main.h
+CFLAGS          = -g -Wall -Wextra -Werror -I $(dir $(LIB))
 NAME            = minishell
 
 OBJS            = ${SRCS:.c=.o}
@@ -50,7 +51,7 @@ all:            $(NAME)
 .c.o:
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME):	$(OBJS) 
+$(NAME):	$(OBJS) $(LIB)
 					${CC} -lreadline ${CFLAGS} ${OBJS} -o ${NAME}
 
 clean:

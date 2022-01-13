@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 16:48:01 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 19:25:39 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_rm_one(t_struct *cfg, t_list *tmp)
 	if (tmp->next != NULL)
 		tmp->next->prev = tmp->prev;
 	free(tmp->content);
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	tmp = NULL;
 }
 
@@ -86,9 +87,11 @@ void	ft_f_arg(t_struct *cfg)
 void	ft_var_env(t_struct *cfg)
 {
 	t_list	*tmp;
+	int		check;
 
 	tmp = cfg->arg;
-	while (tmp)
+	check = 0;
+	while (check == 0)
 	{
 		if (tmp->type == 7)
 		{
@@ -102,7 +105,9 @@ void	ft_var_env(t_struct *cfg)
 				cfg->tenv = NULL;
 			}
 		}
-		if (tmp != NULL)
+		if (tmp != NULL && tmp->next)
 			tmp = tmp->next;
+		else 
+			check = 1;
 	}
 }
