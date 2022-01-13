@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:46:05 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/12 19:19:20 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 11:38:28 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 			ft_incr_shlvl(cfg);
 		if (execve(cmd[0], cmd, cfg->tab_env) == -1)
 		{
-			printf("minishell: %s: command not found\n", cmd[0]);
+			if (cfg->exit_code != 127)
+				printf("minishell: %s: command not found\n", cmd[0]);
 			ft_free_tab(cfg->tab_env);
 			exit (127);
 		}

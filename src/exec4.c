@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/12 19:20:22 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 11:35:47 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ void	ft_exec_norm_4(t_struct *cfg)
 
 	status = 0;
 	nb_cmd = get_nb_cmd(cfg);
+	printf("nb_cmd->%d\n", nb_cmd);
 	while (nb_cmd > 0)
 	{
 		if (waitpid(-1, &status, 0) > 0)
 		{
 			cfg->exit_code = WEXITSTATUS(status);
-			if (cfg->exit_code == 127)
-				return ;
+			/*0if (cfg->exit_code == 127)
+				return ;*/
 			nb_cmd--;
 		}
 	}

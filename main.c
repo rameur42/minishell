@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/12 19:06:10 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 11:53:24 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,23 @@ void	ft_init_cfg(t_struct *cfg)
 	cfg->exit_code = 0;
 }
 
+int	is_invalid(t_struct *cfg)
+{
+	t_list *tmp;
+
+	tmp = cfg->arg;
+	while (tmp)
+	{
+		if (tmp->type == 0)
+		{
+			printf("minishell: %s: command not found\n", tmp->content);
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 void	ft_to_exec(char *str, t_struct *cfg)
 {
 	add_history(str);
@@ -47,7 +64,9 @@ void	ft_to_exec(char *str, t_struct *cfg)
 		if (ft_init_count_pipe(cfg) == 0 && ft_init_redir(cfg) == 0)
 		{
 			ft_is_file(cfg);
-			ft_exec(cfg);
+			//ft_print_lst(cfg);
+			if (is_invalid(cfg) == 0)
+				ft_exec(cfg);
 		}
 		ft_lstclear(&cfg->arg);
 	}
