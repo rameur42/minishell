@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:32:37 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:35:16 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 17:57:18 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_exit(char *s)
 	{
 		if (s[i] < 48 || s[i] > 57)
 		{
-			printf("bash: exit: %s: numeric argument required\n", s);
+			printf("minishell: exit: %s: numeric argument required\n", s);
 			return (1);
 		}
 		i++;
