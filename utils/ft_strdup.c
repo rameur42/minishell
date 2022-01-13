@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 22:47:03 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 17:02:42 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 20:31:06 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@ int	ft_strlen(char *s)
 	while (s && s[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strdup_free(char *str)
+{
+	int		i;
+	char	*res;
+
+	i = 0;
+	res = malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	res[ft_strlen(str)] = '\0';
+	while (str[i])
+	{
+		res[i] = str[i];
+		i++;
+	}
+	free(str);
+	return (res);
 }
 
 char	*ft_strdup(char *str)
