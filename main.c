@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 17:59:22 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 20:56:36 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ int	ft_minishell(t_struct *cfg)
 	if (str == NULL)
 	{
 		write(1, "\n", 1);
+		if (cfg->tab_env != NULL)
+			ft_free_tab(cfg->tab_env);
+		if (cfg->exp != NULL)
+			ft_lstclear(&cfg->exp);
+		if (cfg->path != NULL)
+			ft_free_tab(cfg->path);
+		if (cfg->arg != NULL)
+			ft_lstclear(&cfg->arg);
 		ft_lstclear(&cfg->env);
 		return (1);
 	}
