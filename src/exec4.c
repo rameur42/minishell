@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:18:01 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 16:35:27 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_exec(t_struct *cfg)
 	char	**cmd;
 
 	tmp = cfg->arg;
-	while (tmp && cfg->exit_code != 127)
+	while (tmp)
 	{
 		if (tmp->type == 12)
 		{
