@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/12 18:38:17 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 11:47:37 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,12 +185,14 @@ int		ft_unset(char *s, t_struct *cfg);
 void	exec_cd(t_struct *cfg, char **path);
 void	ft_display_tab(char **tab);
 /*built_in/built_in2.c*/
-void	exec_exit(t_struct *cfg);
+void	exec_exit(t_struct *cfg, t_list *tmp);
 void	exec_pwd(void);
 void	exec_echo(t_list *tmp);
 void	ft_modif_pwd(t_list *lst, int mode);
 /*built_in/built_in3.c*/
 void	ft_refresh_pwd(t_struct *cfg, int mode);
+int		check_exit(char *s);
+void	control_exit_return(t_list *tmp, int *dont_exit);
 /*utils/atoi.c*/
 int		ft_atoi(char *str);
 /*utils/itoa.c*/
