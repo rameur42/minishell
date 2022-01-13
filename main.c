@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 13:56:41 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:19:23 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_to_exec(char *str, t_struct *cfg)
 		if (ft_init_count_pipe(cfg) == 0 && ft_init_redir(cfg) == 0)
 		{
 			ft_is_file(cfg);
-			//ft_print_lst(cfg);
+			ft_print_lst(cfg);
 			if (is_invalid(cfg) == 0)
 				ft_exec(cfg);
 		}

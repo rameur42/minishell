@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 14:18:15 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:11:55 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ typedef struct s_setup {
 	t_list	*pip_p;
 	int		is_red_o;
 	int		is_red_i;
-	int		fd_in;
-	int		fd_out;
 	int		stop_in;
 	int		red_fd[2];
 

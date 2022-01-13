@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:53 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 20:45:19 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:35:57 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ int	is_file(t_struct *cfg, char *file)
 	i = 0;
 	res = -1;
 	if (cfg->path == NULL)
+		return (0);
+	if (file && ft_strlen(file) >= 2 
+		&& (file[0] == '/' || (file[0] == '.' && file[1] == '/')))
+	{
+		if (stat(file, &buff) == 0 && ft_strlen(file) > 2)
+			return (0);
+		return (1);
+	}
+	if (stat(file, &buff) == 0)
 		return (0);
 	file = ft_strjoin("/", file, 0);
 	while (cfg->path[i] && res != 0)
