@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:32 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 13:34:03 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:00:14 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_is_redir(t_struct *cfg, char *str, int i, t_tok **lst)
 	{
 		if (str[i + 1] && str[i + 1] == '>')
 			ft_add_back(lst, ft_new(str[i], 4));
-		else if (str[i - 1] && str[i - 1] == '>')
+		else if (i != 0 && str[i - 1] && str[i - 1] == '>')
 			ft_add_back(lst, ft_new(str[i], 4));
 		else
 			ft_add_back(lst, ft_new(str[i], 3));

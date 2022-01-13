@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:05:08 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/10 17:40:51 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 14:59:00 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,18 @@ void	ft_use_absolute(t_struct *cfg, char *path)
 
 void	exec_cd_norm(t_list *tmp, t_struct *cfg)
 {
+	char *buff;
+
+	buff = NULL;
 	while (tmp)
 	{
 		if (ft_strncmp("HOME", tmp->content, 4) == 0)
 		{
 			ft_refresh_pwd(cfg, 1);
-			chdir(ft_substr(tmp->content, 5, ft_strlen(tmp->content)));
+			buff = ft_substr(tmp->content, 5, ft_strlen(tmp->content));
+			chdir(buff);
 			ft_refresh_pwd(cfg, 2);
+			free(buff);
 			return ;
 		}
 		tmp = tmp->next;
