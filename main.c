@@ -6,23 +6,11 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 16:34:04 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:14:06 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-void	print_lst(t_list *lst)
-{
-	t_list	*tmp;
-	
-	tmp = lst;
-	while (tmp)
-	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
-	}
-}
 
 void	ft_init_cfg(t_struct *cfg)
 {
@@ -41,7 +29,7 @@ void	ft_init_cfg(t_struct *cfg)
 
 int	is_invalid(t_struct *cfg)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cfg->arg;
 	while (tmp)

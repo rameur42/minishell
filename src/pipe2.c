@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:10:06 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:42:33 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:18:26 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	init_pipe_norm(t_struct *cfg, t_list *tmp)
 int	init_pipe_norm2(t_list *tmp, char *pwd)
 {
 	struct stat	buf;
-	char *buff;
-	char *path;
+	char		*buff;
+	char		*path;
 
 	buff = NULL;
 	path = NULL;
@@ -45,6 +45,16 @@ int	init_pipe_norm2(t_list *tmp, char *pwd)
 		}
 		free(buff);
 		free(path);
+	}
+	return (0);
+}
+
+int	ft_init_count_pipe_norm(t_list *tmp, char *pwd)
+{
+	if (init_pipe_norm2(tmp, pwd))
+	{
+		free(pwd);
+		return (1);
 	}
 	return (0);
 }
@@ -69,11 +79,8 @@ int	ft_init_count_pipe(t_struct *cfg)
 			}
 		}
 		else if (tmp->type == 5)
-			if (init_pipe_norm2(tmp, pwd))
-			{
-				free(pwd);
+			if (ft_init_count_pipe_norm(tmp, pwd))
 				return (1);
-			}
 		tmp = tmp->next;
 	}
 	free(pwd);
