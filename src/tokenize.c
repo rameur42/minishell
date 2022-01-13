@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 17:20:43 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 11:07:47 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	ft_tokenizer(t_struct *cfg, t_tok *lst)
 	int		nb_word;
 	t_tok	*tmp;
 
+	if (lst == NULL)
+		return ;
 	tmp = lst;
 	if (cfg->dq == 1 || cfg->sq == 1)
 		return ;

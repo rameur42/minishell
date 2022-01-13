@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/12 17:57:32 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/12 19:22:46 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	exec_echo(t_list *tmp)
 
 	i = 1;
 	first = 0;
+	f = 0;
 	tmp = tmp->next;
 	if (tmp && ft_strcmp(tmp->content, "-n") == 0)
 	{
