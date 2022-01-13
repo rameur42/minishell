@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:05:08 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:31:14 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 16:26:33 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	exec_cd_norm2(t_struct *cfg, char **path)
 	struct stat	buff;
 
 	buffer = NULL;
+	buff.st_mode = (unsigned int)0;
 	buffer = getcwd(buffer, 1024);
 	buffer = ft_strjoin(buffer, "/", 1);
 	go_to = ft_strjoin(buffer, path[1], 0);
