@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:46:05 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 14:35:49 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:10:59 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 	dup2(1, 1);
 	dup2(0, 0);
 	cfg->exit_code = 0;
-	if (stp->is_red_o == 1)
-		close(stp->fd_out);
-	if (stp->is_red_i == 1)
-		close(stp->fd_in);
 	ft_free_tab(cfg->tab_env);
 	ft_lstclear(&cfg->env);
 	ft_lstclear(&cfg->arg);
