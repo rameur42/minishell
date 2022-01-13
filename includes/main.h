@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
 /*   Updated: 2022/01/13 11:47:37 by tgresle          ###   ########.fr       */
@@ -46,6 +46,7 @@
 **built-in -> 11
 **$? -> 12
 */
+
 
 typedef struct s_glob {
 	int		p;
@@ -246,6 +247,7 @@ int		ft_is_env(t_struct *cfg, char *str, int i, t_tok **lst);
 int		ft_is_in_quotes(t_struct *cfg, char c, int f, t_tok **lst);
 int		ft_is_pipe(t_struct *cfg, char *str, int i, t_tok **lst);
 int		ft_is_redir(t_struct *cfg, char *str, int i, t_tok **lst);
+void	ft_clean_wait(int sig);
 /*parse_token2.c*/
 int		ft_is_arg_space(t_struct *cfg, char c, int *f, t_tok **lst);
 void	ft_last_token(t_struct *cfg, char c, int f, t_tok **lst);

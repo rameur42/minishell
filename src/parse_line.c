@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 02:52:12 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 17:43:17 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 11:02:46 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-/* void	ft_print_lst(t_struct *cfg)
+void	ft_print_lst(t_struct *cfg)
 {
 	t_list	*tmp;
 
@@ -23,7 +23,7 @@
 			tmp->content, tmp->type, tmp->ps, tmp->pn);
 		tmp = tmp->next;
 	}
-} */
+}
 
 int	ft_parse_line(t_struct *cfg, char *str)
 {
@@ -31,6 +31,7 @@ int	ft_parse_line(t_struct *cfg, char *str)
 
 	i = 0;
 	ft_tokenize(cfg, str);
+	//ft_print_lst(cfg);
 	if (cfg->sq == 1)
 	{
 		printf("Error unclosed quote\n");
