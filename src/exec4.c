@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   exec4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 11:35:47 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +83,7 @@ void	ft_exec(t_struct *cfg)
 		if (tmp->type == 12)
 		{
 			if (ft_strcmp(tmp->content, "exit") == 0 && tmp->prev == NULL)
-				exec_exit(cfg);
+				exec_exit(cfg, tmp);
 			cmd = ft_init_cmd(tmp);
 			if (ft_strcmp(tmp->content, "cd") == 0)
 				exec_cd(cfg, cmd);
