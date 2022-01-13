@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 11:53:45 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 14:44:14 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	ft_modif_pwd_norm(t_list *tmp, char *buff)
 	if (ft_is_same(tmp->content, "PWD") == 0)
 	{
 		free(tmp->content);
-		tmp->content = ft_strjoin("PWD=", getcwd(buff, 1024), 0);
+		buff = getcwd(buff, 1024);
+		tmp->content = ft_strjoin("PWD=", buff, 0);
 		free(buff);
 		return (1);
 	}
@@ -105,7 +106,8 @@ void	ft_modif_pwd(t_list *lst, int mode)
 			if (ft_is_same(tmp->content, "OLDPWD") == 0)
 			{
 				free(tmp->content);
-				tmp->content = ft_strjoin("OLDPWD=", getcwd(buff, 1024), 0);
+				buff = getcwd(buff, 1024);
+				tmp->content = ft_strjoin("OLDPWD=", buff, 0);
 				free(buff);
 				return ;
 			}
