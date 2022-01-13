@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_norm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:02 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 14:28:56 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:30:11 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,5 @@ void	var_env_norm(t_list *tmp, t_struct *cfg)
 	cfg->tenv->next = tmp->next;
 	free(tmp->content);
 	free(tmp);
-	//tmp = cfg->tenv;
 	ft_f_arg(cfg);
-	//cfg->tenv = NULL;
 }

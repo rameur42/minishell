@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 14:44:14 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:35:25 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,7 @@ void	ft_modif_pwd(t_list *lst, int mode)
 		{
 			if (ft_is_same(tmp->content, "OLDPWD") == 0)
 			{
-				free(tmp->content);
-				buff = getcwd(buff, 1024);
-				tmp->content = ft_strjoin("OLDPWD=", buff, 0);
-				free(buff);
+				ft_modif_pwd_norm2(tmp, buff);
 				return ;
 			}
 		}
