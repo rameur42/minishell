@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 20:31:35 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 21:24:16 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,5 +253,6 @@ void	ft_last_token(t_struct *cfg, char c, int f, t_tok **lst);
 void	ft_tokenize_env(t_struct *cfg, char *str);
 void	ft_tokenizer_env(t_struct *cfg, t_tok *lst);
 int		set_var(t_struct *cfg, t_list *to_check);
+void	ft_d_free(t_struct *cfg);
 
 #endif

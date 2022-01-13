@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:14:23 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 19:25:39 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 21:19:37 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ int	ft_len_env(char *s, int mode)
 
 void	ft_rm_one(t_struct *cfg, t_list *tmp)
 {
-	if (tmp->prev != NULL)
+	printf("%s %s\n", tmp->content, tmp->prev->content);
+	if (tmp->prev != NULL && tmp->next != NULL)
 		tmp->prev->next = tmp->next;
+	else if (tmp->prev != NULL)
+		tmp->prev->next = NULL;
 	if (tmp->prev == NULL)
 		cfg->arg = tmp->next;
 	if (tmp->next != NULL)
@@ -87,11 +90,9 @@ void	ft_f_arg(t_struct *cfg)
 void	ft_var_env(t_struct *cfg)
 {
 	t_list	*tmp;
-	int		check;
 
 	tmp = cfg->arg;
-	check = 0;
-	while (check == 0)
+	while (tmp)
 	{
 		if (tmp->type == 7)
 		{
@@ -104,10 +105,10 @@ void	ft_var_env(t_struct *cfg)
 				tmp = cfg->tenv;
 				cfg->tenv = NULL;
 			}
+			else
+				tmp = cfg->arg;
 		}
-		if (tmp != NULL && tmp->next)
+		if (tmp != NULL)
 			tmp = tmp->next;
-		else 
-			check = 1;
 	}
 }
