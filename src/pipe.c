@@ -3,27 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:53 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:35:57 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:35:39 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int	is_file(t_struct *cfg, char *file)
+int	is_file_norm2(t_struct *cfg, char *file, struct stat *buff)
 {
-	struct stat	buff;
-	int			res;
-	int			i;
-	char		*buffer;
+	int		i;
+	int		res;
+	char	*buffer;
 
 	i = 0;
 	res = -1;
+	while (cfg->path[i] && res != 0)
+	{
+		buffer = ft_strjoin(cfg->path[i], file, 0);
+		res = stat(buffer, buff);
+		if (res == 0)
+		{
+			free(buffer);
+			free(file);
+			return (1);
+		}
+		free(buffer);
+		i++;
+	}
+	return (0);
+}
+
+int	is_file(t_struct *cfg, char *file)
+{
+	struct stat	buff;
+
 	if (cfg->path == NULL)
 		return (0);
-	if (file && ft_strlen(file) >= 2 
+	if (file && ft_strlen(file) >= 2
 		&& (file[0] == '/' || (file[0] == '.' && file[1] == '/')))
 	{
 		if (stat(file, &buff) == 0 && ft_strlen(file) > 2)
@@ -33,19 +52,8 @@ int	is_file(t_struct *cfg, char *file)
 	if (stat(file, &buff) == 0)
 		return (0);
 	file = ft_strjoin("/", file, 0);
-	while (cfg->path[i] && res != 0)
-	{
-		buffer = ft_strjoin(cfg->path[i], file, 0);
-		res = stat(buffer, &buff);
-		if (res == 0)
-		{
-			free(buffer);
-			free(file);
-			return (0);
-		}
-		free(buffer);
-		i++;
-	}
+	if (is_file_norm2(cfg, file, &buff))
+		return (0);
 	free(file);
 	return (1);
 }
