@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:19:58 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 13:52:33 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 21:23:37 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ int	ft_get_env(char **env, t_struct *cfg)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_d_free(t_struct *cfg)
+{
+	if (cfg->tab_env != NULL)
+		ft_free_tab(cfg->tab_env);
+	if (cfg->exp != NULL)
+		ft_lstclear(&cfg->exp);
+	if (cfg->path != NULL)
+		ft_free_tab(cfg->path);
+	if (cfg->arg != NULL)
+		ft_lstclear(&cfg->arg);
+	ft_lstclear(&cfg->env);
 }

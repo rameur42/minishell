@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 20:56:36 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 21:24:50 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,7 @@ int	ft_minishell(t_struct *cfg)
 	if (str == NULL)
 	{
 		write(1, "\n", 1);
-		if (cfg->tab_env != NULL)
-			ft_free_tab(cfg->tab_env);
-		if (cfg->exp != NULL)
-			ft_lstclear(&cfg->exp);
-		if (cfg->path != NULL)
-			ft_free_tab(cfg->path);
-		if (cfg->arg != NULL)
-			ft_lstclear(&cfg->arg);
-		ft_lstclear(&cfg->env);
+		ft_d_free(cfg);
 		return (1);
 	}
 	else if (ft_strlen(str) == 0)
