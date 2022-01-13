@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:46:05 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:22:06 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 15:45:46 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	exec_ft_norm_3(t_setup *stp, t_struct *cfg)
+void	exec_ft_norm_3(t_struct *cfg)
 {
 	cfg->exit_code = 0;
-	if (stp->is_red_o == 1)
-		close(stp->fd_out);
-	if (stp->is_red_i == 1)
-		close(stp->fd_in);
 	ft_free_tab(cfg->tab_env);
 	ft_lstclear(&cfg->env);
 	ft_lstclear(&cfg->arg);
@@ -50,7 +46,7 @@ void	exec_ft_norm(t_list *tmp, t_struct *cfg, char **cmd, t_setup *stp)
 		ft_exec_built_in(cfg, tmp);
 	dup2(1, 1);
 	dup2(0, 0);
-	exec_ft_norm_3(stp, cfg);
+	exec_ft_norm_3(cfg);
 	ft_free_tab(cmd);
 }
 
