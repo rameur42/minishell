@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:45:58 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 17:22:58 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/12 18:04:22 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void	ft_exec_built_in(t_struct *cfg, t_list *tmp)
 	else if (ft_strcmp(tmp->content, "echo") == 0)
 		exec_echo(tmp);
 	else if (ft_strcmp(tmp->content, "exit") == 0)
-		exec_exit(cfg);
+		exec_exit(cfg, tmp);
 }

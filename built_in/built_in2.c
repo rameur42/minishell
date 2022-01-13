@@ -6,22 +6,37 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/12 17:57:32 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 11:53:45 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	exec_exit(t_struct *cfg)
+void	exec_exit(t_struct *cfg, t_list *tmp)
 {
-	ft_lstclear(&cfg->env);
-	ft_lstclear(&cfg->arg);
-	if (cfg->exp != NULL)
-		ft_lstclear(&cfg->exp);
-	if (cfg->path != NULL)
-		ft_free_tab(cfg->path);
-	printf("exit\n");
-	exit (0);
+	int		dont_exit;
+	t_list	*temp;
+
+	dont_exit = 0;
+	temp = tmp;
+	while (temp->next && dont_exit == 0)
+	{
+		if (temp->next->type == 1)
+			dont_exit = 1;
+		temp = temp->next;
+	}
+	control_exit_return(tmp, &dont_exit);
+	if (dont_exit == 0)
+	{
+		ft_lstclear(&cfg->env);
+		ft_lstclear(&cfg->arg);
+		if (cfg->exp != NULL)
+			ft_lstclear(&cfg->exp);
+		if (cfg->path != NULL)
+			ft_free_tab(cfg->path);
+		printf("exit\n");
+		exit (0);
+	}
 }
 
 void	exec_echo(t_list *tmp)

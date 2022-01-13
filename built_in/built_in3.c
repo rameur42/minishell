@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:32:37 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/10 17:32:45 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 11:53:27 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,41 @@ void	ft_refresh_pwd(t_struct *cfg, int mode)
 	ft_modif_pwd(cfg->env, mode);
 	if (cfg->exp != NULL)
 		ft_modif_pwd(cfg->exp, mode);
+}
+
+int	check_exit(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s && s[i] && (s[i] == '-' || s[i] == '+'))
+		i++;
+	while (s && s[i])
+	{
+		if (s[i] < 48 || s[i] > 57)
+		{
+			printf("bash: exit: %s: numeric argument required\n", s);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	control_exit_return(t_list *tmp, int *dont_exit)
+{
+	if (tmp->next && (tmp->next->type == 0 || tmp->next->type == 2
+			|| tmp->next->type == 9 || tmp->next->type == 11))
+	{
+		tmp = tmp->next;
+		if (check_exit(tmp->content) == 0)
+		{
+			if (tmp->next && (tmp->next->type == 0 || tmp->next->type == 2
+					|| tmp->next->type == 9 || tmp->next->type == 11))
+			{
+				printf("minishell: exit: too many arguments\n");
+				*dont_exit = 1;
+			}
+		}
+	}
 }
