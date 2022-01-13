@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:10:06 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/11 16:01:42 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:42:33 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ int	init_pipe_norm(t_struct *cfg, t_list *tmp)
 	return (0);
 }
 
-int	init_pipe_norm2(t_list *tmp, char *buff, char *path, char *pwd)
+int	init_pipe_norm2(t_list *tmp, char *pwd)
 {
 	struct stat	buf;
+	char *buff;
+	char *path;
 
+	buff = NULL;
+	path = NULL;
 	if (tmp->next)
 	{
 		buff = ft_strjoin("/", tmp->next->content, 0);
@@ -48,13 +52,9 @@ int	init_pipe_norm2(t_list *tmp, char *buff, char *path, char *pwd)
 int	ft_init_count_pipe(t_struct *cfg)
 {
 	t_list	*tmp;
-	char	*path;
-	char	*buff;
 	char	*pwd;
 
 	cfg->pipe = 0;
-	buff = NULL;
-	path = NULL;
 	pwd = NULL;
 	pwd = getcwd(pwd, 1024);
 	tmp = cfg->arg;
@@ -63,11 +63,17 @@ int	ft_init_count_pipe(t_struct *cfg)
 		if (tmp->type == 1)
 		{
 			if (init_pipe_norm(cfg, tmp))
+			{
+				free(pwd);
 				return (1);
+			}
 		}
 		else if (tmp->type == 5)
-			if (init_pipe_norm2(tmp, buff, path, pwd))
+			if (init_pipe_norm2(tmp, pwd))
+			{
+				free(pwd);
 				return (1);
+			}
 		tmp = tmp->next;
 	}
 	free(pwd);
