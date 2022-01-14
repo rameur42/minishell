@@ -6,11 +6,10 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/14 13:14:01 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:55:50 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
 
 int	ft_check_pspace(t_tok *tmp)
 {
