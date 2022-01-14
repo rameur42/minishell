@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:46:04 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 14:18:26 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:49:15 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ int	ft_tab_count(t_list *arg)
 		res++;
 	}
 	return (res);
-}
-
-void	ft_display_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("---->%s\n", tab[i]);
-		i++;
-	}
 }
 
 char	**ft_init_cmd(t_list *tmp)

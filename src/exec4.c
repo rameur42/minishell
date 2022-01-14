@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 14:08:59 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 16:35:27 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:41:42 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_exec(t_struct *cfg)
 	tmp = cfg->arg;
 	while (tmp)
 	{
-		if (tmp->type == 12)
+		if (tmp->type == 13)
 		{
 			if (ft_strcmp(tmp->content, "exit") == 0 && tmp->prev == NULL)
 				exec_exit(cfg, tmp);
@@ -93,7 +93,7 @@ void	ft_exec(t_struct *cfg)
 				ft_exec_norm_2(tmp, cfg);
 			ft_free_tab(cmd);
 		}
-		else if (tmp->type == 9 || tmp->type == 0 || tmp->type == 11)
+		if (tmp->type == 9 || tmp->type == 0 || tmp->type == 11)
 			if (ft_exec_norm_3(cfg, tmp))
 				break ;
 		tmp = tmp->next;

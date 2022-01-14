@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 11:07:47 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:14:01 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_tokenize(t_struct *cfg, char *str)
 	while (str[i])
 	{
 		b = 0;
-		ft_is_quotes(cfg, str, i);
+		ft_is_quotes(cfg, str, i, &lst);
 		if (ft_is_in_quotes(cfg, str[i], f, &lst) == 0)
 		{
 			b += ft_is_env(cfg, str, i, &lst);

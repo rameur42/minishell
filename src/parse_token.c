@@ -6,24 +6,28 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:47:32 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:00:14 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:13:11 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	ft_is_quotes(t_struct *cfg, char *str, int i)
+void	ft_is_quotes(t_struct *cfg, char *str, int i, t_tok **lst)
 {
 	if (str[i] == '\'')
 	{
-		if (cfg->sq == 0)
+		if (cfg->dq == 1)
+			ft_add_back(lst, ft_new(str[i], 0));
+		else if (cfg->sq == 0)
 			cfg->sq = 1;
 		else if (cfg->sq == 1)
 			cfg->sq = 0;
 	}
 	else if (str[i] == '\"')
 	{
-		if (cfg->dq == 0)
+		if (cfg->sq == 1)
+			ft_add_back(lst, ft_new(str[i], 0));
+		else if (cfg->dq == 0)
 			cfg->dq = 1;
 		else if (cfg->dq == 1)
 			cfg->dq = 0;

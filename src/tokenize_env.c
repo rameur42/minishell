@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/12 17:23:21 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/14 13:14:31 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_tokenize_env(t_struct *cfg, char *str)
 	while (str[i])
 	{
 		b = 0;
-		ft_is_quotes(cfg, str, i);
+		ft_is_quotes(cfg, str, i, &lst);
 		if (ft_is_in_quotes(cfg, str[i], f, &lst) == 0)
 		{
 			b += ft_is_env(cfg, str, i, &lst);

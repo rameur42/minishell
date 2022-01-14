@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:23:45 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 21:24:16 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:49:10 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 **' ' -> 10
 **built-in -> 11
 **$? -> 12
+**built-in -> 13
 */
 
 typedef struct s_glob {
@@ -179,7 +180,6 @@ char	*ft_strjoin_export(char *s1, char *s2);
 int		ft_unset(char *s, t_struct *cfg);
 /*built_in/built_in.c*/
 void	exec_cd(t_struct *cfg, char **path);
-void	ft_display_tab(char **tab);
 /*built_in/built_in2.c*/
 void	exec_exit(t_struct *cfg, t_list *tmp);
 void	exec_pwd(void);
@@ -223,7 +223,7 @@ int		ft_is_red(t_tok *tmp, int ref);
 int		ft_count_l(t_tok *lst);
 int		ft_count_w(t_tok *lst);
 /*parse_token.c*/
-void	ft_is_quotes(t_struct *cfg, char *str, int i);
+void	ft_is_quotes(t_struct *cfg, char *str, int i, t_tok **lst);
 /*pipe.c*/
 int		is_file(t_struct *cfg, char *file);
 int		is_built_in(char *cmd);
@@ -231,7 +231,6 @@ int		is_built_in(char *cmd);
 void	ft_exec_ft(t_struct *cfg, char **cmd, t_list *tmp);
 /*exec2.c*/
 int		t_tab_count(t_list *arg);
-void	ft_display_tab(char **tab);
 char	**ft_init_cmd(t_list *tmp);
 void	ft_cp_env(t_struct *cfg);
 void	ft_free_tab(char **tab);

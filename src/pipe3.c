@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 13:27:15 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 20:31:48 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/14 13:42:25 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	is_file_norm(t_list *tmp, int *is_cmd)
 			|| ft_strcmp(tmp->content, "export") == 0
 			|| ft_strcmp(tmp->content, "exit") == 0)
 		&& *is_cmd == 0)
-		tmp->type = 12;
+		tmp->type = 13;
 	else if (*is_cmd == 0)
 		tmp->type = 11;
 	else
