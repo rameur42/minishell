@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:28:09 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/14 12:11:29 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/14 13:11:24 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	ft_tokenize(t_struct *cfg, char *str)
 	i = 0;
 	f = 0;
 	lst = NULL;
-	printf("\nhehe:%s\n", str);
 	while (str[i])
 	{
 		b = 0;
