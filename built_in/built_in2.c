@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:43 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/13 15:35:25 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/14 13:03:54 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	exec_exit(t_struct *cfg, t_list *tmp)
 		if (cfg->path != NULL)
 			ft_free_tab(cfg->path);
 		printf("exit\n");
-		exit (0);
+		exit (cfg->exit_code);
 	}
 }
 

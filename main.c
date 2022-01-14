@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:21:53 by reda              #+#    #+#             */
-/*   Updated: 2022/01/13 21:24:50 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:05:33 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,5 @@ int	main(int ac, char **av, char **env)
 				break ;
 		}
 	}
-	return (0);
+	return (cfg.exit_code);
 }
