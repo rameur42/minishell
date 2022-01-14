@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:32:22 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/14 15:35:38 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 15:49:15 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	set_var(t_struct *cfg, t_list *to_check)
 			buff = ft_substr(tmp->content,
 					ft_len_env(tmp->content, 1), ft_strlen(tmp->content));
 			if (buff == NULL)
-				return (0);
+				break ;
 			ft_tokenize_env(cfg, buff);
 			free(buff);
 			return (1);
