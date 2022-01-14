@@ -6,7 +6,7 @@
 /*   By: rameur <rameur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:32:44 by rameur            #+#    #+#             */
-/*   Updated: 2022/01/13 21:32:46 by rameur           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:00:21 by rameur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_len_env(char *s, int mode)
 
 void	ft_rm_one(t_struct *cfg, t_list *tmp)
 {
-	printf("%s %s\n", tmp->content, tmp->prev->content);
 	if (tmp->prev != NULL && tmp->next != NULL)
 		tmp->prev->next = tmp->next;
 	else if (tmp->prev != NULL)
