@@ -6,7 +6,7 @@
 /*   By: tgresle <tgresle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:44:31 by tgresle           #+#    #+#             */
-/*   Updated: 2022/01/12 16:16:42 by tgresle          ###   ########.fr       */
+/*   Updated: 2022/01/13 22:18:14 by tgresle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int	ft_is_already(char *s, t_list *lst)
 			while (s[i] && tmp->content[i] && s[i] == tmp->content[i]
 				&& tmp->content[i] != '=' && s[i] != '+' && s[i] != '=')
 				i++;
-			if ((!(s[i]) && (tmp->content[i] == '=' || !(tmp->content[i])))
-				|| (s[i] && (s[i] == '=' || (tmp->content[i - 1] && s[i - 1]
-							&& tmp->content[i - 1] == s[i - 1] && s[i] == '+'
-							&& s[i + 1] && s[i + 1] == '='))))
+			if ((!(s[i]) && (!(tmp->content[i]) || tmp->content[i] == '='))
+				|| (s[i] && s[i] == '=' && (!(tmp->content[i])
+						|| tmp->content[i] == '=')) || (s[i]
+					&& tmp->content[i - 1] && s[i - 1]
+					&& tmp->content[i - 1] == s[i - 1] && s[i] == '+'
+					&& s[i + 1] && s[i + 1] == '='
+					&& (!(tmp->content[i]) || tmp->content[i] == '=')))
 				return (1);
 		}
 		tmp = tmp->next;
